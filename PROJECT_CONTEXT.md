@@ -1618,3 +1618,28 @@
   recalibrar hipótesis.
 - Corregir en un lote independiente la metadata inicial genérica del resto de
   herramientas, sin alterar esta release.
+## Actualización 2026-10-13: cuatro herramientas operativas publicadas
+
+### Hechos
+
+- Se publicaron en ES/EN el planificador de pedido semanal, la calculadora de rentabilidad de menú y maridaje, el conciliador de stock teórico/real y el simulador de rotura de stock.
+- Las rutas, alternates, sitemap, prerender y catálogo de Herramientas quedaron alineados.
+- Release pública: Pages `b76fa304`, backend `93718c13-7dcb-4e6d-b838-e57f98d63123` y facade `7dbf2ed3-9367-4539-af90-e458c16c6af5`.
+
+### Decisiones
+
+- Cálculo local, fórmulas visibles, ejemplos ficticios y resultado sin formulario obligatorio.
+- Mantener las cuatro nuevas detrás de tiempo, rentabilidad, fuga de margen y mermas en los bloques prioritarios.
+
+### Hipótesis
+
+- Las decisiones operativas semanales pueden comunicar el valor de Winerim con más claridad que otra calculadora genérica de ROI.
+
+### Contradicciones
+
+- Lovable/Supabase no se desplegó en esta release; Cloudflare es la capa pública activa y verificada.
+
+### Pendientes
+
+- Medición agregada sin PII y calibración con datos consentidos.
+- Especificar, sin duplicar tiempo operativo, un posible simulador de impacto TPV/multiestablecimiento.

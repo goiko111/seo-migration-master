@@ -5253,3 +5253,27 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 - Instrumentar eventos agregados sin importes ni PII.
 - Generalizar la metadata inicial del shell en un lote técnico independiente.
+## 2026-10-13 — Herramientas operativas orientadas a decisiones
+
+### Hechos
+
+- Se publicaron cuatro recorridos ES/EN con fórmulas puras, UI compartida, sitemap y prerender coordinados.
+
+### Decisiones
+
+- Priorizar problemas concretos: qué pedir, si un maridaje es rentable, dónde se descuadra el stock y cuánto cuesta una rotura.
+- No sumar magnitudes económicas distintas ni prometer ahorros garantizados.
+- Mantener cálculo y datos del escenario en el navegador; analítica solo de acciones nominales.
+- No publicar una quinta calculadora hasta que aporte una decisión distinta al catálogo existente.
+
+### Hipótesis
+
+- Un simulador TPV/multiestablecimiento podría ser la próxima herramienta comercial si se definen supuestos trazables.
+
+### Contradicciones
+
+- El despliegue público se resolvió por Cloudflare; las Edge Functions locales quedaron alineadas pero no se publicaron desde Lovable Cloud.
+
+### Pendientes
+
+- Validar hipótesis y definir el alcance TPV/multiestablecimiento.

@@ -5831,3 +5831,26 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 3. Corregir la metadata inicial de las herramientas antiguas en un release
    técnico separado.
 4. Mantener Search Console y traducciones como trabajos independientes.
+## Siguiente bloque tras las cuatro herramientas operativas — 2026-10-13
+
+### Hechos
+
+- Pedido semanal, rentabilidad de maridaje, conciliación y rotura de stock ya están publicados y verificados en ES/EN.
+
+### Decisiones
+
+- No reabrir esta release salvo regresión; el siguiente desarrollo debe tener una hipótesis comercial diferenciada.
+
+### Hipótesis
+
+- Candidato: simulador de impacto de integración TPV/multiestablecimiento, centrado en altas, cambios de precio, conciliación e incidencias por centro.
+
+### Contradicciones
+
+- No hay todavía benchmarks consentidos para fijar ahorros por centro sin convertirlos en promesas.
+
+### Tareas pendientes
+
+1. Definir inputs, supuestos y límites del simulador TPV/multiestablecimiento.
+2. Medir uso agregado de las ocho calculadoras prioritarias sin PII ni valores introducidos.
+3. Contrastar ejemplos e hipótesis con datos consentidos de clientes.

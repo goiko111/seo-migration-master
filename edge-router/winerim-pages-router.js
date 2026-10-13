@@ -98,6 +98,14 @@ const REACT_ROUTES = new Set([
   "/en/tools/operational-time-calculator",
   "/herramientas/calculadora-mermas-vino",
   "/en/tools/wine-waste-calculator",
+  "/herramientas/planificador-pedido-semanal-vino",
+  "/en/tools/weekly-wine-order-planner",
+  "/herramientas/calculadora-rentabilidad-menu-maridaje",
+  "/en/tools/pairing-menu-profitability-calculator",
+  "/herramientas/conciliador-stock-vino",
+  "/en/tools/wine-stock-reconciliation",
+  "/herramientas/simulador-rotura-stock-vino",
+  "/en/tools/wine-stockout-risk-calculator",
   "/afiliate",
   "/en/affiliate",
   "/it/affiliati",
@@ -147,7 +155,7 @@ const OPERATIONAL_TIME_URL = `https://winerim.wine${OPERATIONAL_TIME_ROUTE}`;
 const OPERATIONAL_TIME_EN_ROUTE = "/en/tools/operational-time-calculator";
 const OPERATIONAL_TIME_EN_URL = `https://winerim.wine${OPERATIONAL_TIME_EN_ROUTE}`;
 
-const WINE_WASTE_ROUTES = new Map([
+const DECISION_TOOL_ROUTES = new Map([
   ["/herramientas/calculadora-mermas-vino", {
     lang: "es",
     title: "Calculadora de mermas de vino para restaurantes | Winerim",
@@ -157,6 +165,38 @@ const WINE_WASTE_ROUTES = new Map([
     lang: "en",
     title: "Wine waste calculator for restaurants | Winerim",
     description: "Calculate monthly wine waste from by-the-glass service, open bottles, breakage, unrecorded comps and inventory. Free, local and transparent.",
+  }],
+  ["/herramientas/planificador-pedido-semanal-vino", {
+    lang: "es", title: "Planificador de pedido semanal de vino | Winerim",
+    description: "Calcula qué vinos pedir, cuántas cajas comprar, el coste del pedido y qué referencias corren riesgo antes de la próxima entrega.",
+  }],
+  ["/en/tools/weekly-wine-order-planner", {
+    lang: "en", title: "Weekly wine order planner | Winerim",
+    description: "Calculate which wines to order, how many cases to buy, order cost and which references may run out before the next delivery.",
+  }],
+  ["/herramientas/calculadora-rentabilidad-menu-maridaje", {
+    lang: "es", title: "Calculadora de rentabilidad de menú y maridaje | Winerim",
+    description: "Calcula coste por comensal, beverage cost, contribución mensual y el impacto de servir 10 ml de más en un menú con maridaje.",
+  }],
+  ["/en/tools/pairing-menu-profitability-calculator", {
+    lang: "en", title: "Pairing menu profitability calculator | Winerim",
+    description: "Calculate cost per guest, beverage cost, monthly contribution and the impact of pouring 10 ml extra in a paired menu.",
+  }],
+  ["/herramientas/conciliador-stock-vino", {
+    lang: "es", title: "Conciliador de stock de vino teórico y real | Winerim",
+    description: "Compara stock inicial, compras, botellas y copas vendidas, bajas y recuento real para detectar descuadres de inventario.",
+  }],
+  ["/en/tools/wine-stock-reconciliation", {
+    lang: "en", title: "Wine stock reconciliation tool | Winerim",
+    description: "Compare opening stock, purchases, bottle and glass sales, adjustments and actual count to find inventory discrepancies.",
+  }],
+  ["/herramientas/simulador-rotura-stock-vino", {
+    lang: "es", title: "Simulador de rotura de stock de vino | Winerim",
+    description: "Calcula qué vinos se agotarán antes de la próxima entrega, las unidades y margen en riesgo y la compra mínima de emergencia.",
+  }],
+  ["/en/tools/wine-stockout-risk-calculator", {
+    lang: "en", title: "Wine stockout risk calculator | Winerim",
+    description: "Calculate which wines may run out before the next delivery, units and contribution at risk, and minimum emergency quantity.",
   }],
 ]);
 
@@ -481,7 +521,7 @@ const fetchReactPage = async (request, env, path) => {
 const withWineWasteMetadata = (response, path, requestMethod = "GET") => {
   if (requestMethod === "HEAD" || !response.ok) return response;
   const contentType = response.headers.get("Content-Type") || "";
-  const metadata = WINE_WASTE_ROUTES.get(path);
+  const metadata = DECISION_TOOL_ROUTES.get(path);
   if (!metadata || !contentType.includes("text/html")) return response;
   const canonical = `https://winerim.wine${path}`;
 
@@ -559,7 +599,7 @@ const fetchSitemapWithProfitabilityDiagnostic = async (request, env) => {
     PROFITABILITY_DIAGNOSTIC_EN_URL,
     OPERATIONAL_TIME_URL,
     OPERATIONAL_TIME_EN_URL,
-    ...Array.from(WINE_WASTE_ROUTES.keys(), path => `https://winerim.wine${path}`),
+    ...Array.from(DECISION_TOOL_ROUTES.keys(), path => `https://winerim.wine${path}`),
   ];
   let patchedXml = xml;
   const added = [];

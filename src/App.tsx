@@ -119,6 +119,7 @@ const Herramientas = lazy(() => import("./pages/Herramientas"));
 const RentabilidadBodega = lazy(() => import("./pages/RentabilidadBodega"));
 const CalculadoraTiempoOperativo = lazy(() => import("./pages/CalculadoraTiempoOperativo"));
 const CalculadoraMermasVino = lazy(() => import("./pages/CalculadoraMermasVino"));
+const OperationalDecisionTools = lazy(() => import("./pages/OperationalDecisionTools"));
 const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa"));
 const WineListScore = lazy(() => import("./pages/WineListScore"));
 const CalculadoraStockMuerto = lazy(() => import("./pages/CalculadoraStockMuerto"));
@@ -374,6 +375,14 @@ const esRoutes = (
     <Route path="/en/tools/operational-time-calculator" element={<CalculadoraTiempoOperativo />} />
     <Route path="/herramientas/calculadora-mermas-vino" element={<CalculadoraMermasVino />} />
     <Route path="/en/tools/wine-waste-calculator" element={<CalculadoraMermasVino />} />
+    <Route path="/herramientas/planificador-pedido-semanal-vino" element={<OperationalDecisionTools />} />
+    <Route path="/en/tools/weekly-wine-order-planner" element={<OperationalDecisionTools />} />
+    <Route path="/herramientas/calculadora-rentabilidad-menu-maridaje" element={<OperationalDecisionTools />} />
+    <Route path="/en/tools/pairing-menu-profitability-calculator" element={<OperationalDecisionTools />} />
+    <Route path="/herramientas/conciliador-stock-vino" element={<OperationalDecisionTools />} />
+    <Route path="/en/tools/wine-stock-reconciliation" element={<OperationalDecisionTools />} />
+    <Route path="/herramientas/simulador-rotura-stock-vino" element={<OperationalDecisionTools />} />
+    <Route path="/en/tools/wine-stockout-risk-calculator" element={<OperationalDecisionTools />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
@@ -971,6 +980,14 @@ const DeferredAppChrome = () => {
     "/en/tools/operational-time-calculator",
     "/herramientas/calculadora-mermas-vino",
     "/en/tools/wine-waste-calculator",
+    "/herramientas/planificador-pedido-semanal-vino",
+    "/en/tools/weekly-wine-order-planner",
+    "/herramientas/calculadora-rentabilidad-menu-maridaje",
+    "/en/tools/pairing-menu-profitability-calculator",
+    "/herramientas/conciliador-stock-vino",
+    "/en/tools/wine-stock-reconciliation",
+    "/herramientas/simulador-rotura-stock-vino",
+    "/en/tools/wine-stockout-risk-calculator",
   ].includes(location.pathname);
 
   return (

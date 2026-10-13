@@ -3221,6 +3221,10 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/calculadora-margen-vino': '/en/wine-margin-calculator',
     '/herramientas/calculadora-precio-vino-por-copa': '/en/tools/wine-by-glass-price-calculator',
     '/herramientas/calculadora-mermas-vino': '/en/tools/wine-waste-calculator',
+    '/herramientas/planificador-pedido-semanal-vino': '/en/tools/weekly-wine-order-planner',
+    '/herramientas/calculadora-rentabilidad-menu-maridaje': '/en/tools/pairing-menu-profitability-calculator',
+    '/herramientas/conciliador-stock-vino': '/en/tools/wine-stock-reconciliation',
+    '/herramientas/simulador-rotura-stock-vino': '/en/tools/wine-stockout-risk-calculator',
     '/herramientas/calculadora-stock-muerto': '/en/tools/dead-stock-calculator',
     '/herramientas/calculadora-ticket-medio-vino': '/en/tools/average-ticket-calculator',
     '/herramientas/calculadora-compra-inteligente': '/en/tools/smart-purchasing-calculator',
@@ -6313,6 +6317,70 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Wine waste calculator', url: `${SITE}/en/tools/wine-waste-calculator` }],
       internalLinks: [{ label: 'Profitability diagnostic', url: '/en/tools/wine-cellar-profitability-diagnostic' }, { label: 'Dead stock calculator', url: '/en/tools/dead-stock-calculator' }, { label: 'Request a demo', url: '/en/demo' }],
     },
+  },
+  '/herramientas/planificador-pedido-semanal-vino': {
+    meta: { title: 'Planificador de pedido semanal de vino | Winerim', description: 'Calcula qué vinos pedir, cuántas cajas comprar, el coste del pedido y qué referencias corren riesgo antes de la próxima entrega.', canonical: `${SITE}/herramientas/planificador-pedido-semanal-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: '¿Qué vino deberías pedir esta semana?', subtitle: 'Convierte stock, ventas, plazos y eventos en una propuesta de pedido por cajas completas.', sections: [
+      { heading: 'De la cobertura a un pedido ejecutable', content: 'La necesidad combina ritmo diario, plazo de entrega, días de seguridad, cobertura objetivo y demanda extraordinaria. El resultado se redondea a cajas completas.' },
+      { heading: 'Coste y urgencia por referencia', content: 'Separa las referencias que no llegan a la entrega, las que conviene reponer y las que ya tienen cobertura suficiente.' },
+      { heading: 'Escenario local y editable', content: 'Las cifras se calculan en el navegador y no se envían. El escenario no sustituye una previsión conectada a ventas, reservas y estacionalidad.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Planificador de pedido', url: `${SITE}/herramientas/planificador-pedido-semanal-vino` }], internalLinks: [{ label: 'Winerim Supply', url: '/producto/winerim-supply' }, { label: 'SAVia', url: '/producto/savia' }, { label: 'Solicitar demo', url: '/demo' }] },
+  },
+  '/en/tools/weekly-wine-order-planner': {
+    meta: { title: 'Weekly wine order planner | Winerim', description: 'Calculate which wines to order, how many cases to buy, order cost and which references may run out before the next delivery.', canonical: `${SITE}/en/tools/weekly-wine-order-planner`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: 'What wine should you order this week?', subtitle: 'Turn stock, sales, lead times and events into an order proposal rounded to full cases.', sections: [
+      { heading: 'From coverage to an executable order', content: 'Need combines daily pace, lead time, safety days, target coverage and exceptional demand, then rounds the result to full cases.' },
+      { heading: 'Cost and urgency by reference', content: 'Separate references that will not reach delivery, those to reorder and those with enough coverage.' },
+      { heading: 'Local and editable scenario', content: 'Figures run in the browser and are not sent. The scenario does not replace a forecast connected to sales, bookings and seasonality.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Weekly order planner', url: `${SITE}/en/tools/weekly-wine-order-planner` }], internalLinks: [{ label: 'Winerim Supply', url: '/en/product/winerim-supply' }, { label: 'SAVia', url: '/en/product/savia' }, { label: 'Request a demo', url: '/en/demo' }] },
+  },
+  '/herramientas/calculadora-rentabilidad-menu-maridaje': {
+    meta: { title: 'Calculadora de rentabilidad de menú y maridaje | Winerim', description: 'Calcula coste por comensal, beverage cost, contribución mensual y el impacto de servir 10 ml de más en un menú con maridaje.', canonical: `${SITE}/herramientas/calculadora-rentabilidad-menu-maridaje`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: '¿Es rentable tu maridaje?', subtitle: 'Mide cada pase y el coste acumulado de una pequeña desviación de servicio.', sections: [
+      { heading: 'Coste y contribución por comensal', content: 'Convierte la dosis de cada vino en coste por persona y la compara con el ingreso del menú atribuido al vino.' },
+      { heading: 'Beverage cost y dosis real', content: 'Muestra el precio mínimo para el objetivo elegido y el impacto mensual de servir diez mililitros de más en cada pase.' },
+      { heading: 'Del escenario al control de Armonías', content: 'Winerim compara receta y servicio, registra sustituciones y mantiene visible el margen del menú.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Rentabilidad de maridaje', url: `${SITE}/herramientas/calculadora-rentabilidad-menu-maridaje` }], internalLinks: [{ label: 'Calculadora de mermas', url: '/herramientas/calculadora-mermas-vino' }, { label: 'Diagnóstico de rentabilidad', url: '/herramientas/diagnostico-rentabilidad-bodega' }, { label: 'Solicitar demo', url: '/demo' }] },
+  },
+  '/en/tools/pairing-menu-profitability-calculator': {
+    meta: { title: 'Pairing menu profitability calculator | Winerim', description: 'Calculate cost per guest, beverage cost, monthly contribution and the impact of pouring 10 ml extra in a paired menu.', canonical: `${SITE}/en/tools/pairing-menu-profitability-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: 'Is your wine pairing profitable?', subtitle: 'Measure every course and the accumulated cost of a small service deviation.', sections: [
+      { heading: 'Cost and contribution per guest', content: 'Convert each wine pour into cost per person and compare it with the menu revenue allocated to wine.' },
+      { heading: 'Beverage cost and actual pour', content: 'See the minimum revenue for the selected target and the monthly impact of pouring ten extra millilitres in every course.' },
+      { heading: 'From scenario to Pairings control', content: 'Winerim compares recipe and service, records substitutions and keeps menu margin visible.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Pairing profitability', url: `${SITE}/en/tools/pairing-menu-profitability-calculator` }], internalLinks: [{ label: 'Wine waste calculator', url: '/en/tools/wine-waste-calculator' }, { label: 'Profitability diagnostic', url: '/en/tools/wine-cellar-profitability-diagnostic' }, { label: 'Request a demo', url: '/en/demo' }] },
+  },
+  '/herramientas/conciliador-stock-vino': {
+    meta: { title: 'Conciliador de stock de vino teórico y real | Winerim', description: 'Compara stock inicial, compras, botellas y copas vendidas, bajas y recuento real para detectar descuadres de inventario.', canonical: `${SITE}/herramientas/conciliador-stock-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: '¿Dónde se descuadra tu stock de vino?', subtitle: 'Reconstruye el stock esperado y prioriza las diferencias por coste.', sections: [
+      { heading: 'Puente de stock por referencia', content: 'Suma entradas y resta botellas, copas convertidas a botellas, roturas e invitaciones para obtener el stock teórico.' },
+      { heading: 'Faltantes y sobrantes valorados', content: 'Compara el recuento con el teórico y ordena las incidencias por coste para revisar primero lo que más impacta.' },
+      { heading: 'Trazabilidad conectada', content: 'Winerim enlaza TPV, compras, bajas con motivo y recuentos para explicar la diferencia sin rehacer el cálculo.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Conciliador de stock', url: `${SITE}/herramientas/conciliador-stock-vino` }], internalLinks: [{ label: 'Calculadora de mermas', url: '/herramientas/calculadora-mermas-vino' }, { label: 'Winerim Core', url: '/producto/winerim-core' }, { label: 'Solicitar demo', url: '/demo' }] },
+  },
+  '/en/tools/wine-stock-reconciliation': {
+    meta: { title: 'Wine stock reconciliation tool | Winerim', description: 'Compare opening stock, purchases, bottle and glass sales, adjustments and actual count to find inventory discrepancies.', canonical: `${SITE}/en/tools/wine-stock-reconciliation`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: 'Where does your wine stock diverge?', subtitle: 'Rebuild expected stock and prioritize differences by cost.', sections: [
+      { heading: 'Stock bridge by reference', content: 'Add receipts and subtract bottles, glass equivalents, breakage and comps to calculate theoretical stock.' },
+      { heading: 'Missing and surplus stock valued', content: 'Compare the count with theory and sort incidents by cost to review the highest impact first.' },
+      { heading: 'Connected traceability', content: 'Winerim connects POS, purchasing, reason-coded adjustments and counts to explain the difference without rebuilding the calculation.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Stock reconciliation', url: `${SITE}/en/tools/wine-stock-reconciliation` }], internalLinks: [{ label: 'Wine waste calculator', url: '/en/tools/wine-waste-calculator' }, { label: 'Winerim Core', url: '/en/product/winerim-core' }, { label: 'Request a demo', url: '/en/demo' }] },
+  },
+  '/herramientas/simulador-rotura-stock-vino': {
+    meta: { title: 'Simulador de rotura de stock de vino | Winerim', description: 'Calcula qué vinos se agotarán antes de la próxima entrega, las unidades y margen en riesgo y la compra mínima de emergencia.', canonical: `${SITE}/herramientas/simulador-rotura-stock-vino`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: '¿Qué te cuesta quedarte sin un vino?', subtitle: 'Cuantifica el margen expuesto hasta la próxima entrega.', sections: [
+      { heading: 'Cobertura hasta la entrega', content: 'Compara stock con ritmo diario, días de espera y demanda de eventos para detectar el faltante físico.' },
+      { heading: 'Sustitución sin ocultar el faltante', content: 'La demanda que puede moverse a otro vino reduce el margen expuesto, pero la herramienta conserva visible la cantidad que falta.' },
+      { heading: 'Aviso y reposición con SAVia', content: 'Winerim vigila cobertura, rotación y alternativas de carta para avisar antes del servicio y preparar la reposición.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Rotura de stock', url: `${SITE}/herramientas/simulador-rotura-stock-vino` }], internalLinks: [{ label: 'Planificador de pedido', url: '/herramientas/planificador-pedido-semanal-vino' }, { label: 'SAVia', url: '/producto/savia' }, { label: 'Solicitar demo', url: '/demo' }] },
+  },
+  '/en/tools/wine-stockout-risk-calculator': {
+    meta: { title: 'Wine stockout risk calculator | Winerim', description: 'Calculate which wines may run out before the next delivery, units and contribution at risk, and minimum emergency quantity.', canonical: `${SITE}/en/tools/wine-stockout-risk-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: 'What does running out of a wine cost?', subtitle: 'Quantify exposed contribution until the next delivery.', sections: [
+      { heading: 'Coverage until delivery', content: 'Compare stock with daily pace, wait time and event demand to find the physical shortage.' },
+      { heading: 'Substitution without hiding the shortage', content: 'Demand that can move to another wine reduces exposed contribution, while the tool keeps the missing quantity visible.' },
+      { heading: 'SAVia alert and replenishment', content: 'Winerim monitors coverage, rotation and list alternatives to warn before service and prepare replenishment.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Stockout risk', url: `${SITE}/en/tools/wine-stockout-risk-calculator` }], internalLinks: [{ label: 'Weekly order planner', url: '/en/tools/weekly-wine-order-planner' }, { label: 'SAVia', url: '/en/product/savia' }, { label: 'Request a demo', url: '/en/demo' }] },
   },
   '/herramientas/diagnostico-rentabilidad-bodega': {
     meta: { title: 'Diagnóstico de Rentabilidad de la Carta | Winerim', description: 'Calcula margen por botella y copa, Beverage Cost, capital inmovilizado y escenarios de precio, rotación y reposición con fórmulas transparentes.', canonical: `${SITE}/herramientas/diagnostico-rentabilidad-bodega`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },

@@ -1300,6 +1300,41 @@ ONLINE_TOOL_GROUPS.push({
 });
 
 ONLINE_TOOL_GROUPS.push(
+  {
+    key: 'weekly-wine-order-planner',
+    paths: { es: '/herramientas/planificador-pedido-semanal-vino', en: '/en/tools/weekly-wine-order-planner' },
+    copies: {
+      es: { title: 'Planificador de pedido semanal de vino | Winerim', h1: '¿Qué vino deberías pedir esta semana?', description: 'Calcula qué vinos pedir, cuántas cajas comprar, el coste del pedido y qué referencias corren riesgo antes de la próxima entrega.', subtitle: 'Convierte stock, ventas, plazos y eventos en una propuesta de pedido por cajas completas.', problem: 'Comprar sin unir rotación y cobertura inmoviliza capital o deja referencias agotadas antes de la siguiente entrega.', usage: 'Introduce stock, venta semanal, plazo, seguridad, caja, coste y demanda extraordinaria por referencia.', decision: 'Obtén referencias urgentes, cajas completas, coste del pedido y cobertura resultante.' },
+      en: { title: 'Weekly wine order planner | Winerim', h1: 'What wine should you order this week?', description: 'Calculate which wines to order, how many cases to buy, order cost and which references may run out before the next delivery.', subtitle: 'Turn stock, sales, lead times and events into an order proposal rounded to full cases.', problem: 'Purchasing without connecting rotation and coverage either ties up cash or leaves references unavailable before delivery.', usage: 'Enter stock, weekly sales, lead time, safety, case size, cost and exceptional demand for each reference.', decision: 'Get urgent references, full cases, order cost and resulting coverage.' },
+    },
+  },
+  {
+    key: 'pairing-menu-profitability',
+    paths: { es: '/herramientas/calculadora-rentabilidad-menu-maridaje', en: '/en/tools/pairing-menu-profitability-calculator' },
+    copies: {
+      es: { title: 'Calculadora de rentabilidad de menú y maridaje | Winerim', h1: '¿Es rentable tu maridaje?', description: 'Calcula coste por comensal, beverage cost, contribución mensual y el impacto de servir 10 ml de más en un menú con maridaje.', subtitle: 'Mide cada pase y el coste acumulado de una pequeña desviación de servicio.', problem: 'Un maridaje puede parecer rentable hasta que se suman dosis, sustituciones y desviaciones repetidas por comensal.', usage: 'Introduce ingreso atribuido al vino, servicios, comensales y el coste y dosis de cada vino.', decision: 'Compara coste, beverage cost, contribución, precio mínimo objetivo e impacto de servir 10 ml de más.' },
+      en: { title: 'Pairing menu profitability calculator | Winerim', h1: 'Is your wine pairing profitable?', description: 'Calculate cost per guest, beverage cost, monthly contribution and the impact of pouring 10 ml extra in a paired menu.', subtitle: 'Measure every course and the accumulated cost of a small service deviation.', problem: 'A pairing can appear profitable until pours, substitutions and repeated deviations are calculated per guest.', usage: 'Enter wine revenue allocation, services, guests, and the cost and pour of every wine.', decision: 'Compare cost, beverage cost, contribution, target minimum revenue and the impact of a 10 ml overpour.' },
+    },
+  },
+  {
+    key: 'wine-stock-reconciliation',
+    paths: { es: '/herramientas/conciliador-stock-vino', en: '/en/tools/wine-stock-reconciliation' },
+    copies: {
+      es: { title: 'Conciliador de stock de vino teórico y real | Winerim', h1: '¿Dónde se descuadra tu stock de vino?', description: 'Compara stock inicial, compras, botellas y copas vendidas, bajas y recuento real para detectar descuadres de inventario.', subtitle: 'Reconstruye el stock esperado y prioriza las diferencias por coste.', problem: 'Un total de inventario no explica si el descuadre viene de copas, entradas, bajas o productos TPV mal vinculados.', usage: 'Introduce stock inicial, entradas, ventas, copas, roturas, invitaciones, recuento y coste.', decision: 'Detecta faltantes y sobrantes, conviértelos a coste y empieza por la referencia de mayor impacto.' },
+      en: { title: 'Wine stock reconciliation tool | Winerim', h1: 'Where does your wine stock diverge?', description: 'Compare opening stock, purchases, bottle and glass sales, adjustments and actual count to find inventory discrepancies.', subtitle: 'Rebuild expected stock and prioritize differences by cost.', problem: 'An inventory total does not explain whether a discrepancy comes from glasses, receipts, adjustments or incorrectly linked POS products.', usage: 'Enter opening stock, receipts, sales, glasses, breakage, comps, count and cost.', decision: 'Find missing and surplus stock, value it at cost and start with the highest-impact reference.' },
+    },
+  },
+  {
+    key: 'wine-stockout-risk',
+    paths: { es: '/herramientas/simulador-rotura-stock-vino', en: '/en/tools/wine-stockout-risk-calculator' },
+    copies: {
+      es: { title: 'Simulador de rotura de stock de vino | Winerim', h1: '¿Qué te cuesta quedarte sin un vino?', description: 'Calcula qué vinos se agotarán antes de la próxima entrega, las unidades y margen en riesgo y la compra mínima de emergencia.', subtitle: 'Cuantifica el margen expuesto hasta la próxima entrega.', problem: 'Quedarse sin vino no siempre pierde toda la venta: depende de la demanda, los eventos y la capacidad real de sustitución.', usage: 'Introduce stock, ritmo diario, entrega, eventos, contribución y porcentaje sustituible por referencia.', decision: 'Obtén unidades no sustituibles, margen en riesgo y compra mínima de emergencia.' },
+      en: { title: 'Wine stockout risk calculator | Winerim', h1: 'What does running out of a wine cost?', description: 'Calculate which wines may run out before the next delivery, units and contribution at risk, and minimum emergency quantity.', subtitle: 'Quantify exposed contribution until the next delivery.', problem: 'Running out does not always lose the full sale: it depends on demand, events and realistic substitution capacity.', usage: 'Enter stock, daily pace, delivery, events, contribution and substitutable percentage by reference.', decision: 'Get non-substitutable units, contribution at risk and minimum emergency quantity.' },
+    },
+  },
+);
+
+ONLINE_TOOL_GROUPS.push(
   ...ONLINE_TOOL_COMPACT_GROUPS.map((group) => ({
     key: group.key,
     paths: group.paths,

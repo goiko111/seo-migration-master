@@ -33,6 +33,10 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-tiempo-operativo", title: "Calculadora de tiempo operativo recuperable", desc: "Compara el tiempo manual con tu escenario usando Winerim, tarea por tarea, y estima horas recuperables por semana, mes y año.", tag: "Operaciones" },
       { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Diagnóstico de rentabilidad de bodega", desc: "Separa ahorro en compras, margen adicional, horas recuperables y capital inmovilizado con fórmulas y supuestos editables.", tag: "Diagnóstico" },
       { to: "/herramientas/calculadora-mermas-vino", title: "Calculadora de mermas de vino", desc: "Estima cuánto vino pierdes al mes por copeo, botellas abiertas, roturas, invitaciones sin registrar y diferencias de inventario.", tag: "Gestión" },
+      { to: "/herramientas/planificador-pedido-semanal-vino", title: "Planificador de pedido semanal", desc: "Convierte stock, ventas, plazos y eventos en una propuesta de compra por cajas completas, con coste y referencias urgentes.", tag: "Supply" },
+      { to: "/herramientas/calculadora-rentabilidad-menu-maridaje", title: "Rentabilidad de menú y maridaje", desc: "Calcula coste por comensal, beverage cost, contribución mensual y el impacto acumulado de servir 10 ml de más.", tag: "Márgenes" },
+      { to: "/herramientas/conciliador-stock-vino", title: "Conciliador de stock teórico y real", desc: "Reconstruye el stock esperado con entradas, botellas, copas y bajas, y prioriza los descuadres por coste.", tag: "Gestión" },
+      { to: "/herramientas/simulador-rotura-stock-vino", title: "Simulador de rotura de stock", desc: "Cuantifica qué referencias se agotarán antes de la entrega, la compra urgente y el margen realmente expuesto.", tag: "Supply" },
       { to: "/wine-list-analyzer", title: "Analizador de carta de vinos", desc: "Sube tu carta y recibe un análisis con recomendaciones de mejora. Con Winerim, este análisis se actualiza automáticamente cada semana.", tag: "Análisis" },
       { to: "/calculadora-margen-vino", title: "Calculadora de márgenes de vino", desc: "Calcula el margen óptimo para cada referencia. Como cliente de Winerim, los márgenes se optimizan automáticamente según tus objetivos.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calculadora de precio por copa", desc: "Calcula el precio ideal por copa. Winerim lo calcula por ti y te alerta cuando conviene ajustar precios.", tag: "Pricing" },
@@ -72,6 +76,10 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-tiempo-operativo", title: "Recoverable Operational Time Calculator", desc: "Compare current manual work with your Winerim scenario, task by task, and estimate recoverable hours per week, month and year.", tag: "Operations" },
       { to: "/herramientas/diagnostico-rentabilidad-bodega", title: "Wine Cellar Profitability Diagnostic", desc: "Keep purchasing savings, additional contribution margin, recoverable hours and tied-up capital separate with editable assumptions.", tag: "Diagnostic" },
       { to: "/herramientas/calculadora-mermas-vino", title: "Wine Waste Calculator", desc: "Estimate monthly wine loss from by-the-glass service, open bottles, breakage, unrecorded comps and inventory differences.", tag: "Management" },
+      { to: "/herramientas/planificador-pedido-semanal-vino", title: "Weekly Wine Order Planner", desc: "Turn stock, sales, lead times and events into a full-case purchase proposal with cost and urgent references.", tag: "Supply" },
+      { to: "/herramientas/calculadora-rentabilidad-menu-maridaje", title: "Pairing Menu Profitability", desc: "Calculate cost per guest, beverage cost, monthly contribution and the accumulated impact of a 10 ml overpour.", tag: "Margins" },
+      { to: "/herramientas/conciliador-stock-vino", title: "Theoretical vs Actual Stock Reconciliation", desc: "Rebuild expected stock from receipts, bottles, glasses and adjustments, then prioritize discrepancies by cost.", tag: "Management" },
+      { to: "/herramientas/simulador-rotura-stock-vino", title: "Wine Stockout Risk Simulator", desc: "Quantify which references may run out before delivery, the emergency purchase and contribution truly exposed.", tag: "Supply" },
       { to: "/wine-list-analyzer", title: "Wine List Analyzer", desc: "Upload your list and get improvement recommendations. With Winerim, this analysis updates automatically every week.", tag: "Analysis" },
       { to: "/calculadora-margen-vino", title: "Wine Margin Calculator", desc: "Calculate the optimal margin for each reference. As a Winerim client, margins are optimized automatically based on your goals.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "By-the-Glass Price Calculator", desc: "Calculate the ideal price per glass. Winerim calculates it for you and alerts you when to adjust prices.", tag: "Pricing" },
@@ -248,6 +256,10 @@ const toolIconByPath: Record<string, typeof Search> = {
   "/herramientas/diagnostico-rentabilidad-bodega": BarChart3,
   "/herramientas/calculadora-tiempo-operativo": Clock3,
   "/herramientas/calculadora-mermas-vino": ShieldAlert,
+  "/herramientas/planificador-pedido-semanal-vino": ShoppingCart,
+  "/herramientas/calculadora-rentabilidad-menu-maridaje": Utensils,
+  "/herramientas/conciliador-stock-vino": ClipboardList,
+  "/herramientas/simulador-rotura-stock-vino": AlertTriangle,
   "/wine-list-analyzer": Search,
   "/calculadora-margen-vino": Calculator,
   "/herramientas/calculadora-precio-vino-por-copa": Wine,
@@ -428,6 +440,10 @@ const goalCopy: Record<string, {
       { title: "Entender la salud de mi carta", desc: "Estructura, equilibrio, pricing y oportunidades principales.", to: "/wine-list-analyzer" },
       { title: "Recuperar margen", desc: "Detecta dónde se escapa margen por coste, PVP, copa o stock.", to: "/herramientas/calculadora-fuga-margen" },
       { title: "Reducir la merma de vino", desc: "Separa copeo, caducidad, roturas, invitaciones e inventario para priorizar el coste perdido.", to: "/herramientas/calculadora-mermas-vino" },
+      { title: "Preparar el pedido semanal", desc: "Calcula qué referencias pedir, cuántas cajas comprar y cuánto capital comprometer.", to: "/herramientas/planificador-pedido-semanal-vino" },
+      { title: "Proteger el margen de un maridaje", desc: "Mide coste por comensal, beverage cost y desviaciones repetidas de servicio.", to: "/herramientas/calculadora-rentabilidad-menu-maridaje" },
+      { title: "Explicar un descuadre de stock", desc: "Compara stock teórico y real y prioriza las diferencias por su coste.", to: "/herramientas/conciliador-stock-vino" },
+      { title: "Evitar una rotura de stock", desc: "Cuantifica unidades y margen en riesgo hasta la próxima entrega.", to: "/herramientas/simulador-rotura-stock-vino" },
       { title: "Reducir stock inmovilizado", desc: "Estima capital parado y prioriza referencias a revisar.", to: "/herramientas/calculadora-stock-muerto" },
       { title: "Ordenar varios establecimientos", desc: "Compara surtido, precios, copa y ticket entre locales.", to: "/herramientas/auditor-carta-multilocal" },
     ],
@@ -444,6 +460,10 @@ const goalCopy: Record<string, {
       { title: "Understand my wine list health", desc: "Structure, balance, pricing and the main opportunities.", to: "/wine-list-analyzer" },
       { title: "Recover margin", desc: "Find margin leakage across cost, price, by-the-glass and stock.", to: "/herramientas/calculadora-fuga-margen" },
       { title: "Reduce wine waste", desc: "Separate by-the-glass loss, expiry, breakage, comps and inventory to prioritize lost cost.", to: "/herramientas/calculadora-mermas-vino" },
+      { title: "Prepare the weekly order", desc: "Calculate which references to order, how many cases to buy and the cash commitment.", to: "/herramientas/planificador-pedido-semanal-vino" },
+      { title: "Protect pairing margin", desc: "Measure cost per guest, beverage cost and repeated service deviations.", to: "/herramientas/calculadora-rentabilidad-menu-maridaje" },
+      { title: "Explain a stock discrepancy", desc: "Compare theoretical and actual stock and prioritize differences by cost.", to: "/herramientas/conciliador-stock-vino" },
+      { title: "Prevent a stockout", desc: "Quantify units and contribution at risk until the next delivery.", to: "/herramientas/simulador-rotura-stock-vino" },
       { title: "Reduce tied-up stock", desc: "Estimate dormant capital and prioritize references to review.", to: "/herramientas/calculadora-stock-muerto" },
       { title: "Organize multiple venues", desc: "Compare assortment, pricing, by-the-glass and ticket across locations.", to: "/herramientas/auditor-carta-multilocal" },
     ],
@@ -592,7 +612,7 @@ const Herramientas = () => {
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">{goals.title}</h2>
               <p className="text-muted-foreground leading-relaxed">{goals.intro}</p>
             </div>
-            <div className="grid md:grid-cols-2 border-t border-border">
+            <div className="grid md:grid-cols-2 border-t border-border" data-tool-priority="goals">
               {prioritizedGoals.map((goal, index) => {
                 const Icon = toolIconByPath[goal.to] || Search;
                 const isFeatured = goal.to === "/herramientas/calculadora-tiempo-operativo";
@@ -643,7 +663,7 @@ const Herramientas = () => {
             <span className="self-center text-xs text-muted-foreground ml-2">{filteredTools.length} {ui.toolCount}</span>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-tool-priority="catalog">
             {filteredTools.map((tool, i) => {
               const Icon = toolIconByPath[tool.to] || Search;
               return (

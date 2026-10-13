@@ -7813,3 +7813,30 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 - Medición agregada sin PII y contraste de hipótesis con datos consentidos.
 - Resolver la metadata inicial de las herramientas antiguas como mantenimiento
   SEO separado.
+## Actualización 2026-10-13: cuatro herramientas operativas en producción
+
+### Hechos confirmados
+
+- Están activas en ES/EN las herramientas de pedido semanal, rentabilidad de maridaje, conciliación de stock y rotura de stock.
+- Humano, Googlebot y OAI responden `200` y canonical propio en las ocho rutas; el sitemap contiene una sola entrada por URL.
+- QA: `269/269` tests, TypeScript, ESLint, build, Workers, dry-runs, Playwright local/productivo y `28` checks HTTP.
+- Releases: Pages `b76fa304`, backend `93718c13-7dcb-4e6d-b838-e57f98d63123`, facade `7dbf2ed3-9367-4539-af90-e458c16c6af5`.
+
+### Decisiones
+
+- No solicitar datos antes del resultado y no enviar a analítica las cifras introducidas.
+- Separar coste, contribución, unidades y margen expuesto para no generar un ROI artificial.
+
+### Hipótesis
+
+- El siguiente concepto con suficiente distancia respecto al catálogo actual sería el impacto TPV/multiestablecimiento.
+
+### Contradicciones / riesgos
+
+- Supabase/Lovable conserva su ciclo de despliegue separado; la capa pública verificada es Cloudflare.
+- Los ejemplos son ficticios y no constituyen benchmarks.
+
+### Tareas pendientes
+
+- Medición agregada sin PII y validación de hipótesis con clientes.
+- Definir el simulador TPV/multiestablecimiento antes de implementarlo.
