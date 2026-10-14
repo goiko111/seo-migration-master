@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import { chromium } from "/Users/GOIKO/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs";
 
 const base = process.env.BASE_URL || "http://127.0.0.1:4233";
-const out = process.env.SCREENSHOT_DIR || "docs/agent_outputs/operational_decision_tools_2026-10-13/local";
+const out = process.env.SCREENSHOT_DIR || "docs/agent_outputs/tpv_and_decision_tools_2026-10-14/local";
 await fs.mkdir(out, { recursive: true });
 
 const tools = [
@@ -12,6 +12,7 @@ const tools = [
     en: "/en/tools/weekly-wine-order-planner",
     esHeading: "¿Qué vino deberías pedir esta semana?",
     enHeading: "What wine should you order this week?",
+    expectedResult: "Exceso por cajas completas",
   },
   {
     slug: "pairing",
@@ -19,6 +20,7 @@ const tools = [
     en: "/en/tools/pairing-menu-profitability-calculator",
     esHeading: "¿Es rentable tu maridaje?",
     enHeading: "Is your wine pairing profitable?",
+    expectedResult: "Botellas equivalentes al mes",
   },
   {
     slug: "reconciliation",
@@ -26,6 +28,7 @@ const tools = [
     en: "/en/tools/wine-stock-reconciliation",
     esHeading: "¿Dónde se descuadra tu stock de vino?",
     enHeading: "Where does your wine stock diverge?",
+    expectedResult: "Faltante físico",
   },
   {
     slug: "stockout",
@@ -33,6 +36,17 @@ const tools = [
     en: "/en/tools/wine-stockout-risk-calculator",
     esHeading: "¿Qué te cuesta quedarte sin un vino?",
     enHeading: "What does running out of a wine cost?",
+    expectedResult: "Venta salvada por sustitución",
+  },
+  {
+    slug: "tpv-impact",
+    es: "/herramientas/simulador-impacto-integracion-tpv",
+    en: "/en/tools/pos-integration-impact-calculator",
+    esHeading: "¿Qué cambia al conectar todos tus centros con el TPV?",
+    enHeading: "What changes when every location is connected to the POS?",
+    esCalculate: "Calcular impacto",
+    enCalculate: "Calculate impact",
+    expectedResult: "Incidencias evitables/mes",
   },
 ];
 
@@ -67,8 +81,9 @@ async function runSpanishFlow(page, tool, viewportName) {
   await assertNoOverflow(page, `${tool.slug}-${viewportName}-context`);
 
   await page.getByRole("button", { name: "Cargar ejemplo ficticio", exact: true }).first().click();
-  await page.getByRole("button", { name: "Calcular", exact: true }).click();
+  await page.getByRole("button", { name: tool.esCalculate || "Calcular", exact: true }).click();
   await page.locator(".decision-result").waitFor();
+  await page.getByText(tool.expectedResult, { exact: true }).waitFor();
   await assertNoOverflow(page, `${tool.slug}-${viewportName}-result`);
   await page.screenshot({ path: `${out}/${tool.slug}-${viewportName}-result.png`, fullPage: true });
 
@@ -90,7 +105,7 @@ async function checkEnglish(page, tool) {
   await page.getByRole("heading", { name: tool.enHeading, level: 1 }).waitFor();
   await rejectCookies(page, "en");
   await page.getByRole("button", { name: "Load fictional example", exact: true }).first().click();
-  await page.getByRole("button", { name: "Calculate", exact: true }).click();
+  await page.getByRole("button", { name: tool.enCalculate || "Calculate", exact: true }).click();
   await page.locator(".decision-result").waitFor();
   await assertNoOverflow(page, `${tool.slug}-en`);
   const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
@@ -127,7 +142,7 @@ const expectedPriority = [
 ];
 for (const block of ["goals", "catalog"]) {
   const hrefs = await hub.locator(`[data-tool-priority="${block}"] a`).evaluateAll((anchors) =>
-    anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean).slice(0, 8),
+    anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean).slice(0, 9),
   );
   if (JSON.stringify(hrefs) !== JSON.stringify(expectedPriority)) {
     throw new Error(`/herramientas ${block} priority mismatch: ${JSON.stringify(hrefs)}`);

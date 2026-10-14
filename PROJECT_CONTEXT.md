@@ -1643,3 +1643,31 @@
 
 - Medición agregada sin PII y calibración con datos consentidos.
 - Especificar, sin duplicar tiempo operativo, un posible simulador de impacto TPV/multiestablecimiento.
+
+## Actualización 2026-10-14: impacto TPV y herramientas operativas reforzadas
+
+### Hechos
+
+- Se publicó el simulador de impacto TPV/multiestablecimiento en ES/EN y se integró como novena herramienta prioritaria.
+- Pedido, maridaje, conciliación y rotura de stock ya tienen modelos, diagnósticos y acciones propios.
+- Producción usa Pages `5c3f5899`, backend `317e7c1c-09e4-41da-a0be-d63a8b4b12cb` y facade `6dd4ab28-e546-4b10-95bf-f6169c0c3568`.
+- Humano, Googlebot y OAI reciben `200` y canonical propio en las diez rutas; el sitemap contiene cada URL una vez.
+
+### Decisiones
+
+- No inventar tarifas TPV: los costes comerciales son opcionales y los introduce el usuario.
+- No presentar automatización, ROI o payback como garantía; todas las hipótesis son visibles y editables.
+- Separar faltante/sobrante, necesidad/redondeo y déficit/sustitución para no ocultar problemas operativos.
+
+### Hipótesis
+
+- Un diagnóstico por procesos y centros explicará mejor el valor multiestablecimiento que una calculadora genérica de ROI.
+
+### Contradicciones
+
+- La fuente Edge local está alineada, pero Lovable/Supabase no se desplegó; la capa pública activa y comprobada es Cloudflare.
+
+### Tareas pendientes
+
+- Medir uso agregado sin PII ni valores introducidos y contrastar hipótesis con datos consentidos.
+- Recalibrar ejemplos solo cuando exista evidencia real por tipo de integración y centro.

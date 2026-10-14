@@ -92,6 +92,7 @@ export const ROUTE_MAP: Record<SupportedLang, Record<string, string>> = {
     "/herramientas/calculadora-rentabilidad-menu-maridaje": "/en/tools/pairing-menu-profitability-calculator",
     "/herramientas/conciliador-stock-vino": "/en/tools/wine-stock-reconciliation",
     "/herramientas/simulador-rotura-stock-vino": "/en/tools/wine-stockout-risk-calculator",
+    "/herramientas/simulador-impacto-integracion-tpv": "/en/tools/pos-integration-impact-calculator",
     "/herramientas/calculadora-stock-muerto": "/en/tools/dead-stock-calculator",
     "/herramientas/calculadora-ticket-medio-vino": "/en/tools/average-ticket-calculator",
     "/herramientas/calculadora-compra-inteligente": "/en/tools/smart-purchasing-calculator",

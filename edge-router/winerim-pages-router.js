@@ -106,6 +106,8 @@ const REACT_ROUTES = new Set([
   "/en/tools/wine-stock-reconciliation",
   "/herramientas/simulador-rotura-stock-vino",
   "/en/tools/wine-stockout-risk-calculator",
+  "/herramientas/simulador-impacto-integracion-tpv",
+  "/en/tools/pos-integration-impact-calculator",
   "/afiliate",
   "/en/affiliate",
   "/it/affiliati",
@@ -197,6 +199,14 @@ const DECISION_TOOL_ROUTES = new Map([
   ["/en/tools/wine-stockout-risk-calculator", {
     lang: "en", title: "Wine stockout risk calculator | Winerim",
     description: "Calculate which wines may run out before the next delivery, units and contribution at risk, and minimum emergency quantity.",
+  }],
+  ["/herramientas/simulador-impacto-integracion-tpv", {
+    lang: "es", title: "Simulador de impacto de integración TPV y multiestablecimiento | Winerim",
+    description: "Estima horas recuperables, coste operativo, incidencias y plazo de recuperación al conectar uno o varios centros con el TPV.",
+  }],
+  ["/en/tools/pos-integration-impact-calculator", {
+    lang: "en", title: "POS and multi-location integration impact calculator | Winerim",
+    description: "Estimate recoverable hours, operating value, incidents and payback when connecting one or several locations to the POS.",
   }],
 ]);
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { PRIORITY_TOOL_ROUTES, prioritizeToolItems } from "@/lib/toolPriority";
 
 describe("tool priority", () => {
-  it("keeps the eight decision calculators first in the required order", () => {
+  it("keeps the nine decision calculators first in the required order", () => {
     const items = [
       { to: "/wine-list-analyzer", title: "Analyzer" },
       { to: PRIORITY_TOOL_ROUTES[2], title: "Margin" },
@@ -14,6 +14,7 @@ describe("tool priority", () => {
       { to: PRIORITY_TOOL_ROUTES[5], title: "Pairing" },
       { to: PRIORITY_TOOL_ROUTES[4], title: "Order" },
       { to: PRIORITY_TOOL_ROUTES[6], title: "Reconciliation" },
+      { to: PRIORITY_TOOL_ROUTES[8], title: "POS integration impact" },
     ];
 
     expect(prioritizeToolItems(items).map(({ to }) => to)).toEqual([

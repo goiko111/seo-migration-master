@@ -120,6 +120,7 @@ const RentabilidadBodega = lazy(() => import("./pages/RentabilidadBodega"));
 const CalculadoraTiempoOperativo = lazy(() => import("./pages/CalculadoraTiempoOperativo"));
 const CalculadoraMermasVino = lazy(() => import("./pages/CalculadoraMermasVino"));
 const OperationalDecisionTools = lazy(() => import("./pages/OperationalDecisionTools"));
+const TpvIntegrationImpact = lazy(() => import("./pages/TpvIntegrationImpact"));
 const DiagnosticoVinoPorCopa = lazy(() => import("./pages/DiagnosticoVinoPorCopa"));
 const WineListScore = lazy(() => import("./pages/WineListScore"));
 const CalculadoraStockMuerto = lazy(() => import("./pages/CalculadoraStockMuerto"));
@@ -383,6 +384,8 @@ const esRoutes = (
     <Route path="/en/tools/wine-stock-reconciliation" element={<OperationalDecisionTools />} />
     <Route path="/herramientas/simulador-rotura-stock-vino" element={<OperationalDecisionTools />} />
     <Route path="/en/tools/wine-stockout-risk-calculator" element={<OperationalDecisionTools />} />
+    <Route path="/herramientas/simulador-impacto-integracion-tpv" element={<TpvIntegrationImpact />} />
+    <Route path="/en/tools/pos-integration-impact-calculator" element={<TpvIntegrationImpact />} />
     <Route path="/herramientas/diagnostico-vino-por-copa" element={<DiagnosticoVinoPorCopa />} />
     <Route path="/herramientas/wine-list-score" element={<WineListScore />} />
     <Route path="/herramientas/calculadora-stock-muerto" element={<CalculadoraStockMuerto />} />
@@ -988,6 +991,8 @@ const DeferredAppChrome = () => {
     "/en/tools/wine-stock-reconciliation",
     "/herramientas/simulador-rotura-stock-vino",
     "/en/tools/wine-stockout-risk-calculator",
+    "/herramientas/simulador-impacto-integracion-tpv",
+    "/en/tools/pos-integration-impact-calculator",
   ].includes(location.pathname);
 
   return (

@@ -5854,3 +5854,29 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 1. Definir inputs, supuestos y límites del simulador TPV/multiestablecimiento.
 2. Medir uso agregado de las ocho calculadoras prioritarias sin PII ni valores introducidos.
 3. Contrastar ejemplos e hipótesis con datos consentidos de clientes.
+
+## Siguiente bloque tras impacto TPV y mejora operativa — 2026-10-14
+
+### Hechos
+
+- El simulador TPV/multiestablecimiento y las cuatro herramientas operativas reforzadas están publicados y verificados en ES/EN.
+
+### Decisiones
+
+- No modificar porcentajes, ejemplos ni tarifas sin evidencia consentida.
+- Mantener Search Console, traducciones y Lovable/Supabase como líneas separadas.
+
+### Hipótesis
+
+- El siguiente aprendizaje útil vendrá de la finalización real y del proceso seleccionado, no de añadir más calculadoras.
+
+### Contradicciones / límites
+
+- La fuente Edge local está lista, pero no se publicó en Lovable/Supabase; Cloudflare resuelve correctamente la superficie pública.
+
+### Siguiente bloque verificable
+
+1. Instrumentar inicio, finalización, descarga y CTA por herramienta sin PII ni cifras introducidas.
+2. Revisar Search Console cuando las nuevas URLs acumulen rastreo; no solicitar indexación masiva.
+3. Contrastar con clientes los supuestos TPV por proveedor y número de centros.
+4. Reconciliar Lovable/Supabase con un despliegue acotado cuando exista acceso.

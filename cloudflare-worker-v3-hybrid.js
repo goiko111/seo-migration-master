@@ -1332,6 +1332,14 @@ ONLINE_TOOL_GROUPS.push(
       en: { title: 'Wine stockout risk calculator | Winerim', h1: 'What does running out of a wine cost?', description: 'Calculate which wines may run out before the next delivery, units and contribution at risk, and minimum emergency quantity.', subtitle: 'Quantify exposed contribution until the next delivery.', problem: 'Running out does not always lose the full sale: it depends on demand, events and realistic substitution capacity.', usage: 'Enter stock, daily pace, delivery, events, contribution and substitutable percentage by reference.', decision: 'Get non-substitutable units, contribution at risk and minimum emergency quantity.' },
     },
   },
+  {
+    key: 'pos-integration-impact',
+    paths: { es: '/herramientas/simulador-impacto-integracion-tpv', en: '/en/tools/pos-integration-impact-calculator' },
+    copies: {
+      es: { title: 'Simulador de impacto de integración TPV y multiestablecimiento | Winerim', h1: '¿Qué cambia al conectar todos tus centros con el TPV?', description: 'Estima horas recuperables, coste operativo, incidencias y plazo de recuperación al conectar uno o varios centros con el TPV.', subtitle: 'Compara carga manual, automatización e impacto por centro con hipótesis editables.', problem: 'Sin un modelo común, cada centro repite altas, precios, conciliaciones e informes y resulta difícil separar ahorro operativo de costes comerciales.', usage: 'Introduce centros, coste hora, procesos, frecuencia, minutos manuales y automatización esperada. Los costes de integración son opcionales y los defines tú.', decision: 'Obtén horas recuperables, valor operativo, incidencias evitables y, solo si introduces costes, impacto neto y plazo de recuperación.' },
+      en: { title: 'POS and multi-location integration impact calculator | Winerim', h1: 'What changes when every location is connected to the POS?', description: 'Estimate recoverable hours, operating value, incidents and payback when connecting one or several locations to the POS.', subtitle: 'Compare manual workload, automation and impact per location with editable assumptions.', problem: 'Without a shared model, every location repeats products, prices, reconciliation and reporting, making it hard to separate operating value from commercial cost.', usage: 'Enter locations, hourly cost, processes, frequency, manual minutes and expected automation. Integration costs are optional and user-defined.', decision: 'Get recoverable hours, operating value, avoidable incidents and, only when costs are entered, net impact and payback.' },
+    },
+  },
 );
 
 ONLINE_TOOL_GROUPS.push(

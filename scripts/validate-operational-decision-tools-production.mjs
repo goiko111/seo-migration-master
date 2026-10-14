@@ -8,6 +8,8 @@ const routes = [
   "/en/tools/wine-stock-reconciliation",
   "/herramientas/simulador-rotura-stock-vino",
   "/en/tools/wine-stockout-risk-calculator",
+  "/herramientas/simulador-impacto-integracion-tpv",
+  "/en/tools/pos-integration-impact-calculator",
 ];
 
 const agents = {

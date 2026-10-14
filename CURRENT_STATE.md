@@ -7840,3 +7840,31 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - Medición agregada sin PII y validación de hipótesis con clientes.
 - Definir el simulador TPV/multiestablecimiento antes de implementarlo.
+
+## Actualización 2026-10-14: release TPV/multiestablecimiento
+
+### Hechos confirmados
+
+- Activas: `/herramientas/simulador-impacto-integracion-tpv` y `/en/tools/pos-integration-impact-calculator`.
+- Las cuatro herramientas operativas muestran decisiones específicas y métricas no compensadas.
+- QA verde: `273/273` tests, TypeScript, ESLint, build, Workers, dry-runs, Playwright local/productivo y `34` checks HTTP.
+- Producción: Pages `5c3f5899`, backend `317e7c1c-09e4-41da-a0be-d63a8b4b12cb`, facade `6dd4ab28-e546-4b10-95bf-f6169c0c3568`.
+
+### Decisiones
+
+- Resultado completo antes del contacto y cálculo local sin enviar cifras a analítica.
+- ROI y payback TPV solo cuando el usuario introduce costes; no hay tarifa precargada.
+
+### Hipótesis
+
+- Los procesos por centro permitirán cualificar mejor oportunidades de integración y grupos.
+
+### Contradicciones / riesgos
+
+- Deno no estaba disponible en el shell final y la Edge Function no se publicó desde Lovable/Supabase; Cloudflare está alineado y verificado.
+- Persisten avisos no bloqueantes conocidos de React Router, `caniuse-lite`, una `key` en Precios y chunks grandes.
+
+### Tareas pendientes
+
+- Medición agregada sin PII y calibración con datos consentidos.
+- Mantener Search Console y la reconciliación Lovable como líneas separadas de esta release.

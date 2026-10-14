@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { AlertTriangle, Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight, ShoppingCart, Target, Building2, PieChart, ShieldAlert, Clock3 } from "lucide-react";
+import { AlertTriangle, Calculator, BarChart3, Utensils, Wine, TrendingUp, DollarSign, Search, GlassWater, RotateCcw, ClipboardList, ArrowRight, ShoppingCart, Target, Building2, PieChart, ShieldAlert, Clock3, Network } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -37,6 +37,7 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-rentabilidad-menu-maridaje", title: "Rentabilidad de menú y maridaje", desc: "Calcula coste por comensal, beverage cost, contribución mensual y el impacto acumulado de servir 10 ml de más.", tag: "Márgenes" },
       { to: "/herramientas/conciliador-stock-vino", title: "Conciliador de stock teórico y real", desc: "Reconstruye el stock esperado con entradas, botellas, copas y bajas, y prioriza los descuadres por coste.", tag: "Gestión" },
       { to: "/herramientas/simulador-rotura-stock-vino", title: "Simulador de rotura de stock", desc: "Cuantifica qué referencias se agotarán antes de la entrega, la compra urgente y el margen realmente expuesto.", tag: "Supply" },
+      { to: "/herramientas/simulador-impacto-integracion-tpv", title: "Impacto de integración TPV y multiestablecimiento", desc: "Compara carga manual, horas recuperables, incidencias y retorno opcional al conectar uno o varios centros.", tag: "Integraciones" },
       { to: "/wine-list-analyzer", title: "Analizador de carta de vinos", desc: "Sube tu carta y recibe un análisis con recomendaciones de mejora. Con Winerim, este análisis se actualiza automáticamente cada semana.", tag: "Análisis" },
       { to: "/calculadora-margen-vino", title: "Calculadora de márgenes de vino", desc: "Calcula el margen óptimo para cada referencia. Como cliente de Winerim, los márgenes se optimizan automáticamente según tus objetivos.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "Calculadora de precio por copa", desc: "Calcula el precio ideal por copa. Winerim lo calcula por ti y te alerta cuando conviene ajustar precios.", tag: "Pricing" },
@@ -80,6 +81,7 @@ const content: Record<string, {
       { to: "/herramientas/calculadora-rentabilidad-menu-maridaje", title: "Pairing Menu Profitability", desc: "Calculate cost per guest, beverage cost, monthly contribution and the accumulated impact of a 10 ml overpour.", tag: "Margins" },
       { to: "/herramientas/conciliador-stock-vino", title: "Theoretical vs Actual Stock Reconciliation", desc: "Rebuild expected stock from receipts, bottles, glasses and adjustments, then prioritize discrepancies by cost.", tag: "Management" },
       { to: "/herramientas/simulador-rotura-stock-vino", title: "Wine Stockout Risk Simulator", desc: "Quantify which references may run out before delivery, the emergency purchase and contribution truly exposed.", tag: "Supply" },
+      { to: "/herramientas/simulador-impacto-integracion-tpv", title: "POS and Multi-location Integration Impact", desc: "Compare manual workload, recoverable hours, incidents and optional return when connecting one or several locations.", tag: "Integrations" },
       { to: "/wine-list-analyzer", title: "Wine List Analyzer", desc: "Upload your list and get improvement recommendations. With Winerim, this analysis updates automatically every week.", tag: "Analysis" },
       { to: "/calculadora-margen-vino", title: "Wine Margin Calculator", desc: "Calculate the optimal margin for each reference. As a Winerim client, margins are optimized automatically based on your goals.", tag: "Pricing" },
       { to: "/herramientas/calculadora-precio-vino-por-copa", title: "By-the-Glass Price Calculator", desc: "Calculate the ideal price per glass. Winerim calculates it for you and alerts you when to adjust prices.", tag: "Pricing" },
@@ -260,6 +262,7 @@ const toolIconByPath: Record<string, typeof Search> = {
   "/herramientas/calculadora-rentabilidad-menu-maridaje": Utensils,
   "/herramientas/conciliador-stock-vino": ClipboardList,
   "/herramientas/simulador-rotura-stock-vino": AlertTriangle,
+  "/herramientas/simulador-impacto-integracion-tpv": Network,
   "/wine-list-analyzer": Search,
   "/calculadora-margen-vino": Calculator,
   "/herramientas/calculadora-precio-vino-por-copa": Wine,
@@ -444,6 +447,7 @@ const goalCopy: Record<string, {
       { title: "Proteger el margen de un maridaje", desc: "Mide coste por comensal, beverage cost y desviaciones repetidas de servicio.", to: "/herramientas/calculadora-rentabilidad-menu-maridaje" },
       { title: "Explicar un descuadre de stock", desc: "Compara stock teórico y real y prioriza las diferencias por su coste.", to: "/herramientas/conciliador-stock-vino" },
       { title: "Evitar una rotura de stock", desc: "Cuantifica unidades y margen en riesgo hasta la próxima entrega.", to: "/herramientas/simulador-rotura-stock-vino" },
+      { title: "Medir una integración TPV multiestablecimiento", desc: "Compara carga manual, automatización, incidencias y retorno opcional por centro.", to: "/herramientas/simulador-impacto-integracion-tpv" },
       { title: "Reducir stock inmovilizado", desc: "Estima capital parado y prioriza referencias a revisar.", to: "/herramientas/calculadora-stock-muerto" },
       { title: "Ordenar varios establecimientos", desc: "Compara surtido, precios, copa y ticket entre locales.", to: "/herramientas/auditor-carta-multilocal" },
     ],
@@ -464,6 +468,7 @@ const goalCopy: Record<string, {
       { title: "Protect pairing margin", desc: "Measure cost per guest, beverage cost and repeated service deviations.", to: "/herramientas/calculadora-rentabilidad-menu-maridaje" },
       { title: "Explain a stock discrepancy", desc: "Compare theoretical and actual stock and prioritize differences by cost.", to: "/herramientas/conciliador-stock-vino" },
       { title: "Prevent a stockout", desc: "Quantify units and contribution at risk until the next delivery.", to: "/herramientas/simulador-rotura-stock-vino" },
+      { title: "Measure a multi-location POS integration", desc: "Compare manual workload, automation, incidents and optional return by location.", to: "/herramientas/simulador-impacto-integracion-tpv" },
       { title: "Reduce tied-up stock", desc: "Estimate dormant capital and prioritize references to review.", to: "/herramientas/calculadora-stock-muerto" },
       { title: "Organize multiple venues", desc: "Compare assortment, pricing, by-the-glass and ticket across locations.", to: "/herramientas/auditor-carta-multilocal" },
     ],

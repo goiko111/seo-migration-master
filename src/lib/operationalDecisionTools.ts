@@ -17,9 +17,13 @@ export interface OrderRecommendation extends OrderPlannerRow {
   dailySales: number;
   daysCover: number | null;
   rawNeed: number;
+  bottleRequirement: number;
   bottlesToOrder: number;
   casesToOrder: number;
   orderCost: number;
+  preDeliveryShortfall: number;
+  caseRoundingSurplus: number;
+  caseRoundingCost: number;
   postOrderCoverDays: number | null;
   status: "urgent" | "order" | "hold";
 }
@@ -30,6 +34,11 @@ export interface OrderPlanResult {
   totalCases: number;
   totalCost: number;
   urgentCount: number;
+  orderCount: number;
+  holdCount: number;
+  totalPreDeliveryShortfall: number;
+  totalCaseRoundingSurplus: number;
+  totalCaseRoundingCost: number;
 }
 
 export const calculateOrderPlan = (rows: OrderPlannerRow[]): OrderPlanResult => {
@@ -44,10 +53,12 @@ export const calculateOrderPlan = (rows: OrderPlannerRow[]): OrderPlanResult => 
     const dailySales = weeklySales / 7;
     const horizonDemand = dailySales * (leadDays + safetyDays + targetCoverDays) + eventDemand;
     const rawNeed = Math.max(0, horizonDemand - currentStock);
-    const bottlesToOrder = rawNeed > 0 ? Math.ceil(rawNeed) : 0;
-    const casesToOrder = bottlesToOrder > 0 ? Math.ceil(bottlesToOrder / unitsPerCase) : 0;
+    const bottleRequirement = rawNeed > 0 ? Math.ceil(rawNeed) : 0;
+    const casesToOrder = bottleRequirement > 0 ? Math.ceil(bottleRequirement / unitsPerCase) : 0;
     const roundedBottles = casesToOrder * unitsPerCase;
     const stockNeededBeforeDelivery = dailySales * leadDays + eventDemand;
+    const preDeliveryShortfall = Math.max(0, stockNeededBeforeDelivery - currentStock);
+    const caseRoundingSurplus = Math.max(0, roundedBottles - bottleRequirement);
     const daysCover = dailySales > 0 ? currentStock / dailySales : null;
     const postOrderCoverDays = dailySales > 0
       ? Math.max(0, currentStock + roundedBottles - eventDemand) / dailySales
@@ -71,9 +82,13 @@ export const calculateOrderPlan = (rows: OrderPlannerRow[]): OrderPlanResult => 
       dailySales,
       daysCover,
       rawNeed,
+      bottleRequirement,
       bottlesToOrder: roundedBottles,
       casesToOrder,
       orderCost: roundedBottles * Math.max(0, row.unitCost),
+      preDeliveryShortfall,
+      caseRoundingSurplus,
+      caseRoundingCost: caseRoundingSurplus * Math.max(0, row.unitCost),
       postOrderCoverDays,
       status,
     } satisfies OrderRecommendation;
@@ -88,6 +103,11 @@ export const calculateOrderPlan = (rows: OrderPlannerRow[]): OrderPlanResult => 
     totalCases: recommendations.reduce((sum, row) => sum + row.casesToOrder, 0),
     totalCost: recommendations.reduce((sum, row) => sum + row.orderCost, 0),
     urgentCount: recommendations.filter((row) => row.status === "urgent").length,
+    orderCount: recommendations.filter((row) => row.status === "order").length,
+    holdCount: recommendations.filter((row) => row.status === "hold").length,
+    totalPreDeliveryShortfall: recommendations.reduce((sum, row) => sum + row.preDeliveryShortfall, 0),
+    totalCaseRoundingSurplus: recommendations.reduce((sum, row) => sum + row.caseRoundingSurplus, 0),
+    totalCaseRoundingCost: recommendations.reduce((sum, row) => sum + row.caseRoundingCost, 0),
   };
 };
 
@@ -111,6 +131,8 @@ export interface PairingWineResult extends PairingWineRow {
   costPerGuest: number;
   bottlesPerService: number;
   overpourTenMlCostPerGuest: number;
+  monthlyBottleEquivalent: number;
+  overpourTenMlBottleEquivalent: number;
 }
 
 export interface PairingProfitabilityResult {
@@ -123,6 +145,12 @@ export interface PairingProfitabilityResult {
   monthlyContribution: number;
   minimumRevenueForTarget: number;
   overpourTenMlMonthlyImpact: number;
+  targetCostPerGuest: number;
+  costGapPerGuest: number;
+  monthlyCostGap: number;
+  monthlyBottleEquivalent: number;
+  overpourTenMlBottleEquivalent: number;
+  targetStatus: "within" | "over";
 }
 
 export const calculatePairingProfitability = (input: PairingProfitabilityInput): PairingProfitabilityResult => {
@@ -141,11 +169,15 @@ export const calculatePairingProfitability = (input: PairingProfitabilityInput):
       costPerGuest: bottleCost * (pourMl / bottleMl),
       bottlesPerService: Math.ceil((pourMl * guestsPerService) / bottleMl),
       overpourTenMlCostPerGuest: bottleCost * (10 / bottleMl),
+      monthlyBottleEquivalent: (pourMl * monthlyGuests) / bottleMl,
+      overpourTenMlBottleEquivalent: (10 * monthlyGuests) / bottleMl,
     } satisfies PairingWineResult;
   });
   const costPerGuest = wines.reduce((sum, wine) => sum + wine.costPerGuest, 0);
   const revenue = Math.max(0, input.wineRevenuePerGuest);
   const targetPct = Math.min(100, Math.max(1, input.targetBeverageCostPct || 25));
+  const targetCostPerGuest = revenue * (targetPct / 100);
+  const costGapPerGuest = costPerGuest - targetCostPerGuest;
 
   return {
     wines,
@@ -157,6 +189,12 @@ export const calculatePairingProfitability = (input: PairingProfitabilityInput):
     monthlyContribution: (revenue - costPerGuest) * monthlyGuests,
     minimumRevenueForTarget: costPerGuest / (targetPct / 100),
     overpourTenMlMonthlyImpact: wines.reduce((sum, wine) => sum + wine.overpourTenMlCostPerGuest, 0) * monthlyGuests,
+    targetCostPerGuest,
+    costGapPerGuest,
+    monthlyCostGap: costGapPerGuest * monthlyGuests,
+    monthlyBottleEquivalent: wines.reduce((sum, wine) => sum + wine.monthlyBottleEquivalent, 0),
+    overpourTenMlBottleEquivalent: wines.reduce((sum, wine) => sum + wine.overpourTenMlBottleEquivalent, 0),
+    targetStatus: costPerGuest <= targetCostPerGuest ? "within" : "over",
   };
 };
 
@@ -188,6 +226,11 @@ export interface StockReconciliationResult {
   totalAbsoluteVariance: number;
   totalVarianceCost: number;
   mismatchCount: number;
+  missingBottles: number;
+  surplusBottles: number;
+  missingCost: number;
+  surplusCost: number;
+  netVariance: number;
 }
 
 export const calculateStockReconciliation = (
@@ -223,6 +266,11 @@ export const calculateStockReconciliation = (
     totalAbsoluteVariance: lines.reduce((sum, row) => sum + row.absoluteVariance, 0),
     totalVarianceCost: lines.reduce((sum, row) => sum + row.varianceCost, 0),
     mismatchCount: lines.filter((row) => row.status !== "balanced").length,
+    missingBottles: lines.filter((row) => row.status === "missing").reduce((sum, row) => sum + Math.abs(row.variance), 0),
+    surplusBottles: lines.filter((row) => row.status === "surplus").reduce((sum, row) => sum + row.variance, 0),
+    missingCost: lines.filter((row) => row.status === "missing").reduce((sum, row) => sum + row.varianceCost, 0),
+    surplusCost: lines.filter((row) => row.status === "surplus").reduce((sum, row) => sum + row.varianceCost, 0),
+    netVariance: lines.reduce((sum, row) => sum + row.variance, 0),
   };
 };
 
@@ -245,6 +293,8 @@ export interface StockoutRiskLine extends StockoutRiskRow {
   lostUnits: number;
   contributionAtRisk: number;
   emergencyQuantity: number;
+  riskWindowDays: number;
+  contributionProtectedBySubstitution: number;
   status: "risk" | "covered";
 }
 
@@ -254,6 +304,9 @@ export interface StockoutRiskResult {
   totalUnitsAtRisk: number;
   totalContributionAtRisk: number;
   totalEmergencyQuantity: number;
+  totalPhysicalShortage: number;
+  totalSubstitutedUnits: number;
+  totalContributionProtectedBySubstitution: number;
 }
 
 export const calculateStockoutRisk = (rows: StockoutRiskRow[]): StockoutRiskResult => {
@@ -268,6 +321,7 @@ export const calculateStockoutRisk = (rows: StockoutRiskRow[]): StockoutRiskResu
     const substitutedUnits = shortage * (substitutionPct / 100);
     const lostUnits = Math.max(0, shortage - substitutedUnits);
     const emergencyQuantity = shortage > 0 ? Math.ceil(shortage) : 0;
+    const effectiveCoverDays = dailySales > 0 ? Math.max(0, currentStock - eventDemand) / dailySales : 0;
     return {
       ...row,
       currentStock,
@@ -283,6 +337,8 @@ export const calculateStockoutRisk = (rows: StockoutRiskRow[]): StockoutRiskResu
       lostUnits,
       contributionAtRisk: lostUnits * Math.max(0, row.contributionPerBottle),
       emergencyQuantity,
+      riskWindowDays: shortage > 0 ? Math.max(0, daysUntilDelivery - effectiveCoverDays) : 0,
+      contributionProtectedBySubstitution: substitutedUnits * Math.max(0, row.contributionPerBottle),
       status: shortage > 0 ? "risk" : "covered",
     } satisfies StockoutRiskLine;
   }).sort((left, right) => right.contributionAtRisk - left.contributionAtRisk);
@@ -293,6 +349,111 @@ export const calculateStockoutRisk = (rows: StockoutRiskRow[]): StockoutRiskResu
     totalUnitsAtRisk: lines.reduce((sum, row) => sum + row.lostUnits, 0),
     totalContributionAtRisk: lines.reduce((sum, row) => sum + row.contributionAtRisk, 0),
     totalEmergencyQuantity: lines.reduce((sum, row) => sum + row.emergencyQuantity, 0),
+    totalPhysicalShortage: lines.reduce((sum, row) => sum + row.shortage, 0),
+    totalSubstitutedUnits: lines.reduce((sum, row) => sum + row.substitutedUnits, 0),
+    totalContributionProtectedBySubstitution: lines.reduce((sum, row) => sum + row.contributionProtectedBySubstitution, 0),
+  };
+};
+
+export type TpvImpactTaskType = "operation" | "incident";
+
+export interface TpvImpactTaskRow {
+  id: string;
+  name: string;
+  type: TpvImpactTaskType;
+  monthlyOccurrencesPerCenter: number;
+  manualMinutesPerOccurrence: number;
+  automationPct: number;
+}
+
+export interface TpvImpactInput {
+  centers: number;
+  hourlyCost: number;
+  monthlyIntegrationCostPerCenter: number;
+  setupCostPerCenter: number;
+  tasks: TpvImpactTaskRow[];
+}
+
+export interface TpvImpactTaskResult extends TpvImpactTaskRow {
+  manualHoursMonthly: number;
+  integratedHoursMonthly: number;
+  hoursRecoveredMonthly: number;
+  occurrencesAvoidedMonthly: number;
+}
+
+export interface TpvIntegrationImpactResult {
+  centers: number;
+  tasks: TpvImpactTaskResult[];
+  manualHoursMonthly: number;
+  integratedHoursMonthly: number;
+  hoursRecoveredMonthly: number;
+  laborValueMonthly: number;
+  recurringIntegrationCostMonthly: number;
+  setupCostTotal: number;
+  hasCommercialCost: boolean;
+  netOperationalImpactMonthly: number | null;
+  firstYearNetImpact: number | null;
+  paybackMonths: number | null;
+  incidentsAvoidedMonthly: number;
+}
+
+export const calculateTpvIntegrationImpact = (input: TpvImpactInput): TpvIntegrationImpactResult => {
+  const centers = Math.min(100, Math.max(1, Math.round(input.centers || 1)));
+  const hourlyCost = Math.max(0, input.hourlyCost);
+  const monthlyIntegrationCostPerCenter = Math.max(0, input.monthlyIntegrationCostPerCenter);
+  const setupCostPerCenter = Math.max(0, input.setupCostPerCenter);
+  const tasks = input.tasks.map((task) => {
+    const monthlyOccurrencesPerCenter = Math.max(0, task.monthlyOccurrencesPerCenter);
+    const manualMinutesPerOccurrence = Math.max(0, task.manualMinutesPerOccurrence);
+    const automationPct = Math.min(100, Math.max(0, task.automationPct));
+    const manualHoursMonthly = monthlyOccurrencesPerCenter * manualMinutesPerOccurrence * centers / 60;
+    const integratedHoursMonthly = manualHoursMonthly * (1 - automationPct / 100);
+    const hoursRecoveredMonthly = Math.max(0, manualHoursMonthly - integratedHoursMonthly);
+    return {
+      ...task,
+      monthlyOccurrencesPerCenter,
+      manualMinutesPerOccurrence,
+      automationPct,
+      manualHoursMonthly,
+      integratedHoursMonthly,
+      hoursRecoveredMonthly,
+      occurrencesAvoidedMonthly: task.type === "incident"
+        ? monthlyOccurrencesPerCenter * centers * (automationPct / 100)
+        : 0,
+    } satisfies TpvImpactTaskResult;
+  }).sort((left, right) => right.hoursRecoveredMonthly - left.hoursRecoveredMonthly);
+
+  const manualHoursMonthly = tasks.reduce((sum, task) => sum + task.manualHoursMonthly, 0);
+  const integratedHoursMonthly = tasks.reduce((sum, task) => sum + task.integratedHoursMonthly, 0);
+  const hoursRecoveredMonthly = tasks.reduce((sum, task) => sum + task.hoursRecoveredMonthly, 0);
+  const laborValueMonthly = hoursRecoveredMonthly * hourlyCost;
+  const recurringIntegrationCostMonthly = monthlyIntegrationCostPerCenter * centers;
+  const setupCostTotal = setupCostPerCenter * centers;
+  const hasCommercialCost = recurringIntegrationCostMonthly > 0 || setupCostTotal > 0;
+  const netOperationalImpactMonthly = hasCommercialCost
+    ? laborValueMonthly - recurringIntegrationCostMonthly
+    : null;
+  const firstYearNetImpact = hasCommercialCost
+    ? laborValueMonthly * 12 - recurringIntegrationCostMonthly * 12 - setupCostTotal
+    : null;
+  const paybackMonths = hasCommercialCost && setupCostTotal > 0 && netOperationalImpactMonthly !== null && netOperationalImpactMonthly > 0
+    ? setupCostTotal / netOperationalImpactMonthly
+    : null;
+
+  return {
+    centers,
+    tasks,
+    manualHoursMonthly,
+    integratedHoursMonthly,
+    hoursRecoveredMonthly,
+    laborValueMonthly,
+    recurringIntegrationCostMonthly,
+    setupCostTotal,
+    hasCommercialCost,
+    netOperationalImpactMonthly,
+    firstYearNetImpact,
+    paybackMonths,
+    incidentsAvoidedMonthly: tasks.reduce((sum, task) => sum + task.occurrencesAvoidedMonthly, 0),
   };
 };
 
@@ -325,3 +486,17 @@ export const STOCKOUT_EXAMPLE: StockoutRiskRow[] = [
   { id: "stockout-2", name: "Tinto reserva", currentStock: 14, dailySales: 1.1, daysUntilDelivery: 5, eventDemand: 0, contributionPerBottle: 48, substitutionPct: 40 },
   { id: "stockout-3", name: "Espumoso", currentStock: 4, dailySales: 0.8, daysUntilDelivery: 5, eventDemand: 6, contributionPerBottle: 36, substitutionPct: 20 },
 ];
+
+export const TPV_IMPACT_EXAMPLE: TpvImpactInput = {
+  centers: 4,
+  hourlyCost: 22,
+  monthlyIntegrationCostPerCenter: 120,
+  setupCostPerCenter: 300,
+  tasks: [
+    { id: "tpv-1", name: "Altas y cambios de artículos", type: "operation", monthlyOccurrencesPerCenter: 20, manualMinutesPerOccurrence: 8, automationPct: 95 },
+    { id: "tpv-2", name: "Actualizaciones de precios", type: "operation", monthlyOccurrencesPerCenter: 30, manualMinutesPerOccurrence: 4, automationPct: 95 },
+    { id: "tpv-3", name: "Conciliación de ventas y stock", type: "operation", monthlyOccurrencesPerCenter: 12, manualMinutesPerOccurrence: 35, automationPct: 80 },
+    { id: "tpv-4", name: "Consolidación de centros e informes", type: "operation", monthlyOccurrencesPerCenter: 4, manualMinutesPerOccurrence: 60, automationPct: 85 },
+    { id: "tpv-5", name: "Incidencias y reintentos manuales", type: "incident", monthlyOccurrencesPerCenter: 6, manualMinutesPerOccurrence: 30, automationPct: 70 },
+  ],
+};

@@ -5277,3 +5277,30 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 ### Pendientes
 
 - Validar hipótesis y definir el alcance TPV/multiestablecimiento.
+
+## 2026-10-14 — Simulador TPV y profundidad de herramientas operativas
+
+### Hechos
+
+- Se publicó un recorrido ES/EN para medir impacto operativo por centro y se reforzaron los cuatro modelos operativos existentes.
+
+### Decisiones
+
+- Mantener separados valor del tiempo, costes comerciales, impacto neto e incidencias.
+- Calcular ROI y payback únicamente con costes introducidos por el usuario.
+- No ocultar problemas por compensación: faltante frente a sobrante, déficit físico frente a sustitución y necesidad frente a redondeo de caja.
+- Exigir readback, idempotencia y piloto por fases en el mensaje de integración; no prometer sustitución de recuentos físicos.
+- Publicar por Cloudflare sin gastar créditos de Lovable.
+
+### Hipótesis
+
+- La profundidad operativa y los planes de acción aumentarán el valor comercial percibido frente a resultados genéricos.
+
+### Contradicciones
+
+- Supabase/Lovable conserva un ciclo de despliegue separado; la capa pública verificada es Cloudflare.
+
+### Pendientes
+
+- Medir finalización, descarga y solicitud de demo sin PII ni importes.
+- Validar supuestos con clientes antes de modificar porcentajes o ejemplos.

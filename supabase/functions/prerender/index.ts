@@ -3225,6 +3225,7 @@ const STATIC_LOCALIZED_ROUTES: Record<StaticLocalizedLang, Record<string, string
     '/herramientas/calculadora-rentabilidad-menu-maridaje': '/en/tools/pairing-menu-profitability-calculator',
     '/herramientas/conciliador-stock-vino': '/en/tools/wine-stock-reconciliation',
     '/herramientas/simulador-rotura-stock-vino': '/en/tools/wine-stockout-risk-calculator',
+    '/herramientas/simulador-impacto-integracion-tpv': '/en/tools/pos-integration-impact-calculator',
     '/herramientas/calculadora-stock-muerto': '/en/tools/dead-stock-calculator',
     '/herramientas/calculadora-ticket-medio-vino': '/en/tools/average-ticket-calculator',
     '/herramientas/calculadora-compra-inteligente': '/en/tools/smart-purchasing-calculator',
@@ -6381,6 +6382,22 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       { heading: 'Substitution without hiding the shortage', content: 'Demand that can move to another wine reduces exposed contribution, while the tool keeps the missing quantity visible.' },
       { heading: 'SAVia alert and replenishment', content: 'Winerim monitors coverage, rotation and list alternatives to warn before service and prepare replenishment.' },
     ], faqs: [], breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'Stockout risk', url: `${SITE}/en/tools/wine-stockout-risk-calculator` }], internalLinks: [{ label: 'Weekly order planner', url: '/en/tools/weekly-wine-order-planner' }, { label: 'SAVia', url: '/en/product/savia' }, { label: 'Request a demo', url: '/en/demo' }] },
+  },
+  '/herramientas/simulador-impacto-integracion-tpv': {
+    meta: { title: 'Simulador de impacto de integración TPV y multiestablecimiento | Winerim', description: 'Estima horas recuperables, coste operativo, incidencias y plazo de recuperación al conectar uno o varios centros con el TPV.', canonical: `${SITE}/herramientas/simulador-impacto-integracion-tpv`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: '¿Qué cambia al conectar todos tus centros con el TPV?', subtitle: 'Compara carga manual, automatización e impacto por centro con hipótesis visibles y editables.', sections: [
+      { heading: 'Carga manual por centro', content: 'Mide altas y cambios de productos, precios, conciliación, consolidación e incidencias por frecuencia y minutos reales de trabajo.' },
+      { heading: 'Tiempo y costes sin mezclar', content: 'Calcula horas recuperables y valor operativo. El retorno y el plazo de recuperación solo aparecen si el usuario introduce costes comerciales.' },
+      { heading: 'Integración verificable', content: 'Antes de extenderla, valida catálogo, formatos, precios, ventas, efectos de stock, readback e idempotencia mediante un piloto por fases.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Inicio', url: `${SITE}/` }, { name: 'Herramientas', url: `${SITE}/herramientas` }, { name: 'Impacto integración TPV', url: `${SITE}/herramientas/simulador-impacto-integracion-tpv` }], internalLinks: [{ label: 'Integraciones', url: '/integraciones' }, { label: 'Gestión para grupos', url: '/soluciones/grupos-restauracion' }, { label: 'Solicitar demo', url: '/demo' }] },
+  },
+  '/en/tools/pos-integration-impact-calculator': {
+    meta: { title: 'POS and multi-location integration impact calculator | Winerim', description: 'Estimate recoverable hours, operating value, incidents and payback when connecting one or several locations to the POS.', canonical: `${SITE}/en/tools/pos-integration-impact-calculator`, ogImage: OG_IMAGE, lang: 'en', type: 'website', schemaType: 'WebApplication' },
+    content: { h1: 'What changes when every location is connected to the POS?', subtitle: 'Compare manual workload, automation and impact per location with visible, editable assumptions.', sections: [
+      { heading: 'Manual workload by location', content: 'Measure product changes, prices, reconciliation, consolidation and incidents using actual frequency and working minutes.' },
+      { heading: 'Time and costs kept separate', content: 'Calculate recoverable hours and operating value. Return and payback only appear when the user enters commercial costs.' },
+      { heading: 'Verifiable integration', content: 'Before rollout, validate catalog, formats, prices, sales, stock effects, readback and idempotency through a phased pilot.' },
+    ], faqs: [], breadcrumbs: [{ name: 'Home', url: `${SITE}/en` }, { name: 'Tools', url: `${SITE}/en/tools` }, { name: 'POS integration impact', url: `${SITE}/en/tools/pos-integration-impact-calculator` }], internalLinks: [{ label: 'Integrations', url: '/en/integrations' }, { label: 'Restaurant groups', url: '/en/solutions/restaurant-groups' }, { label: 'Request a demo', url: '/en/demo' }] },
   },
   '/herramientas/diagnostico-rentabilidad-bodega': {
     meta: { title: 'Diagnóstico de Rentabilidad de la Carta | Winerim', description: 'Calcula margen por botella y copa, Beverage Cost, capital inmovilizado y escenarios de precio, rotación y reposición con fórmulas transparentes.', canonical: `${SITE}/herramientas/diagnostico-rentabilidad-bodega`, ogImage: OG_IMAGE, lang: 'es', type: 'website', schemaType: 'WebApplication' },
