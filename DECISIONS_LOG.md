@@ -5367,3 +5367,33 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 ### Pendientes
 
 - Medir uso de filtros y aperturas por categoría sin PII.
+
+## 2026-10-14 — Lenguaje operativo y ayuda visible en calculadoras
+
+### Hechos
+
+- Las cinco herramientas operativas compartían una estructura clara para el
+  sistema, pero exigían al hostelero interpretar etiquetas y resultados.
+- Existía un solapamiento real entre introducción y distintivo de privacidad.
+
+### Decisiones
+
+- Mantener los motores de cálculo y reescribir entradas y salidas en lenguaje
+  de restauración.
+- Explicar debajo de cada campo qué dato se pide y de dónde puede obtenerse.
+- Reservar la jerga financiera para detalles acompañados de una definición.
+- Incorporar detección automatizada de colisiones a Playwright.
+
+### Hipótesis
+
+- La comprensión mejorará más con ayuda contextual que añadiendo nuevos pasos o
+  nuevas calculadoras.
+
+### Contradicciones
+
+- El lint global sigue siendo un gate rojo previo; el release se acepta con
+  lint acotado verde, TypeScript, build, suite y QA visual completos.
+
+### Pendientes
+
+- Validar textos con usuarios y medir finalización antes de tocar supuestos.

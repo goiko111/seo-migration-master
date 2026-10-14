@@ -1753,3 +1753,36 @@
 
 - Medir selección de categoría y apertura de herramienta sin PII.
 - Revisar el orden con datos reales de uso antes de añadir nuevas categorías.
+
+## Actualización 2026-10-14: claridad hostelera de las cinco herramientas
+
+### Hechos
+
+- Pedido semanal, maridaje, conciliación, rotura de stock e impacto TPV explican
+  ahora qué dato introducir, dónde obtenerlo, su unidad y cómo leer el resultado.
+- Se corrigieron el solapamiento del distintivo de cálculo local, el espaciado
+  del panel y el responsive intermedio de los formularios.
+- Producción usa Pages `bf21695a`, backend sin cambios
+  `317e7c1c-09e4-41da-a0be-d63a8b4b12cb` y facade
+  `cdc296db-c48c-4bc5-ba68-d621c649cd66`.
+
+### Decisiones
+
+- Mantener las fórmulas y cambiar solo comprensión, jerarquía y presentación.
+- Usar lenguaje operativo antes que jerga financiera; cualquier término técnico
+  que permanezca debe incluir una explicación visible.
+- Comprobar colisiones y overflow en tests de navegador, no solo mediante build.
+
+### Hipótesis
+
+- Las ayudas junto a cada campo reducirán abandonos y errores de introducción.
+
+### Contradicciones
+
+- El lint global no está verde: conserva `112` errores y `28` avisos previos
+  fuera de este cambio. TypeScript, build y lint acotado sí están verdes.
+
+### Tareas pendientes
+
+- Medir inicio, finalización, CSV y CTA por herramienta sin guardar cifras.
+- Validar el vocabulario con hosteleros reales antes de recalibrar fórmulas.

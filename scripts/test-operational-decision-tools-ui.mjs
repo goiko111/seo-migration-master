@@ -12,7 +12,7 @@ const tools = [
     en: "/en/tools/weekly-wine-order-planner",
     esHeading: "¿Qué vino deberías pedir esta semana?",
     enHeading: "What wine should you order this week?",
-    expectedResult: "Exceso por cajas completas",
+    expectedResult: "Botellas extra al comprar cajas completas",
     uniqueSelector: ".order-manifest",
   },
   {
@@ -21,7 +21,7 @@ const tools = [
     en: "/en/tools/pairing-menu-profitability-calculator",
     esHeading: "¿Es rentable tu maridaje?",
     enHeading: "Is your wine pairing profitable?",
-    expectedResult: "Botellas equivalentes al mes",
+    expectedResult: "Botellas consumidas al mes",
     uniqueSelector: ".pairing-pnl",
   },
   {
@@ -30,7 +30,7 @@ const tools = [
     en: "/en/tools/wine-stock-reconciliation",
     esHeading: "¿Dónde se descuadra tu stock de vino?",
     enHeading: "Where does your wine stock diverge?",
-    expectedResult: "Faltante físico",
+    expectedResult: "Botellas que faltan en el recuento",
     uniqueSelector: ".recon-audit-board",
   },
   {
@@ -39,7 +39,7 @@ const tools = [
     en: "/en/tools/wine-stockout-risk-calculator",
     esHeading: "¿Qué te cuesta quedarte sin un vino?",
     enHeading: "What does running out of a wine cost?",
-    expectedResult: "Venta salvada por sustitución",
+    expectedResult: "Margen protegido si el cliente acepta otro vino",
     uniqueSelector: ".stockout-radar",
   },
   {
@@ -50,7 +50,7 @@ const tools = [
     enHeading: "What changes when every location is connected to the POS?",
     esCalculate: "Calcular impacto",
     enCalculate: "Calculate impact",
-    expectedResult: "Incidencias evitables/mes",
+    expectedResult: "Errores o incidencias que podrían evitarse al mes",
     uniqueSelector: ".tpv-before-after",
   },
 ];
@@ -71,6 +71,25 @@ async function assertNoOverflow(page, label) {
   }
 }
 
+async function assertNoKeyOverlap(page, label) {
+  const collisions = await page.evaluate(() => {
+    const intersects = (a, b) => a.left < b.right - 1 && a.right > b.left + 1 && a.top < b.bottom - 1 && a.bottom > b.top + 1;
+    const issues = [];
+    const intro = document.querySelector(".profit-intro > p:not(.profit-eyebrow)");
+    const privacy = document.querySelector(".profit-intro .profit-local");
+    if (intro && privacy && intersects(intro.getBoundingClientRect(), privacy.getBoundingClientRect())) issues.push("intro/privacy badge");
+    document.querySelectorAll(".decision-field").forEach((field, index) => {
+      const labelNode = field.querySelector(":scope > span:first-child");
+      const control = field.querySelector(":scope > input, :scope > select, :scope > .decision-input-wrap");
+      const help = field.querySelector(":scope > .decision-field-help");
+      if (labelNode && control && intersects(labelNode.getBoundingClientRect(), control.getBoundingClientRect())) issues.push(`field ${index} label/control`);
+      if (control && help && intersects(control.getBoundingClientRect(), help.getBoundingClientRect())) issues.push(`field ${index} control/help`);
+    });
+    return issues;
+  });
+  if (collisions.length) throw new Error(`${label}: overlapping elements: ${collisions.join(", ")}`);
+}
+
 async function runSpanishFlow(page, tool, viewportName) {
   const consoleErrors = [];
   const pageErrors = [];
@@ -84,10 +103,22 @@ async function runSpanishFlow(page, tool, viewportName) {
   await page.getByRole("heading", { name: tool.esHeading, level: 1 }).waitFor();
   await rejectCookies(page, "es");
   await assertNoOverflow(page, `${tool.slug}-${viewportName}-context`);
-  if (viewportName === "desktop") await page.screenshot({ path: `${out}/${tool.slug}-desktop-context.png`, fullPage: true });
+  await assertNoKeyOverlap(page, `${tool.slug}-${viewportName}-context`);
+  if (await page.locator(".decision-field-help").count() < 2) throw new Error(`${tool.es}: field guidance is missing`);
+  if (viewportName === "desktop") {
+    await page.screenshot({ path: `${out}/${tool.slug}-desktop-context.png`, fullPage: true });
+    await page.screenshot({ path: `${out}/${tool.slug}-desktop-context-viewport.png` });
+  }
 
   await page.getByRole("button", { name: "Cargar ejemplo ficticio", exact: true }).first().click();
-  if (viewportName === "desktop") await page.screenshot({ path: `${out}/${tool.slug}-desktop-input.png`, fullPage: true });
+  await assertNoKeyOverlap(page, `${tool.slug}-${viewportName}-input`);
+  if (await page.locator(".decision-field-help").count() < 4) throw new Error(`${tool.es}: row guidance is missing`);
+  if (viewportName === "desktop") {
+    await page.screenshot({ path: `${out}/${tool.slug}-desktop-input.png`, fullPage: true });
+    await page.screenshot({ path: `${out}/${tool.slug}-desktop-input-viewport.png` });
+  } else {
+    await page.screenshot({ path: `${out}/${tool.slug}-mobile-input.png`, fullPage: true });
+  }
   await page.getByRole("button", { name: tool.esCalculate || "Calcular", exact: true }).click();
   await page.locator(".decision-result").waitFor();
   await page.locator(tool.uniqueSelector).waitFor();

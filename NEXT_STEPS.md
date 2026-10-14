@@ -5938,3 +5938,33 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 1. Medir `tools_category_selected` y `tool_opened` sin datos introducidos.
 2. Unirlo a finalización, CSV y CTA por nombre de herramienta.
 3. Revisar el orden con datos reales antes de modificar la jerarquía.
+
+## Siguiente bloque tras aclarar las cinco herramientas — 2026-10-14
+
+### Hechos
+
+- Campos, unidades, resultados y acciones ya son comprensibles sin conocimiento
+  financiero previo y la maquetación está verificada en producción.
+
+### Decisiones
+
+- No añadir más explicaciones ni pasos hasta observar dónde abandonan usuarios
+  reales.
+- No alterar fórmulas o porcentajes con criterios editoriales.
+
+### Hipótesis
+
+- El siguiente aprendizaje útil vendrá de eventos agregados por paso.
+
+### Contradicciones / límites
+
+- El lint global conserva deuda previa fuera de estas herramientas.
+- Los ejemplos no son benchmarks de clientes.
+
+### Siguiente bloque verificable
+
+1. Instrumentar inicio, avance de paso, finalización, CSV y CTA sin cifras ni PII.
+2. Revisar embudos por herramienta tras una muestra suficiente.
+3. Probar el vocabulario con hosteleros y corregir solo ambigüedades observadas.
+4. Mantener Search Console, traducciones y Lovable/Supabase como trabajos
+   separados.

@@ -7934,3 +7934,37 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 ### Tareas pendientes
 
 - Instrumentar categoría y apertura sin PII.
+
+## Actualización 2026-10-14: herramientas comprensibles para hostelería
+
+### Hechos confirmados
+
+- Las cinco herramientas operativas están publicadas con ayudas visibles por
+  campo y resultados explicados en lenguaje de negocio.
+- Se eliminaron los solapamientos detectados y no hay overflow horizontal en
+  escritorio o móvil.
+- QA: `273/273`, TypeScript, build, ESLint acotado y Playwright
+  local/productivo verdes; `34` checks HTTP y `10` sitemap exactos.
+- Producción: Pages `bf21695a`; backend sin cambios
+  `317e7c1c-09e4-41da-a0be-d63a8b4b12cb`; facade
+  `cdc296db-c48c-4bc5-ba68-d621c649cd66`.
+
+### Decisiones
+
+- No se modificaron fórmulas, tarifas ni datos.
+- Las ayudas permanecen junto al campo y no escondidas en tooltips.
+
+### Hipótesis
+
+- El nuevo vocabulario mejorará la finalización sin convertir las herramientas
+  en formularios genéricos.
+
+### Contradicciones / riesgos
+
+- `npm run lint` global continúa rojo por deuda anterior: `112` errores y
+  `28` avisos fuera de los archivos tocados.
+- Los escenarios son orientativos y no sustituyen datos conectados del negocio.
+
+### Tareas pendientes
+
+- Medir finalización, descarga y CTA por herramienta sin PII ni valores.
