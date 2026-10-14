@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PRIORITY_TOOL_ROUTES, prioritizeToolItems } from "@/lib/toolPriority";
+import { PRIORITY_TOOL_ROUTES, TIME_SAVING_TOOL_ROUTES, prioritizeToolItems } from "@/lib/toolPriority";
 
 describe("tool priority", () => {
   it("keeps the nine decision calculators first in the required order", () => {
@@ -49,5 +49,13 @@ describe("tool priority", () => {
       "/wine-list-analyzer",
       PRIORITY_TOOL_ROUTES[0],
     ]);
+  });
+
+  it("keeps every manual-work shortcut unique and puts operational time first", () => {
+    expect(TIME_SAVING_TOOL_ROUTES[0]).toBe("/herramientas/calculadora-tiempo-operativo");
+    expect(new Set(TIME_SAVING_TOOL_ROUTES).size).toBe(TIME_SAVING_TOOL_ROUTES.length);
+    expect(TIME_SAVING_TOOL_ROUTES).toContain("/herramientas/planificador-pedido-semanal-vino");
+    expect(TIME_SAVING_TOOL_ROUTES).toContain("/herramientas/conciliador-stock-vino");
+    expect(TIME_SAVING_TOOL_ROUTES).toContain("/herramientas/simulador-impacto-integracion-tpv");
   });
 });

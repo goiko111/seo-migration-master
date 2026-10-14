@@ -1,5 +1,33 @@
 # Next Steps
 
+## Siguiente bloque tras priorizar ahorro operativo — 2026-10-14
+
+### Hechos
+
+- Diez herramientas de ahorro de trabajo ya están visibles al inicio y dentro
+  de sus categorías.
+
+### Decisiones
+
+- No añadir más herramientas a portada solo porque aporten valor indirecto;
+  deben sustituir o reducir una tarea manual recurrente.
+
+### Hipótesis
+
+- El orden actual permitirá distinguir ahorro operativo de diagnósticos de
+  margen, stock o rentabilidad.
+
+### Contradicciones / límites
+
+- IT/FR/DE/PT no tienen todavía todas las calculadoras operativas nuevas que sí
+  están disponibles en ES/EN.
+
+### Siguiente bloque verificable
+
+1. Instrumentar clic de portada y clic de categoría sin PII ni cifras de uso.
+2. Medir finalización por herramienta antes de cambiar el orden.
+3. Planificar paridad funcional IT/FR/DE/PT como bloque independiente.
+
 ## Siguiente bloque tras alinear pedido semanal con SAVia — 2026-10-14
 
 ### Hechos

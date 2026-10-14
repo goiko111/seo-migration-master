@@ -1,5 +1,34 @@
 # Decisions Log
 
+## 2026-10-14 — Doble acceso para herramientas que ahorran trabajo manual
+
+### Hechos
+
+- La portada anterior mostraba cuatro objetivos y los retiraba después del
+  catálogo para evitar cualquier repetición.
+- Esa regla ocultaba herramientas operativas relevantes de la primera pantalla
+  y también impedía encontrarlas de nuevo por área.
+
+### Decisiones
+
+- Destacar diez herramientas de ahorro operativo en un bloque inicial.
+- Mantener esas mismas rutas en sus categorías del catálogo.
+- Conservar unicidad dentro de cada bloque y comprobarla en escritorio y móvil.
+- Publicar directamente por Cloudflare sin usar Lovable ni tocar Supabase.
+
+### Hipótesis
+
+- Repetir una herramienta en dos contextos distintos mejora orientación sin
+  generar confusión si ambos bloques explican su propósito.
+
+### Contradicciones
+
+- Se revoca la decisión previa de evitar duplicación entre portada y catálogo.
+
+### Pendientes
+
+- Comparar clics y finalización por posición para ajustar el orden con datos.
+
 ## 2026-10-14 — Pedido público inspirado en SAVia, no automatización de compra
 
 ### Hechos

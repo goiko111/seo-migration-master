@@ -184,9 +184,15 @@ await hub.goto(`${base}/herramientas`, { waitUntil: "networkidle" });
 await rejectCookies(hub, "es");
 const expectedFeatured = [
   "/herramientas/calculadora-tiempo-operativo",
-  "/herramientas/diagnostico-rentabilidad-bodega",
-  "/herramientas/calculadora-fuga-margen",
-  "/herramientas/calculadora-mermas-vino",
+  "/herramientas/planificador-pedido-semanal-vino",
+  "/herramientas/conciliador-stock-vino",
+  "/herramientas/simulador-impacto-integracion-tpv",
+  "/wine-list-analyzer",
+  "/wine-list-benchmark",
+  "/wine-pairing-generator",
+  "/herramientas/comparador-distribuidores",
+  "/herramientas/calculadora-compra-inteligente",
+  "/herramientas/auditor-carta-multilocal",
 ];
 const featuredHrefs = await hub.locator('[data-tool-priority="goals"] a').evaluateAll((anchors) =>
   anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean),
@@ -197,12 +203,16 @@ if (JSON.stringify(featuredHrefs) !== JSON.stringify(expectedFeatured)) {
 const catalogHrefs = await hub.locator('[data-tool-priority="catalog"] a').evaluateAll((anchors) =>
   anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean),
 );
-const allHrefs = [...featuredHrefs, ...catalogHrefs];
-if (new Set(allHrefs).size !== allHrefs.length) {
-  throw new Error(`/herramientas repeats tool routes: ${JSON.stringify(allHrefs)}`);
+if (new Set(catalogHrefs).size !== catalogHrefs.length) {
+  throw new Error(`/herramientas repeats routes inside the catalogue: ${JSON.stringify(catalogHrefs)}`);
+}
+for (const route of featuredHrefs) {
+  if (!catalogHrefs.includes(route)) {
+    throw new Error(`/herramientas should keep featured route in its catalogue section: ${route}`);
+  }
 }
 for (const tool of tools) {
-  if (!allHrefs.includes(tool.es)) throw new Error(`/herramientas is missing ${tool.es}`);
+  if (!catalogHrefs.includes(tool.es)) throw new Error(`/herramientas catalogue is missing ${tool.es}`);
 }
 const expectedGroups = ["diagnosis", "margin", "operations", "supply", "service", "groups"];
 const renderedGroups = await hub.locator("[data-tool-group]").evaluateAll((groups) =>
@@ -225,11 +235,17 @@ const mobileHub = await browser.newPage({ viewport: { width: 390, height: 844 },
 await mobileHub.goto(`${base}/herramientas`, { waitUntil: "networkidle" });
 await rejectCookies(mobileHub, "es");
 await assertNoOverflow(mobileHub, "tools-hub-mobile");
-const mobileHrefs = await mobileHub.locator('[data-tool-priority="goals"] a, [data-tool-priority="catalog"] a').evaluateAll((anchors) =>
+const mobileFeaturedHrefs = await mobileHub.locator('[data-tool-priority="goals"] a').evaluateAll((anchors) =>
   anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean),
 );
-if (new Set(mobileHrefs).size !== mobileHrefs.length) {
-  throw new Error(`/herramientas repeats tool routes on mobile: ${JSON.stringify(mobileHrefs)}`);
+const mobileCatalogHrefs = await mobileHub.locator('[data-tool-priority="catalog"] a').evaluateAll((anchors) =>
+  anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean),
+);
+if (new Set(mobileFeaturedHrefs).size !== mobileFeaturedHrefs.length || new Set(mobileCatalogHrefs).size !== mobileCatalogHrefs.length) {
+  throw new Error("/herramientas repeats routes inside a mobile section");
+}
+for (const route of mobileFeaturedHrefs) {
+  if (!mobileCatalogHrefs.includes(route)) throw new Error(`/herramientas mobile catalogue is missing featured route: ${route}`);
 }
 await mobileHub.screenshot({ path: `${out}/tools-hub-mobile.png`, fullPage: true });
 await mobileHub.close();

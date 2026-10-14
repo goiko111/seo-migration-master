@@ -12,7 +12,7 @@ import MethodologyBox from "@/components/seo/MethodologyBox";
 import FAQSection from "@/components/seo/FAQSection";
 import { useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { prioritizeToolItems } from "@/lib/toolPriority";
+import { prioritizeToolItems, TIME_SAVING_TOOL_ROUTES } from "@/lib/toolPriority";
 
 const content: Record<string, {
   seoTitle: string; seoDesc: string; badge: string; h1: string; subtitle: string;
@@ -350,7 +350,7 @@ const catalogCopy: Record<string, {
   es: {
     eyebrow: "Catálogo por objetivo",
     title: "Una herramienta para cada decisión",
-    intro: "Después del diagnóstico inicial, entra directamente en el área que quieres mejorar. Cada herramienta aparece una sola vez.",
+    intro: "Entra directamente en el área que quieres mejorar. Las herramientas que reducen trabajo manual también están destacadas arriba para que puedas encontrarlas antes.",
     groups: {
       diagnosis: { label: "Diagnóstico", description: "Entiende la salud de la carta y detecta dónde actuar primero." },
       margin: { label: "Margen y precios", description: "Trabaja PVP, copa, rentabilidad y potencial económico." },
@@ -363,7 +363,7 @@ const catalogCopy: Record<string, {
   en: {
     eyebrow: "Catalogue by objective",
     title: "One tool for each decision",
-    intro: "After the initial diagnosis, go straight to the area you want to improve. Each tool appears only once.",
+    intro: "Go straight to the area you want to improve. Tools that reduce manual work are also highlighted above so you can find them first.",
     groups: {
       diagnosis: { label: "Diagnosis", description: "Understand wine-list health and identify where to act first." },
       margin: { label: "Margin and pricing", description: "Work on price, by-the-glass, profitability and economic potential." },
@@ -376,7 +376,7 @@ const catalogCopy: Record<string, {
   it: {
     eyebrow: "Catalogo per obiettivo",
     title: "Uno strumento per ogni decisione",
-    intro: "Dopo la diagnosi iniziale, vai direttamente all'area da migliorare. Ogni strumento compare una sola volta.",
+    intro: "Vai direttamente all'area da migliorare. Gli strumenti che riducono il lavoro manuale sono evidenziati anche sopra per trovarli subito.",
     groups: {
       diagnosis: { label: "Diagnosi", description: "Comprendi la salute della carta e dove intervenire prima." },
       margin: { label: "Margine e prezzi", description: "Lavora su prezzo, calice, redditività e potenziale economico." },
@@ -389,7 +389,7 @@ const catalogCopy: Record<string, {
   fr: {
     eyebrow: "Catalogue par objectif",
     title: "Un outil pour chaque décision",
-    intro: "Après le diagnostic initial, allez directement au domaine à améliorer. Chaque outil n'apparaît qu'une fois.",
+    intro: "Allez directement au domaine à améliorer. Les outils qui réduisent le travail manuel sont aussi mis en avant ci-dessus pour les trouver plus vite.",
     groups: {
       diagnosis: { label: "Diagnostic", description: "Comprenez la santé de la carte et où agir en premier." },
       margin: { label: "Marge et prix", description: "Travaillez prix, verre, rentabilité et potentiel économique." },
@@ -402,7 +402,7 @@ const catalogCopy: Record<string, {
   de: {
     eyebrow: "Katalog nach Ziel",
     title: "Ein Tool für jede Entscheidung",
-    intro: "Nach der ersten Diagnose wechseln Sie direkt zum passenden Bereich. Jedes Tool erscheint nur einmal.",
+    intro: "Wechseln Sie direkt zum passenden Bereich. Tools, die manuelle Arbeit reduzieren, werden oben zusätzlich hervorgehoben.",
     groups: {
       diagnosis: { label: "Diagnose", description: "Verstehen Sie den Zustand der Weinkarte und den ersten Hebel." },
       margin: { label: "Marge und Preise", description: "Bearbeiten Sie Preis, Ausschank, Rentabilität und Potenzial." },
@@ -415,7 +415,7 @@ const catalogCopy: Record<string, {
   pt: {
     eyebrow: "Catálogo por objetivo",
     title: "Uma ferramenta para cada decisão",
-    intro: "Depois do diagnóstico inicial, avance diretamente para a área a melhorar. Cada ferramenta aparece uma única vez.",
+    intro: "Avance diretamente para a área a melhorar. As ferramentas que reduzem trabalho manual também aparecem em destaque acima.",
     groups: {
       diagnosis: { label: "Diagnóstico", description: "Compreenda a saúde da carta e onde atuar primeiro." },
       margin: { label: "Margem e preços", description: "Trabalhe preço, copo, rentabilidade e potencial económico." },
@@ -576,9 +576,9 @@ const goalCopy: Record<string, {
   goals: { title: string; desc: string; to: string }[];
 }> = {
   es: {
-    eyebrow: "Empieza por el problema",
-    title: "¿Qué quieres mejorar primero?",
-    intro: "No necesitas revisar todas las herramientas. Elige el objetivo que más se parece a tu situación y empieza por una prueba concreta.",
+    eyebrow: "Ahorro operativo",
+    title: "Herramientas que te ahorran trabajo manual",
+    intro: "Empieza por las tareas que más tiempo consumen: analizar, comparar, conciliar, preparar pedidos y coordinar centros. Estos accesos también permanecen en su sección correspondiente del catálogo.",
     action: "Abrir herramienta",
     featured: "Empieza aquí",
     goals: [
@@ -597,9 +597,9 @@ const goalCopy: Record<string, {
     ],
   },
   en: {
-    eyebrow: "Start with the problem",
-    title: "What do you want to improve first?",
-    intro: "You do not need to review every tool. Choose the goal closest to your situation and start with one concrete check.",
+    eyebrow: "Operational time savings",
+    title: "Tools that reduce manual work",
+    intro: "Start with the work that consumes the most time: analyzing, comparing, reconciling, preparing orders and coordinating locations. These tools also remain in their catalogue section.",
     action: "Open tool",
     featured: "Start here",
     goals: [
@@ -618,9 +618,9 @@ const goalCopy: Record<string, {
     ],
   },
   it: {
-    eyebrow: "Parti dal problema",
-    title: "Cosa vuoi migliorare per prima?",
-    intro: "Non devi esaminare tutti gli strumenti. Scegli l'obiettivo più vicino alla tua situazione e inizia da una verifica concreta.",
+    eyebrow: "Risparmio operativo",
+    title: "Strumenti che riducono il lavoro manuale",
+    intro: "Inizia dalle attività che richiedono più tempo: analizzare, confrontare, riconciliare, preparare ordini e coordinare sedi. Gli strumenti restano anche nella relativa sezione del catalogo.",
     action: "Apri strumento",
     featured: "Inizia qui",
     goals: [
@@ -631,9 +631,9 @@ const goalCopy: Record<string, {
     ],
   },
   fr: {
-    eyebrow: "Commencez par le problème",
-    title: "Que voulez-vous améliorer en premier ?",
-    intro: "Vous n'avez pas besoin de parcourir tous les outils. Choisissez l'objectif le plus proche de votre situation et commencez par une vérification concrète.",
+    eyebrow: "Gain de temps opérationnel",
+    title: "Des outils qui réduisent le travail manuel",
+    intro: "Commencez par les tâches les plus chronophages : analyser, comparer, rapprocher, préparer les commandes et coordonner les sites. Ces outils restent aussi dans leur section du catalogue.",
     action: "Ouvrir l'outil",
     featured: "Commencez ici",
     goals: [
@@ -644,9 +644,9 @@ const goalCopy: Record<string, {
     ],
   },
   de: {
-    eyebrow: "Beim Problem beginnen",
-    title: "Was möchten Sie zuerst verbessern?",
-    intro: "Sie müssen nicht alle Tools prüfen. Wählen Sie das passendste Ziel und starten Sie mit einer konkreten Analyse.",
+    eyebrow: "Operative Zeitersparnis",
+    title: "Tools, die manuelle Arbeit reduzieren",
+    intro: "Beginnen Sie mit den zeitintensivsten Aufgaben: analysieren, vergleichen, abstimmen, Bestellungen vorbereiten und Standorte koordinieren. Die Tools bleiben auch in ihrer Katalogkategorie.",
     action: "Tool öffnen",
     featured: "Hier starten",
     goals: [
@@ -657,9 +657,9 @@ const goalCopy: Record<string, {
     ],
   },
   pt: {
-    eyebrow: "Comece pelo problema",
-    title: "O que quer melhorar primeiro?",
-    intro: "Não precisa de rever todas as ferramentas. Escolha o objetivo mais próximo da sua situação e comece por uma análise concreta.",
+    eyebrow: "Poupança operacional",
+    title: "Ferramentas que reduzem trabalho manual",
+    intro: "Comece pelas tarefas que consomem mais tempo: analisar, comparar, conciliar, preparar pedidos e coordenar unidades. Estas ferramentas continuam também na respetiva secção do catálogo.",
     action: "Abrir ferramenta",
     featured: "Comece aqui",
     goals: [
@@ -719,10 +719,10 @@ const Herramientas = () => {
   const catalog = catalogCopy[lang] || catalogCopy.es;
   const [activeGroup, setActiveGroup] = useState<"all" | ToolGroupId>("all");
   const prioritizedTools = prioritizeToolItems(t.tools);
-  const prioritizedGoals = prioritizeToolItems(goals.goals);
-  const featuredGoals = prioritizedGoals.slice(0, 4);
-  const featuredRoutes = new Set(featuredGoals.map((goal) => goal.to));
-  const catalogTools = prioritizedTools.filter((tool) => !featuredRoutes.has(tool.to));
+  const featuredTools = TIME_SAVING_TOOL_ROUTES
+    .map((route) => prioritizedTools.find((tool) => tool.to === route))
+    .filter((tool): tool is (typeof prioritizedTools)[number] => Boolean(tool));
+  const catalogTools = prioritizedTools;
   const groupedTools = toolGroupOrder
     .map((id) => ({
       id,
@@ -767,15 +767,15 @@ const Herramientas = () => {
               <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">{goals.title}</h2>
               <p className="text-muted-foreground leading-relaxed">{goals.intro}</p>
             </div>
-            <div className="grid md:grid-cols-2 border-t border-border" data-tool-priority="goals">
-              {featuredGoals.map((goal, index) => {
-                const Icon = toolIconByPath[goal.to] || Search;
-                const isFeatured = goal.to === "/herramientas/calculadora-tiempo-operativo";
+            <div className="grid border-l border-t border-border md:grid-cols-2 lg:grid-cols-3" data-tool-priority="goals">
+              {featuredTools.map((tool) => {
+                const Icon = toolIconByPath[tool.to] || Search;
+                const isFeatured = tool.to === "/herramientas/calculadora-tiempo-operativo";
                 return (
                   <Link
-                    key={goal.to}
-                    to={localePath(goal.to)}
-                    className={`group flex min-h-40 gap-5 border-b border-border p-6 transition-colors hover:bg-wine/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-wine ${isFeatured ? "md:col-span-2 bg-wine/[0.035]" : index % 2 === 1 ? "md:border-r" : ""}`}
+                    key={tool.to}
+                    to={localePath(tool.to)}
+                    className={`group flex min-h-44 gap-5 border-b border-r border-border p-6 transition-colors hover:bg-wine/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-wine ${isFeatured ? "bg-wine/[0.035] md:col-span-2 lg:col-span-3" : ""}`}
                   >
                     <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center border border-wine/25 text-wine">
                       <Icon size={19} />
@@ -786,8 +786,8 @@ const Herramientas = () => {
                           {goals.featured}
                         </span>
                       )}
-                      <h3 className="font-heading text-lg font-bold mb-2 group-hover:text-wine transition-colors">{goal.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{goal.desc}</p>
+                      <h3 className="font-heading text-lg font-bold mb-2 group-hover:text-wine transition-colors">{tool.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{tool.desc}</p>
                       <span className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
                         {goals.action} <ArrowRight size={14} />
                       </span>

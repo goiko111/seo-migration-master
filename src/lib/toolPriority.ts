@@ -10,6 +10,19 @@ export const PRIORITY_TOOL_ROUTES = [
   "/herramientas/simulador-impacto-integracion-tpv",
 ] as const;
 
+export const TIME_SAVING_TOOL_ROUTES = [
+  "/herramientas/calculadora-tiempo-operativo",
+  "/herramientas/planificador-pedido-semanal-vino",
+  "/herramientas/conciliador-stock-vino",
+  "/herramientas/simulador-impacto-integracion-tpv",
+  "/wine-list-analyzer",
+  "/wine-list-benchmark",
+  "/wine-pairing-generator",
+  "/herramientas/comparador-distribuidores",
+  "/herramientas/calculadora-compra-inteligente",
+  "/herramientas/auditor-carta-multilocal",
+] as const;
+
 const priorityByRoute = new Map<string, number>(
   PRIORITY_TOOL_ROUTES.map((route, index) => [route, index]),
 );

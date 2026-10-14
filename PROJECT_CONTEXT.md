@@ -1,5 +1,42 @@
 # Project Context
 
+## Actualización 2026-10-14: herramientas de ahorro operativo en portada y catálogo
+
+### Hechos
+
+- `/herramientas` destaca primero diez herramientas que reducen trabajo manual:
+  tiempo operativo, pedido semanal, conciliación de stock, impacto TPV,
+  análisis y benchmark de carta, maridajes, distribuidores, compra inteligente
+  y auditoría multiestablecimiento.
+- Las diez rutas también permanecen en su sección natural del catálogo; el
+  catálogo conserva sus `26` herramientas sin duplicados internos.
+- Producción usa Pages `2e56af45`, facade
+  `e070c6d0-e427-4360-ab6f-08b85484b268` y backend sin cambios.
+
+### Decisiones
+
+- Permitir repetición deliberada entre la portada de ahorro operativo y el
+  catálogo para facilitar tanto descubrimiento rápido como navegación temática.
+- Mantener la calculadora de tiempo operativo como primera entrada y destacar
+  únicamente herramientas cuyo resultado sustituye o reduce una tarea manual
+  recurrente.
+
+### Hipótesis
+
+- Una primera pantalla organizada por ahorro de trabajo facilitará que un
+  hostelero entienda antes el valor práctico de Winerim.
+
+### Contradicciones
+
+- Queda sustituida la regla anterior de que cada herramienta aparecía una sola
+  vez en la página; la unicidad se mantiene dentro de cada bloque, no entre
+  portada y catálogo.
+
+### Tareas pendientes
+
+- Medir clics desde portada frente a categoría sin registrar los datos que el
+  usuario introduzca en las calculadoras.
+
 ## Actualización 2026-10-14: planificador de pedidos alineado con SAVia
 
 ### Hechos

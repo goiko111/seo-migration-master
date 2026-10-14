@@ -1,5 +1,37 @@
 # Current State
 
+## Estado 2026-10-14: ahorro de tiempo visible primero en Herramientas
+
+### Hechos confirmados
+
+- `https://winerim.wine/herramientas` publica diez accesos de ahorro operativo
+  antes del catálogo completo.
+- Cada acceso destacado reaparece en Diagnóstico, Operaciones, Supply, Sala o
+  Grupos, según su función; el catálogo mantiene `26` rutas únicas.
+- QA verde: `277/277` tests, TypeScript, ESLint acotado, build, Playwright local
+  y Playwright productivo en escritorio, móvil y rutas ES/EN.
+- Producción: Pages `2e56af45`; facade
+  `e070c6d0-e427-4360-ab6f-08b85484b268`; backend sin cambios.
+
+### Decisiones
+
+- Dar prioridad visual al ahorro de trabajo manual sin sacar las herramientas
+  de sus categorías.
+
+### Hipótesis
+
+- La doble entrada por beneficio y por área operativa reducirá el tiempo para
+  encontrar la herramienta adecuada.
+
+### Contradicciones / límites
+
+- Las traducciones IT/FR/DE/PT solo destacan las herramientas que ya existen en
+  su catálogo localizado; no se han creado nuevas localizaciones en este bloque.
+
+### Tareas pendientes
+
+- Medir descubrimiento y uso por bloque antes de ampliar la selección.
+
 ## Estado 2026-10-14: pedido semanal con contexto SAVia
 
 ### Hechos confirmados
