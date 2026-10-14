@@ -5304,3 +5304,37 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 
 - Medir finalización, descarga y solicitud de demo sin PII ni importes.
 - Validar supuestos con clientes antes de modificar porcentajes o ejemplos.
+
+## 2026-10-14 — Diferenciación de las cinco herramientas operativas
+
+### Hechos
+
+- La comparación visual confirmó que compartir tarjetas, KPIs y cierre hacía que
+  las cinco herramientas parecieran variaciones del mismo contenido.
+- La nueva release asigna a cada una un lenguaje de decisión y un artefacto de
+  salida distintos, conservando fórmulas y controles auditables.
+
+### Decisiones
+
+- Pedido: manifiesto de compra y cobertura por referencia.
+- Maridaje: P&L por comensal y mapa de pases.
+- Conciliación: puente de inventario y cola de investigación.
+- Rotura: línea temporal hasta entrega y plan de protección.
+- TPV: mapa antes/después, impacto por proceso y rollout verificable.
+- Sustituir descargas TXT genéricas por CSV específico en las cinco.
+- Publicar solo Pages y facade, sin gastar créditos de Lovable ni redeplegar
+  backend, sitemap o prerender.
+
+### Hipótesis
+
+- Un artefacto exportable cercano al trabajo real tendrá más valor comercial que
+  una cifra resumen repetida con otro título.
+
+### Contradicciones
+
+- Se mantiene un sistema de diseño común de Winerim; la diferenciación vive en
+  el flujo, la visualización y la decisión, no en cinco micrositios inconexos.
+
+### Pendientes
+
+- Medir comportamiento agregado y validar hipótesis con usuarios reales.

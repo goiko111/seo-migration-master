@@ -7868,3 +7868,38 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - Medición agregada sin PII y calibración con datos consentidos.
 - Mantener Search Console y la reconciliación Lovable como líneas separadas de esta release.
+
+## Actualización 2026-10-14: diferenciación visual y operativa en producción
+
+### Hechos confirmados
+
+- Las cinco herramientas operativas están publicadas con resultados propios,
+  exportación CSV específica y responsive verificado.
+- QA final: `273/273` tests, TypeScript, ESLint, build, Playwright local y
+  productivo, `34` checks HTTP y `10` URLs exactas en sitemap.
+- Producción: Pages `81cb6c4b`; backend sin cambios
+  `317e7c1c-09e4-41da-a0be-d63a8b4b12cb`; facade
+  `46972403-8b7d-4e3f-aaaf-110eae45186f`.
+
+### Decisiones
+
+- Mantener la mecánica común de entrada, pero especializar contexto, resultado,
+  recomendación y descarga para la decisión de cada herramienta.
+- Esta release no toca contenido bot, rutas ni Edge Functions.
+
+### Hipótesis
+
+- La separación visual y funcional hará más evidente por qué usar cada
+  herramienta y reducirá la percepción de contenido de relleno.
+
+### Contradicciones / riesgos
+
+- Persisten avisos no bloqueantes preexistentes de React Router, `caniuse-lite`,
+  una `key` en Precios y chunks grandes.
+- La fuente secundaria Lovable/Supabase mantiene su ciclo independiente; no era
+  necesaria para esta publicación de frontend.
+
+### Tareas pendientes
+
+- Instrumentar eventos agregados sin PII ni cifras.
+- Evaluar uso real antes de añadir más herramientas o modificar supuestos.

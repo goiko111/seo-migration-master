@@ -13,6 +13,7 @@ const tools = [
     esHeading: "¿Qué vino deberías pedir esta semana?",
     enHeading: "What wine should you order this week?",
     expectedResult: "Exceso por cajas completas",
+    uniqueSelector: ".order-manifest",
   },
   {
     slug: "pairing",
@@ -21,6 +22,7 @@ const tools = [
     esHeading: "¿Es rentable tu maridaje?",
     enHeading: "Is your wine pairing profitable?",
     expectedResult: "Botellas equivalentes al mes",
+    uniqueSelector: ".pairing-pnl",
   },
   {
     slug: "reconciliation",
@@ -29,6 +31,7 @@ const tools = [
     esHeading: "¿Dónde se descuadra tu stock de vino?",
     enHeading: "Where does your wine stock diverge?",
     expectedResult: "Faltante físico",
+    uniqueSelector: ".recon-audit-board",
   },
   {
     slug: "stockout",
@@ -37,6 +40,7 @@ const tools = [
     esHeading: "¿Qué te cuesta quedarte sin un vino?",
     enHeading: "What does running out of a wine cost?",
     expectedResult: "Venta salvada por sustitución",
+    uniqueSelector: ".stockout-radar",
   },
   {
     slug: "tpv-impact",
@@ -47,6 +51,7 @@ const tools = [
     esCalculate: "Calcular impacto",
     enCalculate: "Calculate impact",
     expectedResult: "Incidencias evitables/mes",
+    uniqueSelector: ".tpv-before-after",
   },
 ];
 
@@ -79,13 +84,25 @@ async function runSpanishFlow(page, tool, viewportName) {
   await page.getByRole("heading", { name: tool.esHeading, level: 1 }).waitFor();
   await rejectCookies(page, "es");
   await assertNoOverflow(page, `${tool.slug}-${viewportName}-context`);
+  if (viewportName === "desktop") await page.screenshot({ path: `${out}/${tool.slug}-desktop-context.png`, fullPage: true });
 
   await page.getByRole("button", { name: "Cargar ejemplo ficticio", exact: true }).first().click();
+  if (viewportName === "desktop") await page.screenshot({ path: `${out}/${tool.slug}-desktop-input.png`, fullPage: true });
   await page.getByRole("button", { name: tool.esCalculate || "Calcular", exact: true }).click();
   await page.locator(".decision-result").waitFor();
+  await page.locator(tool.uniqueSelector).waitFor();
   await page.getByText(tool.expectedResult, { exact: true }).waitFor();
   await assertNoOverflow(page, `${tool.slug}-${viewportName}-result`);
   await page.screenshot({ path: `${out}/${tool.slug}-${viewportName}-result.png`, fullPage: true });
+
+  if (viewportName === "desktop") {
+    const downloadPromise = page.waitForEvent("download");
+    await page.getByRole("button", { name: "Descargar escenario", exact: true }).click();
+    const download = await downloadPromise;
+    if (!download.suggestedFilename().endsWith(".csv")) {
+      throw new Error(`${tool.es}: expected a CSV download, received ${download.suggestedFilename()}`);
+    }
+  }
 
   const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
   if (canonical !== `https://winerim.wine${tool.es}`) {
@@ -107,6 +124,7 @@ async function checkEnglish(page, tool) {
   await page.getByRole("button", { name: "Load fictional example", exact: true }).first().click();
   await page.getByRole("button", { name: tool.enCalculate || "Calculate", exact: true }).click();
   await page.locator(".decision-result").waitFor();
+  await page.locator(tool.uniqueSelector).waitFor();
   await assertNoOverflow(page, `${tool.slug}-en`);
   const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
   if (canonical !== `https://winerim.wine${tool.en}`) {

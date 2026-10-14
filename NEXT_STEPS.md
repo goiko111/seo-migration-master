@@ -5880,3 +5880,34 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 2. Revisar Search Console cuando las nuevas URLs acumulen rastreo; no solicitar indexación masiva.
 3. Contrastar con clientes los supuestos TPV por proveedor y número de centros.
 4. Reconciliar Lovable/Supabase con un despliegue acotado cuando exista acceso.
+
+## Siguiente bloque tras diferenciar las cinco herramientas — 2026-10-14
+
+### Hechos
+
+- Las cinco herramientas ya ofrecen decisiones, visualizaciones y CSV propios en
+  producción; no queda gate técnico de esta release.
+
+### Decisiones
+
+- No crear otra calculadora hasta medir las actuales y demostrar una decisión
+  nueva que no cubra el catálogo.
+- Mantener Search Console, traducciones y Lovable/Supabase como líneas separadas.
+
+### Hipótesis
+
+- La mayor oportunidad inmediata es aprender qué recorrido se inicia, termina y
+  descarga, no aumentar el número de URLs.
+
+### Contradicciones / límites
+
+- No existen todavía benchmarks consentidos suficientes para presentar los
+  ejemplos como resultados típicos.
+
+### Siguiente bloque verificable
+
+1. Instrumentar `tool_started`, `tool_completed`, `csv_downloaded` y `cta_clicked`
+   con nombre de herramienta, sin PII ni valores del escenario.
+2. Construir un panel agregado de conversión por herramienta.
+3. Revisar Search Console tras acumular rastreo y resolver solo incidencias reales.
+4. Calibrar textos, ejemplos y orden con evidencia consentida.

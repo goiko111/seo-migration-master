@@ -6,13 +6,18 @@ import {
   Building2,
   Check,
   CircleDollarSign,
+  Database,
   Download,
+  MapPinned,
   Network,
   Plus,
+  RefreshCw,
   RotateCcw,
   Scale,
+  ServerCog,
   ShieldCheck,
   Trash2,
+  Workflow,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -174,9 +179,18 @@ export default function TpvIntegrationImpact() {
 
   const download = () => {
     if (!result) return;
-    const text = document.querySelector(".decision-result")?.textContent?.replace(/\s+/g, " ").trim() || t.resultTitle;
-    const url = URL.createObjectURL(new Blob([`${t.h1}\n\n${text}\n\n${t.formula}`], { type: "text/plain;charset=utf-8" }));
-    const anchor = document.createElement("a"); anchor.href = url; anchor.download = `winerim-tpv-impact-${locale}.txt`; anchor.click(); URL.revokeObjectURL(url);
+    const row = (values: Array<string | number>) => values.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(",");
+    const lines = [
+      row([es ? "Centros" : "Locations", result.centers]),
+      row([es ? "Horas manuales/mes" : "Manual hours/month", result.manualHoursMonthly]),
+      row([es ? "Horas conectadas/mes" : "Integrated hours/month", result.integratedHoursMonthly]),
+      row([es ? "Horas recuperables/mes" : "Recoverable hours/month", result.hoursRecoveredMonthly]),
+      "",
+      row([es ? "Proceso" : "Process", es ? "Tipo" : "Type", es ? "Horas manuales" : "Manual hours", es ? "Horas conectadas" : "Integrated hours", es ? "Horas recuperables" : "Recoverable hours", es ? "Automatización estimada" : "Estimated automation"]),
+      ...result.tasks.map((task) => row([task.name, task.type, task.manualHoursMonthly, task.integratedHoursMonthly, task.hoursRecoveredMonthly, task.automationPct])),
+    ];
+    const url = URL.createObjectURL(new Blob([`\uFEFF${lines.join("\n")}`], { type: "text/csv;charset=utf-8" }));
+    const anchor = document.createElement("a"); anchor.href = url; anchor.download = `winerim-tpv-impact-${locale}.csv`; anchor.click(); URL.revokeObjectURL(url);
     trackToolUse("tpv_integration_impact", { action: "download" });
   };
 
@@ -213,6 +227,11 @@ export default function TpvIntegrationImpact() {
           <div className="profit-panel-head"><div><span>{es ? `Paso ${step + 1} de 3` : `Step ${step + 1} of 3`}</span><h2 ref={titleRef} tabIndex={-1}>{step === 0 ? t.contextTitle : step === 1 ? t.figuresTitle : t.resultTitle}</h2></div>{step > 0 && <button type="button" className="profit-reset" onClick={reset} title={t.reset}><RotateCcw size={15} /><span>{t.reset}</span></button>}</div>
 
           {step === 0 && <div className="decision-context">
+            <section className="tpv-topology" aria-label={es ? "Topología de centros" : "Location topology"}>
+              <header><div><MapPinned size={18} /><strong>{es ? "Topología a conectar" : "Topology to connect"}</strong></div><span>{context.centers} {es ? "centros" : "locations"}</span></header>
+              <div className="tpv-topology-map"><div className="tpv-central-node"><ServerCog size={18} /><span>Winerim</span></div><div className="tpv-center-grid">{Array.from({ length: Math.min(12, context.centers) }, (_, index) => <span key={index}><b>{String(index + 1).padStart(2, "0")}</b>{es ? "Centro" : "Location"}</span>)}{context.centers > 12 && <span><b>+{context.centers - 12}</b>{es ? "centros" : "locations"}</span>}</div></div>
+              <p>{es ? "El cálculo multiplica la carga repetida por centro; no presupone que todos tengan el mismo catálogo o volumen." : "The calculation multiplies repeated work by location; it does not assume identical catalogs or volumes."}</p>
+            </section>
             <div className="decision-context-grid">
               <label className="decision-field"><span>{es ? "Moneda" : "Currency"}</span><select value={currency} onChange={(event) => setCurrency(event.target.value as DecisionCurrency)}><option value="EUR">EUR · €</option><option value="USD">USD · $</option><option value="GBP">GBP · £</option></select></label>
               <NumberField label={es ? "Centros a integrar" : "Locations to integrate"} value={context.centers} onChange={(value) => updateContext({ centers: Math.min(100, Math.max(1, Math.round(value))) })} unit={es ? "centros" : "locations"} max={100} />
@@ -223,7 +242,7 @@ export default function TpvIntegrationImpact() {
             <div className="decision-context-note"><CircleDollarSign size={18} /><p>{es ? "Los costes son los que tú introduzcas y no representan una tarifa pública. Sin costes, calcularemos tiempo y valor operativo, pero no ROI ni plazo de recuperación." : "Costs are whatever you enter and do not represent public pricing. Without costs, we calculate time and operating value, but not ROI or payback."}</p></div>
           </div>}
 
-          {step === 1 && <div className="decision-rows">{tasks.map((task, index) => <fieldset className="decision-row-card" key={task.id}><legend>{String(index + 1).padStart(2, "0")}</legend><button type="button" className="decision-remove" onClick={() => setTasks((current) => current.length > 1 ? current.filter((item) => item.id !== task.id) : current)} title={t.remove} aria-label={t.remove}><Trash2 size={15} /></button><div className="decision-row-grid tpv-task-grid">
+          {step === 1 && <div className="decision-rows tpv-process-matrix"><div className="tpv-process-guide"><Workflow size={18} /><div><strong>{es ? "Mapa de procesos repetidos" : "Repeated process map"}</strong><p>{es ? "Separa operación e incidencias. El porcentaje sigue siendo una hipótesis editable." : "Separate operations from incidents. The percentage remains an editable assumption."}</p></div></div>{tasks.map((task, index) => <fieldset className="decision-row-card tpv-process-row" data-type={task.type} key={task.id}><legend>{String(index + 1).padStart(2, "0")}</legend><button type="button" className="decision-remove" onClick={() => setTasks((current) => current.length > 1 ? current.filter((item) => item.id !== task.id) : current)} title={t.remove} aria-label={t.remove}><Trash2 size={15} /></button><div className="decision-row-grid tpv-task-grid">
             <label className="decision-field decision-name-field"><span>{es ? "Proceso" : "Process"}</span><input value={task.name} onChange={(event) => updateTask(task.id, { name: event.target.value })} placeholder={es ? "Nombre del proceso" : "Process name"} /></label>
             <label className="decision-field"><span>{es ? "Tipo" : "Type"}</span><select value={task.type} onChange={(event) => updateTask(task.id, { type: event.target.value as TpvImpactTaskType })}><option value="operation">{es ? "Operación" : "Operation"}</option><option value="incident">{es ? "Incidencia" : "Incident"}</option></select></label>
             <NumberField label={es ? "Acciones por centro y mes" : "Actions per location/month"} value={task.monthlyOccurrencesPerCenter} onChange={(value) => updateTask(task.id, { monthlyOccurrencesPerCenter: value })} />
@@ -256,10 +275,27 @@ export default function TpvIntegrationImpact() {
 function Result({ result, es, money, decimal, formula, isExample }: { result: TpvIntegrationImpactResult; es: boolean; money: Intl.NumberFormat; decimal: Intl.NumberFormat; formula: string; isExample: boolean }) {
   return <div className="decision-result">
     <div className="decision-headline"><Building2 size={23} /><div><span>{es ? "Tiempo recuperable en toda la operación" : "Recoverable time across the operation"}</span><strong>{decimal.format(result.hoursRecoveredMonthly)} h/{es ? "mes" : "month"} · {result.centers} {es ? "centros" : "locations"}</strong><p>{es ? `La carga manual baja de ${decimal.format(result.manualHoursMonthly)} h a ${decimal.format(result.integratedHoursMonthly)} h al mes en este escenario.` : `Manual workload falls from ${decimal.format(result.manualHoursMonthly)} h to ${decimal.format(result.integratedHoursMonthly)} h per month in this scenario.`}</p></div></div>
+    <section className="tpv-before-after" aria-label={es ? "Proceso manual frente a conectado" : "Manual versus connected process"}>
+      <div className="tpv-state manual"><span>{es ? "Antes" : "Before"}</span><strong>{decimal.format(result.manualHoursMonthly)} h/{es ? "mes" : "month"}</strong><small>{es ? "hojas, altas y comprobaciones repetidas" : "repeated sheets, updates and checks"}</small></div>
+      <div className="tpv-connection-layer"><Database size={17} /><i /><Network size={19} /><i /><RefreshCw size={17} /><b>{result.centers} {es ? "centros conectados" : "connected locations"}</b></div>
+      <div className="tpv-state connected"><span>{es ? "Escenario conectado" : "Connected scenario"}</span><strong>{decimal.format(result.integratedHoursMonthly)} h/{es ? "mes" : "month"}</strong><small>{es ? "supervisión, excepciones y validación" : "supervision, exceptions and validation"}</small></div>
+    </section>
     <div className="decision-kpis"><Metric label={es ? "Valor del tiempo recuperado" : "Value of recovered time"} value={money.format(result.laborValueMonthly)} accent /><Metric label={es ? "Incidencias evitables/mes" : "Avoidable incidents/month"} value={decimal.format(result.incidentsAvoidedMonthly)} /><Metric label={es ? "Coste mensual introducido" : "Entered monthly cost"} value={result.hasCommercialCost ? money.format(result.recurringIntegrationCostMonthly) : "—"} /><Metric label={es ? "Impacto neto mensual" : "Monthly net impact"} value={result.netOperationalImpactMonthly === null ? "—" : money.format(result.netOperationalImpactMonthly)} /></div>
     {result.hasCommercialCost ? <div className="tpv-commercial-result"><div><span>{es ? "Impacto neto primer año" : "First-year net impact"}</span><strong>{money.format(result.firstYearNetImpact || 0)}</strong></div><div><span>{es ? "Puesta en marcha total" : "Total setup"}</span><strong>{money.format(result.setupCostTotal)}</strong></div><div><span>{es ? "Recuperación estimada" : "Estimated payback"}</span><strong>{result.paybackMonths === null ? (es ? "No calculable" : "Not calculable") : `${decimal.format(result.paybackMonths)} ${es ? "meses" : "months"}`}</strong></div></div> : <div className="decision-note"><CircleDollarSign size={18} /><p>{es ? "No has introducido costes comerciales. Por eso mostramos tiempo y valor operativo, pero no inventamos impacto neto ni plazo de recuperación." : "You did not enter commercial costs, so we show time and operating value without inventing net impact or payback."}</p></div>}
-    <div className="decision-list">{result.tasks.map((task) => <article key={task.id}><div><span className={`decision-status ${task.type === "incident" ? "order" : "covered"}`}>{task.type === "incident" ? (es ? "Incidencia" : "Incident") : (es ? "Operación" : "Operation")}</span><h3>{task.name}</h3><p>{decimal.format(task.manualHoursMonthly)} h {es ? "manuales" : "manual"} → {decimal.format(task.integratedHoursMonthly)} h {es ? "con integración" : "integrated"}</p></div><div className="decision-line-metrics"><b>{decimal.format(task.hoursRecoveredMonthly)} h/{es ? "mes" : "month"}</b><span>{task.automationPct}% {es ? "automatización estimada" : "estimated automation"}</span></div></article>)}</div>
+    <section className="tpv-process-impact" aria-label={es ? "Impacto por proceso" : "Impact by process"}>
+      <header><div><Workflow size={17} /><strong>{es ? "Impacto por proceso" : "Impact by process"}</strong></div><span>{es ? "Horas mensuales en todos los centros" : "Monthly hours across all locations"}</span></header>
+      {result.tasks.map((task) => {
+        const integratedPct = task.manualHoursMonthly > 0 ? Math.max(2, (task.integratedHoursMonthly / task.manualHoursMonthly) * 100) : 0;
+        return <article key={task.id} data-type={task.type}>
+          <div className="tpv-process-name"><span>{task.type === "incident" ? (es ? "Incidencia" : "Incident") : (es ? "Operación" : "Operation")}</span><strong>{task.name}</strong></div>
+          <div className="tpv-process-bars"><div><i style={{ width: "100%" }} /><span>{decimal.format(task.manualHoursMonthly)} h</span></div><div><i style={{ width: `${integratedPct}%` }} /><span>{decimal.format(task.integratedHoursMonthly)} h</span></div></div>
+          <div className="tpv-process-saving"><strong>−{decimal.format(task.hoursRecoveredMonthly)} h</strong><span>{task.automationPct}% {es ? "hipótesis" : "assumption"}</span></div>
+        </article>;
+      })}
+      <footer><span><i />{es ? "Carga manual" : "Manual load"}</span><span><i />{es ? "Carga conectada" : "Connected load"}</span></footer>
+    </section>
     <div className="tpv-next-actions"><h3>{es ? "Qué validaría antes de decidir" : "What to validate before deciding"}</h3><ol><li>{es ? "Volumen real y minutos del proceso con mayor impacto." : "Actual volume and minutes for the highest-impact process."}</li><li>{es ? "Cobertura técnica del TPV: catálogo, precios, centros, ventas, stock y readback." : "POS technical coverage: catalog, prices, locations, sales, stock and readback."}</li><li>{es ? "Piloto por fases y medición durante 30 días antes de extenderlo al resto de centros." : "Phased pilot and 30-day measurement before extending to every location."}</li></ol></div>
+    <section className="tpv-rollout"><h3>{es ? "Ruta de implantación verificable" : "Verifiable rollout path"}</h3><ol><li><b>01</b><span>{es ? "Mapa" : "Map"}<small>{es ? "Catálogo, formatos, precios y centros" : "Catalog, formats, prices and locations"}</small></span></li><li><b>02</b><span>{es ? "Piloto" : "Pilot"}<small>{es ? "Un centro, readback e idempotencia" : "One location, readback and idempotency"}</small></span></li><li><b>03</b><span>{es ? "Medición" : "Measure"}<small>{es ? "30 días de tiempos e incidencias" : "30 days of time and incidents"}</small></span></li><li><b>04</b><span>{es ? "Escalado" : "Scale"}<small>{es ? "Resto de centros con gate explícito" : "Remaining locations with an explicit gate"}</small></span></li></ol></section>
     <div className="decision-source"><h3>{es ? "Origen de las cifras" : "Source of the figures"}</h3><span>{es ? "Introducido por ti" : "Entered by you"}</span><span>{es ? "Calculado con tus datos" : "Calculated from your data"}</span><span>{es ? "Hipótesis base Winerim, editable y no garantizada" : "Editable, non-guaranteed Winerim baseline"}</span>{isExample && <span>{es ? "Ejemplo ficticio cargado" : "Fictional example loaded"}</span>}</div>
     <details className="decision-formula"><summary><Scale size={15} /> {es ? "Fórmula visible" : "Visible formula"}</summary><p>{formula}</p></details>
   </div>;

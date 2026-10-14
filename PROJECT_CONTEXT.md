@@ -1671,3 +1671,47 @@
 
 - Medir uso agregado sin PII ni valores introducidos y contrastar hipótesis con datos consentidos.
 - Recalibrar ejemplos solo cuando exista evidencia real por tipo de integración y centro.
+
+## Actualización 2026-10-14: cinco herramientas con interfaces de decisión propias
+
+### Hechos
+
+- Pedido semanal, maridaje, conciliación, rotura de stock e impacto TPV ya no
+  comparten un resultado genérico: cada herramienta presenta un instrumento
+  operativo, métricas, guía y exportación CSV específicos.
+- Pedido produce una hoja de compra por referencia y cajas completas; maridaje
+  muestra P&L y mapa de pases; conciliación reconstruye el puente de inventario;
+  rotura expone la cuenta atrás y demanda protegida/expuesta; TPV compara el
+  proceso manual con el conectado y propone un despliegue por fases.
+- Producción usa Pages `81cb6c4b`, backend sin cambios
+  `317e7c1c-09e4-41da-a0be-d63a8b4b12cb` y facade
+  `46972403-8b7d-4e3f-aaaf-110eae45186f`.
+- QA productiva: recorridos ES/EN, escritorio/móvil, CSV, consola y overflow
+  verdes; además `34` checks HTTP y `10` entradas exactas de sitemap.
+
+### Decisiones
+
+- Conservar componentes y fórmulas compartidos solo donde aporten consistencia;
+  el resultado y la representación de cada decisión deben ser propios.
+- Exportar tablas útiles en CSV en lugar de un resumen TXT genérico.
+- No modificar sitemap, prerender ni backend cuando una release es únicamente de
+  interfaz y las rutas ya están sanas.
+
+### Hipótesis
+
+- Un resultado reconocible y directamente utilizable aumentará finalización,
+  descarga y conversación comercial frente a cinco calculadoras visualmente
+  intercambiables.
+
+### Contradicciones
+
+- Las cinco herramientas conservan una estructura de tres pasos por coherencia de
+  navegación, pero ya no comparten el mismo instrumento de resultado.
+- Las capturas `fullPage` pueden coser la cabecera fija en mitad de la imagen; la
+  navegación real no presenta ese solapamiento.
+
+### Tareas pendientes
+
+- Medir inicio, finalización, descarga CSV y CTA de forma agregada, sin PII ni
+  valores introducidos.
+- Contrastar ejemplos e hipótesis con clientes antes de recalibrar cifras.

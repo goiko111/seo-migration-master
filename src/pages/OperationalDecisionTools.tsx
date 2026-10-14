@@ -4,14 +4,19 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
+  CalendarDays,
   Check,
+  ClipboardCheck,
   Download,
   GlassWater,
-  PackageCheck,
+  Layers3,
+  LineChart,
   Plus,
+  ReceiptText,
   RotateCcw,
   Scale,
   ShieldCheck,
+  TimerReset,
   Trash2,
   TrendingDown,
   Wine,
@@ -207,6 +212,13 @@ const common = {
   },
 } as const;
 
+const TOOL_STEPS: Record<ToolKind, Record<Locale, readonly string[]>> = {
+  order: { es: ["Cobertura", "Referencias", "Pedido"], en: ["Coverage", "References", "Order"] },
+  pairing: { es: ["Servicio", "Pases", "P&L"], en: ["Service", "Courses", "P&L"] },
+  reconciliation: { es: ["Reglas", "Movimientos", "Auditoría"], en: ["Rules", "Movements", "Audit"] },
+  stockout: { es: ["Horizonte", "Referencias", "Riesgo"], en: ["Horizon", "References", "Risk"] },
+};
+
 const createOrderRow = (id = `order-${Date.now()}`): OrderPlannerRow => ({ id, name: "", currentStock: 0, weeklySales: 0, leadDays: 4, safetyDays: 3, targetCoverDays: 14, unitsPerCase: 6, unitCost: 0, eventDemand: 0 });
 const createPairingRow = (id = `pair-${Date.now()}`): PairingWineRow => ({ id, name: "", bottleCost: 0, bottleMl: 750, pourMl: 75 });
 const createReconRow = (id = `recon-${Date.now()}`): StockReconciliationRow => ({ id, name: "", openingStock: 0, received: 0, bottlesSold: 0, glassesSold: 0, glassesPerBottle: 6, breakage: 0, comps: 0, actualStock: 0, unitCost: 0 });
@@ -240,6 +252,58 @@ const ToolSteps = ({ active, labels }: { active: number; labels: readonly string
     {labels.map((label, index) => <li key={label} className={index === active ? "active" : index < active ? "done" : ""}><span>{index < active ? <Check size={13} /> : String(index + 1).padStart(2, "0")}</span>{label}</li>)}
   </ol>
 );
+
+function ToolSignal({ kind, locale }: { kind: ToolKind; locale: Locale }) {
+  const es = locale === "es";
+  const signal = {
+    order: { icon: <ReceiptText size={16} />, label: es ? "Salida" : "Output", value: es ? "Pedido exportable" : "Exportable order" },
+    pairing: { icon: <GlassWater size={16} />, label: es ? "Unidad" : "Unit", value: es ? "Coste por comensal" : "Cost per guest" },
+    reconciliation: { icon: <ClipboardCheck size={16} />, label: es ? "Control" : "Control", value: es ? "Puente de inventario" : "Inventory bridge" },
+    stockout: { icon: <TimerReset size={16} />, label: es ? "Horizonte" : "Horizon", value: es ? "Hasta la entrega" : "Until delivery" },
+  }[kind];
+  return <div className="decision-tool-signal">{signal.icon}<span>{signal.label}</span><strong>{signal.value}</strong></div>;
+}
+
+function ContextInstrument({ kind, locale, orderDefaults, pairingContext, glassesPerBottle, stockoutDefaults }: {
+  kind: ToolKind;
+  locale: Locale;
+  orderDefaults: { leadDays: number; safetyDays: number; targetCoverDays: number; unitsPerCase: number };
+  pairingContext: { wineRevenuePerGuest: number; guestsPerService: number; servicesPerMonth: number; targetBeverageCostPct: number };
+  glassesPerBottle: number;
+  stockoutDefaults: { daysUntilDelivery: number; substitutionPct: number };
+}) {
+  const es = locale === "es";
+  if (kind === "order") return <section className="decision-context-instrument order-runway" aria-label={es ? "Horizonte del pedido" : "Order horizon"}>
+    <div className="instrument-title"><CalendarDays size={18} /><div><strong>{es ? "Horizonte de cobertura" : "Coverage horizon"}</strong><span>{es ? "Desde hoy hasta el siguiente ciclo seguro" : "From today to the next safe cycle"}</span></div></div>
+    <div className="runway-track"><span><i>0</i>{es ? "Hoy" : "Today"}</span><span><i>{orderDefaults.leadDays}</i>{es ? "Entrega" : "Delivery"}</span><span><i>{orderDefaults.leadDays + orderDefaults.safetyDays}</i>{es ? "Seguridad" : "Safety"}</span><span><i>{orderDefaults.leadDays + orderDefaults.safetyDays + orderDefaults.targetCoverDays}</i>{es ? "Cobertura" : "Coverage"}</span></div>
+    <p>{es ? `El pedido se redondeará a cajas de ${orderDefaults.unitsPerCase} botellas.` : `The order will be rounded to cases of ${orderDefaults.unitsPerCase} bottles.`}</p>
+  </section>;
+  if (kind === "pairing") return <section className="decision-context-instrument pairing-brief" aria-label={es ? "Ficha del servicio" : "Service brief"}>
+    <div className="instrument-title"><GlassWater size={18} /><div><strong>{es ? "Ficha del servicio" : "Service brief"}</strong><span>{es ? "La rentabilidad se decide por comensal" : "Profitability is decided per guest"}</span></div></div>
+    <div className="pairing-brief-grid"><span><b>{pairingContext.guestsPerService}</b>{es ? "comensales" : "guests"}</span><span><b>{pairingContext.servicesPerMonth}</b>{es ? "servicios/mes" : "services/month"}</span><span><b>{pairingContext.targetBeverageCostPct}%</b>{es ? "objetivo" : "target"}</span><span><b>{pairingContext.wineRevenuePerGuest}</b>{es ? "ingreso vino/persona" : "wine revenue/guest"}</span></div>
+  </section>;
+  if (kind === "reconciliation") return <section className="decision-context-instrument recon-equation" aria-label={es ? "Ecuación de inventario" : "Inventory equation"}>
+    <div className="instrument-title"><Layers3 size={18} /><div><strong>{es ? "Puente de inventario" : "Inventory bridge"}</strong><span>{es ? "No compensa faltantes con sobrantes" : "Never offsets shortages with surpluses"}</span></div></div>
+    <div className="equation-flow"><span>{es ? "Inicial" : "Opening"}</span><b>+</b><span>{es ? "Entradas" : "Receipts"}</span><b>−</b><span>{es ? "Ventas y bajas" : "Sales & adjustments"}</span><b>=</b><span>{es ? "Teórico" : "Expected"}</span><b>↔</b><span>{es ? "Real" : "Actual"}</span></div>
+    <p>{es ? `${glassesPerBottle} copas equivalen a una botella.` : `${glassesPerBottle} glasses equal one bottle.`}</p>
+  </section>;
+  return <section className="decision-context-instrument stockout-window" aria-label={es ? "Ventana de riesgo" : "Risk window"}>
+    <div className="instrument-title"><TimerReset size={18} /><div><strong>{es ? "Ventana de disponibilidad" : "Availability window"}</strong><span>{es ? "El objetivo es llegar a la entrega sin perder demanda" : "The goal is to reach delivery without losing demand"}</span></div></div>
+    <div className="stockout-window-line"><span>{es ? "Hoy" : "Today"}</span><div><i style={{ width: `${Math.max(4, 100 - stockoutDefaults.substitutionPct)}%` }} /></div><span>{stockoutDefaults.daysUntilDelivery} {es ? "días" : "days"}</span></div>
+    <p>{stockoutDefaults.substitutionPct}% {es ? "de la demanda podría reconducirse; sigue sin ser stock físico." : "of demand may be redirected; it is still not physical stock."}</p>
+  </section>;
+}
+
+function EntryGuide({ kind, locale }: { kind: ToolKind; locale: Locale }) {
+  const es = locale === "es";
+  const guide = {
+    order: { icon: <ReceiptText size={18} />, title: es ? "Hoja de compra" : "Purchase sheet", text: es ? "Una línea por referencia. El resultado prioriza urgencias y genera cantidades comprables." : "One row per reference. The result prioritizes urgency and generates purchasable quantities." },
+    pairing: { icon: <GlassWater size={18} />, title: es ? "Secuencia de pases" : "Course sequence", text: es ? "Ordena los vinos como se sirven. La suma construye el P&L por comensal." : "Order wines as they are served. Their sum builds the per-guest P&L." },
+    reconciliation: { icon: <ClipboardCheck size={18} />, title: es ? "Libro de movimientos" : "Movement ledger", text: es ? "Introduce entradas y salidas por referencia antes de comparar con el recuento físico." : "Enter movements by reference before comparing them with the physical count." },
+    stockout: { icon: <LineChart size={18} />, title: es ? "Radar de disponibilidad" : "Availability radar", text: es ? "Incluye eventos y margen. Así el riesgo se prioriza por negocio, no solo por botellas." : "Include events and contribution so risk is prioritized by business impact, not bottle count alone." },
+  }[kind];
+  return <div className="decision-entry-guide">{guide.icon}<div><strong>{guide.title}</strong><p>{guide.text}</p></div></div>;
+}
 
 const getKind = (pathname: string): ToolKind => pathname.includes("maridaje") || pathname.includes("pairing-menu")
   ? "pairing"
@@ -313,9 +377,9 @@ export default function OperationalDecisionTools() {
 
   const download = () => {
     if (!result) return;
-    const text = document.querySelector(".decision-result")?.textContent?.replace(/\s+/g, " ").trim() || t.resultTitle;
-    const url = URL.createObjectURL(new Blob([`${t.h1}\n\n${text}\n\n${t.formula}`], { type: "text/plain;charset=utf-8" }));
-    const anchor = document.createElement("a"); anchor.href = url; anchor.download = `winerim-${kind}-${locale}.txt`; anchor.click(); URL.revokeObjectURL(url);
+    const csv = buildOperationalCsv(kind, locale, result, currency);
+    const url = URL.createObjectURL(new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8" }));
+    const anchor = document.createElement("a"); anchor.href = url; anchor.download = `winerim-${kind}-${locale}.csv`; anchor.click(); URL.revokeObjectURL(url);
     trackToolUse(toolName, { action: "download" });
   };
 
@@ -327,7 +391,7 @@ export default function OperationalDecisionTools() {
     { lang: "x-default", url: `https://winerim.wine${TOOL_ROUTES[kind].es}` },
   ];
 
-  return <div className="profitability-page decision-tool-page">
+  return <div className="profitability-page decision-tool-page" data-tool={kind}>
     <SEOHead title={t.title} description={t.description} url={TOOL_ROUTES[kind][locale]} hreflang={hreflang} structuredData={{ "@context": "https://schema.org", "@type": "WebApplication", name: t.h1, description: t.description, url: `https://winerim.wine${TOOL_ROUTES[kind][locale]}`, applicationCategory: "BusinessApplication", operatingSystem: "Web", offers: { "@type": "Offer", price: "0" } }} />
     <a className="profit-skip" href="#decision-calculator">{locale === "es" ? "Ir a la calculadora" : "Skip to calculator"}</a>
     <Navbar />
@@ -336,9 +400,10 @@ export default function OperationalDecisionTools() {
         <p className="profit-eyebrow">{t.eyebrow}</p><h1>{t.h1}</h1><p>{t.intro}</p>
         <span className="profit-local"><ShieldCheck size={14} aria-hidden /> {c.local}</span>
       </header>
-      <section className="profit-workspace" id="decision-calculator" aria-label={t.h1}>
+      <section className="profit-workspace" id="decision-calculator" aria-label={t.h1} data-tool={kind}>
         <aside className="profit-sidebar">
-          <p className="profit-eyebrow">{t.eyebrow}</p><ToolSteps active={step} labels={c.steps} />
+          <p className="profit-eyebrow">{t.eyebrow}</p><ToolSteps active={step} labels={TOOL_STEPS[kind][locale]} />
+          <ToolSignal kind={kind} locale={locale} />
           <div className="profit-sidebar-note"><strong>{c.noVat}</strong><span>{locale === "es" ? "Puedes cargar un ejemplo y sustituir después cualquier cifra." : "Load an example and replace any figure afterwards."}</span></div>
           <button type="button" className="profit-example-link" onClick={loadExample}><Wine size={14} /> {c.loadExample}</button>
         </aside>
@@ -381,6 +446,7 @@ function ContextStep({ kind, locale, currency, setCurrency, orderDefaults, setOr
 }) {
   const es = locale === "es";
   return <div className="decision-context">
+    <ContextInstrument kind={kind} locale={locale} orderDefaults={orderDefaults} pairingContext={pairingContext} glassesPerBottle={glassesPerBottle} stockoutDefaults={stockoutDefaults} />
     <label className="decision-field"><span>{es ? "Moneda" : "Currency"}</span><select value={currency} onChange={(event) => setCurrency(event.target.value as DecisionCurrency)}><option value="EUR">EUR · €</option><option value="USD">USD · $</option><option value="GBP">GBP · £</option></select></label>
     {kind === "order" && <div className="decision-context-grid">
       <NumberField label={es ? "Días hasta entrega" : "Lead time in days"} value={orderDefaults.leadDays} onChange={(value) => setOrderDefaults((current) => ({ ...current, leadDays: value }))} unit={es ? "días" : "days"} />
@@ -415,21 +481,22 @@ function RowsStep(props: {
   const updateRow = <T extends { id: string }>(setter: React.Dispatch<React.SetStateAction<T[]>>, id: string, patch: Partial<T>) => { setter((rows) => rows.map((row) => row.id === id ? { ...row, ...patch } : row)); onChange(); };
   const removeRow = <T extends { id: string }>(setter: React.Dispatch<React.SetStateAction<T[]>>, id: string) => setter((rows) => rows.length > 1 ? rows.filter((row) => row.id !== id) : rows);
   const addButton = (add: () => void) => <button type="button" className="decision-add" onClick={add}><Plus size={15} /> {c.add}</button>;
-  return <div className="decision-rows">
-    {kind === "order" && <>{props.orderRows.map((row, index) => <RowCard key={row.id} index={index} remove={() => removeRow(props.setOrderRows, row.id)} removeLabel={c.remove}>
+  return <div className="decision-rows" data-tool={kind}>
+    <EntryGuide kind={kind} locale={locale} />
+    {kind === "order" && <>{props.orderRows.map((row, index) => <RowCard key={row.id} kind={kind} index={index} remove={() => removeRow(props.setOrderRows, row.id)} removeLabel={c.remove}>
       <NameField value={row.name} onChange={(value) => updateRow(props.setOrderRows, row.id, { name: value })} placeholder={c.emptyName} />
       <NumberField label={es ? "Stock actual" : "Current stock"} value={row.currentStock} onChange={(value) => updateRow(props.setOrderRows, row.id, { currentStock: value })} unit={es ? "bot." : "btl."} />
       <NumberField label={es ? "Ventas por semana" : "Weekly sales"} value={row.weeklySales} onChange={(value) => updateRow(props.setOrderRows, row.id, { weeklySales: value })} unit={es ? "bot." : "btl."} />
       <NumberField label={es ? "Demanda de eventos" : "Event demand"} value={row.eventDemand} onChange={(value) => updateRow(props.setOrderRows, row.id, { eventDemand: value })} unit={es ? "bot." : "btl."} />
       <NumberField label={es ? "Coste por botella" : "Cost per bottle"} value={row.unitCost} onChange={(value) => updateRow(props.setOrderRows, row.id, { unitCost: value })} />
     </RowCard>)}{addButton(() => props.setOrderRows((rows) => rows.length < 10 ? [...rows, createOrderRow(`order-${Date.now()}`)] : rows))}</>}
-    {kind === "pairing" && <>{props.pairingRows.map((row, index) => <RowCard key={row.id} index={index} remove={() => removeRow(props.setPairingRows, row.id)} removeLabel={c.remove}>
+    {kind === "pairing" && <>{props.pairingRows.map((row, index) => <RowCard key={row.id} kind={kind} index={index} remove={() => removeRow(props.setPairingRows, row.id)} removeLabel={c.remove}>
       <NameField value={row.name} onChange={(value) => updateRow(props.setPairingRows, row.id, { name: value })} placeholder={es ? "Vino o pase" : "Wine or course"} />
       <NumberField label={es ? "Coste botella" : "Bottle cost"} value={row.bottleCost} onChange={(value) => updateRow(props.setPairingRows, row.id, { bottleCost: value })} />
       <NumberField label={es ? "Volumen botella" : "Bottle volume"} value={row.bottleMl} onChange={(value) => updateRow(props.setPairingRows, row.id, { bottleMl: Math.max(1, value) })} unit="ml" />
       <NumberField label={es ? "Dosis por comensal" : "Pour per guest"} value={row.pourMl} onChange={(value) => updateRow(props.setPairingRows, row.id, { pourMl: value })} unit="ml" />
     </RowCard>)}{addButton(() => props.setPairingRows((rows) => rows.length < 10 ? [...rows, createPairingRow(`pair-${Date.now()}`)] : rows))}</>}
-    {kind === "reconciliation" && <>{props.reconRows.map((row, index) => <RowCard key={row.id} index={index} remove={() => removeRow(props.setReconRows, row.id)} removeLabel={c.remove} wide>
+    {kind === "reconciliation" && <>{props.reconRows.map((row, index) => <RowCard key={row.id} kind={kind} index={index} remove={() => removeRow(props.setReconRows, row.id)} removeLabel={c.remove} wide>
       <NameField value={row.name} onChange={(value) => updateRow(props.setReconRows, row.id, { name: value })} placeholder={c.emptyName} />
       <NumberField label={es ? "Stock inicial" : "Opening stock"} value={row.openingStock} onChange={(value) => updateRow(props.setReconRows, row.id, { openingStock: value })} />
       <NumberField label={es ? "Entradas" : "Receipts"} value={row.received} onChange={(value) => updateRow(props.setReconRows, row.id, { received: value })} />
@@ -440,7 +507,7 @@ function RowsStep(props: {
       <NumberField label={es ? "Stock real" : "Actual stock"} value={row.actualStock} onChange={(value) => updateRow(props.setReconRows, row.id, { actualStock: value })} />
       <NumberField label={es ? "Coste botella" : "Bottle cost"} value={row.unitCost} onChange={(value) => updateRow(props.setReconRows, row.id, { unitCost: value })} />
     </RowCard>)}{addButton(() => props.setReconRows((rows) => rows.length < 10 ? [...rows, createReconRow(`recon-${Date.now()}`)] : rows))}</>}
-    {kind === "stockout" && <>{props.stockoutRows.map((row, index) => <RowCard key={row.id} index={index} remove={() => removeRow(props.setStockoutRows, row.id)} removeLabel={c.remove}>
+    {kind === "stockout" && <>{props.stockoutRows.map((row, index) => <RowCard key={row.id} kind={kind} index={index} remove={() => removeRow(props.setStockoutRows, row.id)} removeLabel={c.remove}>
       <NameField value={row.name} onChange={(value) => updateRow(props.setStockoutRows, row.id, { name: value })} placeholder={c.emptyName} />
       <NumberField label={es ? "Stock actual" : "Current stock"} value={row.currentStock} onChange={(value) => updateRow(props.setStockoutRows, row.id, { currentStock: value })} unit={es ? "bot." : "btl."} />
       <NumberField label={es ? "Venta diaria" : "Daily sales"} value={row.dailySales} onChange={(value) => updateRow(props.setStockoutRows, row.id, { dailySales: value })} unit={es ? "bot." : "btl."} />
@@ -450,7 +517,7 @@ function RowsStep(props: {
   </div>;
 }
 
-const RowCard = ({ index, remove, removeLabel, wide, children }: { index: number; remove: () => void; removeLabel: string; wide?: boolean; children: React.ReactNode }) => <fieldset className="decision-row-card" data-wide={wide}><legend>{String(index + 1).padStart(2, "0")}</legend><button type="button" className="decision-remove" onClick={remove} title={removeLabel} aria-label={removeLabel}><Trash2 size={15} /></button><div className="decision-row-grid">{children}</div></fieldset>;
+const RowCard = ({ kind, index, remove, removeLabel, wide, children }: { kind: ToolKind; index: number; remove: () => void; removeLabel: string; wide?: boolean; children: React.ReactNode }) => <fieldset className="decision-row-card" data-tool={kind} data-wide={wide}><legend>{kind === "pairing" ? (index + 1) : String(index + 1).padStart(2, "0")}</legend><button type="button" className="decision-remove" onClick={remove} title={removeLabel} aria-label={removeLabel}><Trash2 size={15} /></button><div className="decision-row-grid">{children}</div></fieldset>;
 
 function ResultStep({ kind, locale, result, money, decimal, formula, sourceLabel }: { kind: ToolKind; locale: Locale; result: OrderPlanResult | PairingProfitabilityResult | StockReconciliationResult | StockoutRiskResult; money: Intl.NumberFormat; decimal: Intl.NumberFormat; formula: string; sourceLabel: string }) {
   const es = locale === "es";
@@ -466,42 +533,128 @@ function ResultStep({ kind, locale, result, money, decimal, formula, sourceLabel
 
 function OrderResult({ result, es, money, decimal }: { result: OrderPlanResult; es: boolean; money: Intl.NumberFormat; decimal: Intl.NumberFormat }) {
   return <>
-    <div className="decision-headline"><PackageCheck size={23} /><div><span>{es ? "Pedido ejecutable" : "Executable order"}</span><strong>{result.totalCases} {es ? "cajas" : "cases"} · {result.totalBottles} {es ? "botellas" : "bottles"} · {money.format(result.totalCost)}</strong><p>{result.urgentCount ? `${result.urgentCount} ${es ? "referencias requieren una acción antes de la entrega ordinaria" : "references need action before the normal delivery"}.` : es ? "La propuesta cubre el horizonte sin urgencias previas a la entrega." : "The proposal covers the horizon without pre-delivery emergencies."}</p></div></div>
+    <div className="decision-headline order-headline"><ReceiptText size={23} /><div><span>{es ? "Orden de compra preparada" : "Purchase order prepared"}</span><strong>{result.totalCases} {es ? "cajas" : "cases"} · {result.totalBottles} {es ? "botellas" : "bottles"} · {money.format(result.totalCost)}</strong><p>{result.urgentCount ? `${result.urgentCount} ${es ? "referencias necesitan una solución previa a la entrega" : "references need a solution before delivery"}.` : es ? "La propuesta llega al siguiente ciclo sin urgencias previas." : "The proposal reaches the next cycle without pre-delivery emergencies."}</p></div></div>
     <div className="decision-kpis"><Metric label={es ? "Urgencias antes de entrega" : "Pre-delivery emergencies"} value={String(result.urgentCount)} /><Metric label={es ? "Faltante previo" : "Pre-delivery shortfall"} value={`${decimal.format(result.totalPreDeliveryShortfall)} ${es ? "bot." : "btl."}`} /><Metric label={es ? "Exceso por cajas completas" : "Full-case surplus"} value={`${decimal.format(result.totalCaseRoundingSurplus)} ${es ? "bot." : "btl."}`} /><Metric label={es ? "Capital del redondeo" : "Rounding cash commitment"} value={money.format(result.totalCaseRoundingCost)} accent /></div>
-    <div className="decision-list">{result.rows.map((row) => <article key={row.id}><div><span className={`decision-status ${row.status}`}>{row.status === "urgent" ? (es ? "Actuar hoy" : "Act today") : row.status === "order" ? (es ? "Incluir en pedido" : "Add to order") : (es ? "No reponer" : "Hold")}</span><h3>{row.name}</h3><p>{es ? "Cobertura" : "Coverage"}: {row.daysCover === null ? "—" : `${decimal.format(row.daysCover)} ${es ? "días" : "days"}`} → {row.postOrderCoverDays === null ? "—" : `${decimal.format(row.postOrderCoverDays)} ${es ? "días tras pedido" : "days after order"}`}</p>{row.preDeliveryShortfall > 0 && <p className="decision-warning-line">{es ? `Faltarían ${decimal.format(row.preDeliveryShortfall)} botellas antes de que llegue el pedido.` : `${decimal.format(row.preDeliveryShortfall)} bottles would be missing before the order arrives.`}</p>}</div><div className="decision-line-metrics"><b>{row.casesToOrder} {es ? "cajas" : "cases"} · {money.format(row.orderCost)}</b><span>{es ? "Necesidad" : "Need"}: {row.bottleRequirement} · {es ? "pedido" : "order"}: {row.bottlesToOrder}</span>{row.caseRoundingSurplus > 0 && <span>+{row.caseRoundingSurplus} {es ? "bot. por redondeo" : "btl. from rounding"} · {money.format(row.caseRoundingCost)}</span>}</div></article>)}</div>
+    <section className="order-manifest" aria-label={es ? "Hoja de pedido" : "Order sheet"}>
+      <header><div><ReceiptText size={17} /><strong>{es ? "Hoja de pedido" : "Order sheet"}</strong></div><span>{es ? "Lista lista para revisar con distribución" : "Ready to review with distribution"}</span></header>
+      <div className="order-manifest-head"><span>{es ? "Referencia" : "Reference"}</span><span>{es ? "Cobertura" : "Coverage"}</span><span>{es ? "Pedido" : "Order"}</span><span>{es ? "Importe" : "Amount"}</span></div>
+      {result.rows.map((row) => {
+        const target = Math.max(1, row.leadDays + row.safetyDays + row.targetCoverDays);
+        const before = Math.min(100, ((row.daysCover || 0) / target) * 100);
+        const after = Math.min(100, ((row.postOrderCoverDays || 0) / target) * 100);
+        return <article key={row.id}>
+          <div className="order-reference"><span className={`decision-status ${row.status}`}>{row.status === "urgent" ? (es ? "Hoy" : "Today") : row.status === "order" ? (es ? "Pedir" : "Order") : (es ? "Mantener" : "Hold")}</span><strong>{row.name}</strong>{row.preDeliveryShortfall > 0 && <small>{es ? `Faltan ${decimal.format(row.preDeliveryShortfall)} antes de entrega` : `${decimal.format(row.preDeliveryShortfall)} short before delivery`}</small>}</div>
+          <div className="order-coverage"><div><i style={{ width: `${before}%` }} /><b style={{ width: `${Math.max(0, after - before)}%`, left: `${before}%` }} /></div><small>{row.daysCover === null ? "—" : decimal.format(row.daysCover)} → {row.postOrderCoverDays === null ? "—" : decimal.format(row.postOrderCoverDays)} {es ? "días" : "days"}</small></div>
+          <div className="order-quantity"><strong>{row.casesToOrder} {es ? "cajas" : "cases"}</strong><small>{row.bottlesToOrder} {es ? "botellas" : "bottles"}{row.caseRoundingSurplus > 0 ? ` · +${row.caseRoundingSurplus} ${es ? "redondeo" : "rounding"}` : ""}</small></div>
+          <div className="order-amount"><strong>{money.format(row.orderCost)}</strong><small>{row.caseRoundingCost > 0 ? `${money.format(row.caseRoundingCost)} ${es ? "por redondeo" : "from rounding"}` : (es ? "sin exceso" : "no surplus")}</small></div>
+        </article>;
+      })}
+      <footer><span>{es ? "Total propuesto" : "Proposed total"}</span><strong>{result.totalCases} {es ? "cajas" : "cases"} · {money.format(result.totalCost)}</strong></footer>
+    </section>
     <ActionPlan title={es ? "Secuencia recomendada" : "Recommended sequence"} items={es ? ["Resuelve primero las referencias marcadas como Actuar hoy: el pedido ordinario llega tarde.", "Confirma cajas mínimas y disponibilidad con el distribuidor antes de comprometer el capital.", "Revisa el exceso por redondeo: si es alto, negocia unidad suelta o amplía la cobertura de esa referencia."] : ["Resolve Act today references first: the normal order arrives too late.", "Confirm case minimums and availability with the distributor before committing cash.", "Review rounding surplus: if it is high, negotiate split cases or extend that reference's coverage."]} />
   </>;
 }
 
 function PairingResult({ result, es, money, decimal }: { result: PairingProfitabilityResult; es: boolean; money: Intl.NumberFormat; decimal: Intl.NumberFormat }) {
   const gap = Math.abs(result.monthlyCostGap);
+  const costShare = Math.min(100, Math.max(0, result.beverageCostPct || 0));
   return <>
     <div className={`decision-headline pairing-${result.targetStatus}`}><GlassWater size={23} /><div><span>{result.targetStatus === "within" ? (es ? "Dentro del objetivo" : "Within target") : (es ? "Por encima del objetivo" : "Above target")}</span><strong>{result.beverageCostPct === null ? "—" : `${decimal.format(result.beverageCostPct)} % beverage cost`}</strong><p>{result.targetStatus === "within" ? (es ? `Hay ${money.format(gap)} mensuales de margen hasta el límite objetivo introducido.` : `There is ${money.format(gap)} monthly headroom before the entered target.`) : (es ? `El coste supera el objetivo en ${money.format(gap)} al mes.` : `Cost exceeds target by ${money.format(gap)} per month.`)}</p></div></div>
     <div className="decision-kpis"><Metric label={es ? "Coste / objetivo por comensal" : "Cost / target per guest"} value={`${money.format(result.costPerGuest)} / ${money.format(result.targetCostPerGuest)}`} /><Metric label={es ? "Botellas equivalentes al mes" : "Bottle equivalents/month"} value={decimal.format(result.monthlyBottleEquivalent)} /><Metric label={es ? "Contribución mensual" : "Monthly contribution"} value={money.format(result.monthlyContribution)} accent /><Metric label={es ? "+10 ml en todos los pases" : "+10 ml across every course"} value={`${decimal.format(result.overpourTenMlBottleEquivalent)} ${es ? "bot." : "btl."} · ${money.format(result.overpourTenMlMonthlyImpact)}`} /></div>
-    <div className="decision-list">{result.wines.map((wine) => <article key={wine.id}><div><h3>{wine.name}</h3><p>{money.format(wine.costPerGuest)} {es ? "por comensal" : "per guest"} · {decimal.format(wine.monthlyBottleEquivalent)} {es ? "botellas equivalentes/mes" : "bottle equivalents/month"}</p></div><div className="decision-line-metrics"><b>{wine.bottlesPerService} {es ? "botellas a preparar/servicio" : "bottles to prepare/service"}</b><span>{wine.pourMl} ml/{es ? "comensal" : "guest"}</span><span>+10 ml = {decimal.format(wine.overpourTenMlBottleEquivalent)} {es ? "bot./mes" : "btl./month"}</span></div></article>)}</div>
+    <section className="pairing-pnl" aria-label={es ? "Cuenta de resultados por comensal" : "Per-guest profit and loss"}>
+      <header><div><GlassWater size={17} /><strong>{es ? "P&L por comensal" : "P&L per guest"}</strong></div><span>{result.monthlyGuests} {es ? "comensales/mes" : "guests/month"}</span></header>
+      <div className="pairing-pnl-bar"><i style={{ width: `${costShare}%` }} /><b style={{ width: `${100 - costShare}%` }} /><em style={{ left: `${Math.min(100, result.targetCostPerGuest / Math.max(1, result.costPerGuest + result.contributionPerGuest) * 100)}%` }} /></div>
+      <div className="pairing-pnl-legend"><span><i />{es ? "Coste de vino" : "Wine cost"} <strong>{money.format(result.costPerGuest)}</strong></span><span><i />{es ? "Contribución" : "Contribution"} <strong>{money.format(result.contributionPerGuest)}</strong></span><span><i />{es ? "Objetivo" : "Target"} <strong>{money.format(result.targetCostPerGuest)}</strong></span></div>
+    </section>
+    <section className="pairing-course-map" aria-label={es ? "Mapa de pases" : "Course map"}>
+      <header><span>{es ? "Pase" : "Course"}</span><span>{es ? "Dosis" : "Pour"}</span><span>{es ? "Coste/persona" : "Cost/guest"}</span><span>{es ? "Preparación" : "Preparation"}</span></header>
+      {result.wines.map((wine, index) => <article key={wine.id}>
+        <div className="pairing-course-name"><b>{String(index + 1).padStart(2, "0")}</b><strong>{wine.name}</strong></div>
+        <div className="pairing-pour"><div><i style={{ height: `${Math.min(100, (wine.pourMl / Math.max(1, wine.bottleMl)) * 500)}%` }} /></div><span>{wine.pourMl} ml</span></div>
+        <div><strong>{money.format(wine.costPerGuest)}</strong><small>{decimal.format(wine.monthlyBottleEquivalent)} {es ? "bot./mes" : "btl./month"}</small></div>
+        <div><strong>{wine.bottlesPerService} {es ? "botellas" : "bottles"}</strong><small>+10 ml = {decimal.format(wine.overpourTenMlBottleEquivalent)} {es ? "bot./mes" : "btl./month"}</small></div>
+      </article>)}
+    </section>
     <ActionPlan title={es ? "Decisión de servicio" : "Service decision"} items={es ? [`El ingreso mínimo atribuido al vino para cumplir el objetivo es ${money.format(result.minimumRevenueForTarget)} por comensal.`, "Pesa o calibra una dosis real por pase; el sobrevertido repetido es una receta distinta, no un detalle.", "Revisa primero el pase con mayor coste por comensal antes de cambiar todo el maridaje."] : [`Minimum wine revenue allocation to meet the target is ${money.format(result.minimumRevenueForTarget)} per guest.`, "Weigh or calibrate an actual pour for each course; repeated overpour is a different recipe, not a detail.", "Review the highest cost-per-guest course before changing the whole pairing."]} />
   </>;
 }
 
 function ReconciliationResult({ result, es, money, decimal }: { result: StockReconciliationResult; es: boolean; money: Intl.NumberFormat; decimal: Intl.NumberFormat }) {
   return <>
-    <div className="decision-headline"><Scale size={23} /><div><span>{es ? "Diferencia bruta a explicar" : "Gross variance to explain"}</span><strong>{decimal.format(result.totalAbsoluteVariance)} {es ? "botellas" : "bottles"} · {money.format(result.totalVarianceCost)}</strong><p>{es ? "Los faltantes y sobrantes se muestran por separado: un sobrante no borra un faltante en otra referencia." : "Missing and surplus stock are shown separately: surplus in one reference does not erase a shortage in another."}</p></div></div>
+    <div className="decision-headline recon-headline"><ClipboardCheck size={23} /><div><span>{es ? "Cola de investigación" : "Investigation queue"}</span><strong>{result.mismatchCount} {es ? "incidencias" : "incidents"} · {money.format(result.totalVarianceCost)} {es ? "por explicar" : "to explain"}</strong><p>{es ? "Los faltantes y sobrantes se mantienen separados: corregir el neto ocultaría movimientos distintos." : "Shortages and surpluses remain separate: correcting the net would hide different movements."}</p></div></div>
     <div className="decision-kpis"><Metric label={es ? "Faltante físico" : "Physical shortage"} value={`${decimal.format(result.missingBottles)} ${es ? "bot." : "btl."}`} /><Metric label={es ? "Coste del faltante" : "Shortage cost"} value={money.format(result.missingCost)} accent /><Metric label={es ? "Sobrante no explicado" : "Unexplained surplus"} value={`${decimal.format(result.surplusBottles)} ${es ? "bot." : "btl."}`} /><Metric label={es ? "Valor del sobrante" : "Surplus value"} value={money.format(result.surplusCost)} /></div>
-    <div className="decision-list">{result.rows.map((row) => <article key={row.id}><div><span className={`decision-status ${row.status}`}>{row.status === "missing" ? (es ? "Falta stock" : "Missing") : row.status === "surplus" ? (es ? "Sobra stock" : "Surplus") : (es ? "Cuadra" : "Balanced")}</span><h3>{row.name}</h3><p>{es ? "Teórico" : "Theoretical"}: {decimal.format(row.theoreticalStock)} · {es ? "Real" : "Actual"}: {decimal.format(row.actualStock)} · {es ? "Copas equivalentes" : "Glass equivalent"}: {decimal.format(row.glassBottleEquivalent)}</p></div><div className="decision-line-metrics"><b>{row.variance > 0 ? "+" : ""}{decimal.format(row.variance)} {es ? "bot." : "btl."}</b><span>{money.format(row.varianceCost)} {es ? "a investigar" : "to investigate"}</span></div></article>)}</div>
+    <section className="recon-audit-board" aria-label={es ? "Puentes de inventario" : "Inventory bridges"}>
+      <header><div><Layers3 size={17} /><strong>{es ? "Puente por referencia" : "Bridge by reference"}</strong></div><span>{es ? "Prioridad por coste de la diferencia" : "Prioritized by variance cost"}</span></header>
+      {result.rows.map((row, index) => <article key={row.id} data-status={row.status}>
+        <div className="recon-rank"><b>{String(index + 1).padStart(2, "0")}</b><span className={`decision-status ${row.status}`}>{row.status === "missing" ? (es ? "Faltante" : "Missing") : row.status === "surplus" ? (es ? "Sobrante" : "Surplus") : (es ? "Cuadra" : "Balanced")}</span></div>
+        <div className="recon-reference"><strong>{row.name}</strong><small>{money.format(row.varianceCost)} {es ? "a investigar" : "to investigate"}</small></div>
+        <div className="recon-bridge">
+          <span><small>{es ? "Inicial" : "Opening"}</small><b>{decimal.format(row.openingStock)}</b></span><i>+</i>
+          <span><small>{es ? "Entradas" : "Receipts"}</small><b>{decimal.format(row.received)}</b></span><i>−</i>
+          <span><small>{es ? "Salidas" : "Outflow"}</small><b>{decimal.format(row.bottlesSold + row.glassBottleEquivalent + row.breakage + row.comps)}</b></span><i>=</i>
+          <span><small>{es ? "Teórico" : "Expected"}</small><b>{decimal.format(row.theoreticalStock)}</b></span><i>↔</i>
+          <span><small>{es ? "Real" : "Actual"}</small><b>{decimal.format(row.actualStock)}</b></span>
+        </div>
+        <div className="recon-variance"><span>{es ? "Diferencia" : "Variance"}</span><strong>{row.variance > 0 ? "+" : ""}{decimal.format(row.variance)}</strong></div>
+      </article>)}
+    </section>
     <ActionPlan title={es ? "Ruta de conciliación" : "Reconciliation path"} items={es ? ["Recuenta la referencia de mayor coste antes de corregir el ERP: primero confirma el hecho físico.", "Si falta: revisa copas, invitaciones, roturas y ventas no vinculadas. Si sobra: revisa entradas, duplicados y mapeo TPV.", `No uses el neto (${result.netVariance > 0 ? "+" : ""}${decimal.format(result.netVariance)} botellas) como cierre: puede ocultar errores opuestos.`] : ["Recount the highest-cost reference before correcting the ERP: confirm the physical fact first.", "If missing, review glasses, comps, breakage and unlinked sales. If surplus, review receipts, duplicates and POS mapping.", `Do not close on net variance (${result.netVariance > 0 ? "+" : ""}${decimal.format(result.netVariance)} bottles): it can hide opposing errors.`]} />
   </>;
 }
 
 function StockoutResult({ result, es, money, decimal }: { result: StockoutRiskResult; es: boolean; money: Intl.NumberFormat; decimal: Intl.NumberFormat }) {
   return <>
-    <div className="decision-headline"><TrendingDown size={23} /><div><span>{es ? "Exposición hasta la próxima entrega" : "Exposure until next delivery"}</span><strong>{decimal.format(result.totalPhysicalShortage)} {es ? "botellas de déficit físico" : "bottles physically short"}</strong><p>{es ? `${decimal.format(result.totalSubstitutedUnits)} podrían reconducirse a alternativas; ${decimal.format(result.totalUnitsAtRisk)} quedarían sin cubrir.` : `${decimal.format(result.totalSubstitutedUnits)} could move to alternatives; ${decimal.format(result.totalUnitsAtRisk)} would remain uncovered.`}</p></div></div>
+    <div className="decision-headline stockout-headline"><TrendingDown size={23} /><div><span>{es ? "Ventana de riesgo hasta entrega" : "Risk window until delivery"}</span><strong>{decimal.format(result.totalPhysicalShortage)} {es ? "botellas de déficit físico" : "bottles physically short"}</strong><p>{es ? `${decimal.format(result.totalSubstitutedUnits)} pueden reconducirse; ${decimal.format(result.totalUnitsAtRisk)} siguen expuestas.` : `${decimal.format(result.totalSubstitutedUnits)} may be redirected; ${decimal.format(result.totalUnitsAtRisk)} remain exposed.`}</p></div></div>
     <div className="decision-kpis"><Metric label={es ? "Referencias en riesgo" : "References at risk"} value={String(result.riskCount)} /><Metric label={es ? "Venta salvada por sustitución" : "Sales protected by substitution"} value={money.format(result.totalContributionProtectedBySubstitution)} /><Metric label={es ? "Margen todavía en riesgo" : "Contribution still at risk"} value={money.format(result.totalContributionAtRisk)} accent /><Metric label={es ? "Compra física de emergencia" : "Physical emergency buy"} value={`${result.totalEmergencyQuantity} ${es ? "bot." : "btl."}`} /></div>
-    <div className="decision-list">{result.rows.map((row) => <article key={row.id}><div><span className={`decision-status ${row.status}`}>{row.status === "risk" ? (es ? "Riesgo" : "Risk") : (es ? "Cubierto" : "Covered")}</span><h3>{row.name}</h3><p>{es ? "Cobertura" : "Coverage"}: {row.daysCover === null ? "—" : `${decimal.format(row.daysCover)} ${es ? "días" : "days"}`} {row.status === "risk" && `· ${decimal.format(row.riskWindowDays)} ${es ? "días expuesto" : "days exposed"}`}</p></div><div className="decision-line-metrics"><b>{money.format(row.contributionAtRisk)} {es ? "en riesgo" : "at risk"}</b><span>{decimal.format(row.shortage)} {es ? "déficit" : "short"} · {decimal.format(row.substitutedUnits)} {es ? "sustituibles" : "substitutable"}</span><span>{row.emergencyQuantity} {es ? "botellas para cubrirlo" : "bottles to cover"}</span></div></article>)}</div>
+    <section className="stockout-radar" aria-label={es ? "Radar de rotura" : "Stockout radar"}>
+      <header><div><TimerReset size={17} /><strong>{es ? "Cuenta atrás por referencia" : "Countdown by reference"}</strong></div><span>{es ? "Hoy → próxima entrega" : "Today → next delivery"}</span></header>
+      {result.rows.map((row) => {
+        const coverPct = row.daysUntilDelivery > 0 ? Math.min(100, ((row.daysCover || 0) / row.daysUntilDelivery) * 100) : 100;
+        const protectedPct = row.shortage > 0 ? Math.min(100, (row.substitutedUnits / row.shortage) * 100) : 100;
+        return <article key={row.id} data-status={row.status}>
+          <div className="stockout-reference"><span className={`decision-status ${row.status}`}>{row.status === "risk" ? (es ? "Riesgo" : "Risk") : (es ? "Cubierto" : "Covered")}</span><strong>{row.name}</strong><small>{money.format(row.contributionAtRisk)} {es ? "de margen expuesto" : "contribution exposed"}</small></div>
+          <div className="stockout-timeline"><div><i style={{ width: `${coverPct}%` }} /><b style={{ left: `${coverPct}%` }} /></div><span>{es ? "Hoy" : "Today"}</span><span>{row.status === "risk" ? `${decimal.format(row.riskWindowDays)} ${es ? "días sin stock" : "days out"}` : (es ? "llega cubierto" : "covered")}</span><span>{row.daysUntilDelivery}d</span></div>
+          <div className="stockout-protection"><span>{es ? "Déficit" : "Shortage"} <b>{decimal.format(row.shortage)}</b></span><div><i style={{ width: `${protectedPct}%` }} /></div><small>{decimal.format(row.substitutedUnits)} {es ? "sustituibles" : "substitutable"} · {decimal.format(row.lostUnits)} {es ? "sin cubrir" : "uncovered"}</small></div>
+          <div className="stockout-buy"><span>{es ? "Compra mínima" : "Minimum buy"}</span><strong>{row.emergencyQuantity} {es ? "bot." : "btl."}</strong></div>
+        </article>;
+      })}
+    </section>
     <ActionPlan title={es ? "Plan de protección" : "Protection plan"} items={es ? ["Compra de emergencia para el déficit físico; la sustitución es un plan comercial, no stock disponible.", "Prepara alternativas concretas en carta y briefing de sala para las unidades sustituibles.", "Prioriza por margen todavía en riesgo y días expuestos, no solo por número de botellas."] : ["Emergency buy addresses the physical deficit; substitution is a commercial plan, not available stock.", "Prepare specific list alternatives and a service briefing for substitutable units.", "Prioritize by remaining contribution at risk and exposed days, not only bottle count."]} />
   </>;
 }
 
 const ActionPlan = ({ title, items }: { title: string; items: string[] }) => <section className="decision-action-plan"><h3>{title}</h3><ol>{items.map((item) => <li key={item}>{item}</li>)}</ol></section>;
+
+const csvCell = (value: string | number) => `"${String(value).replace(/"/g, '""')}"`;
+
+function buildOperationalCsv(kind: ToolKind, locale: Locale, result: OrderPlanResult | PairingProfitabilityResult | StockReconciliationResult | StockoutRiskResult, currency: DecisionCurrency) {
+  const es = locale === "es";
+  const row = (values: Array<string | number>) => values.map(csvCell).join(",");
+  const lines: string[] = [row([es ? "Herramienta" : "Tool", kind]), row([es ? "Moneda" : "Currency", currency]), ""];
+  if (kind === "order") {
+    const data = result as OrderPlanResult;
+    lines.push(row([es ? "Referencia" : "Reference", es ? "Estado" : "Status", es ? "Cobertura actual (días)" : "Current cover (days)", es ? "Faltante antes de entrega" : "Shortfall before delivery", es ? "Cajas" : "Cases", es ? "Botellas" : "Bottles", es ? "Coste" : "Cost", es ? "Exceso por redondeo" : "Rounding surplus"]));
+    data.rows.forEach((item) => lines.push(row([item.name, item.status, item.daysCover ?? "", item.preDeliveryShortfall, item.casesToOrder, item.bottlesToOrder, item.orderCost, item.caseRoundingSurplus])));
+    lines.push("", row([es ? "TOTAL" : "TOTAL", "", "", data.totalPreDeliveryShortfall, data.totalCases, data.totalBottles, data.totalCost, data.totalCaseRoundingSurplus]));
+  }
+  if (kind === "pairing") {
+    const data = result as PairingProfitabilityResult;
+    lines.push(row([es ? "Pase o vino" : "Course or wine", es ? "Dosis ml" : "Pour ml", es ? "Coste por comensal" : "Cost per guest", es ? "Botellas por servicio" : "Bottles per service", es ? "Botellas equivalentes al mes" : "Monthly bottle equivalent", es ? "Impacto +10 ml" : "+10 ml impact"]));
+    data.wines.forEach((item) => lines.push(row([item.name, item.pourMl, item.costPerGuest, item.bottlesPerService, item.monthlyBottleEquivalent, item.overpourTenMlCostPerGuest * data.monthlyGuests])));
+    lines.push("", row([es ? "Coste total por comensal" : "Total cost per guest", data.costPerGuest]), row([es ? "Contribución mensual" : "Monthly contribution", data.monthlyContribution]), row([es ? "Beverage cost" : "Beverage cost", data.beverageCostPct ?? ""]));
+  }
+  if (kind === "reconciliation") {
+    const data = result as StockReconciliationResult;
+    lines.push(row([es ? "Referencia" : "Reference", es ? "Inicial" : "Opening", es ? "Entradas" : "Receipts", es ? "Botellas vendidas" : "Bottles sold", es ? "Copas equivalentes" : "Glass equivalent", es ? "Bajas" : "Adjustments", es ? "Teórico" : "Expected", es ? "Real" : "Actual", es ? "Diferencia" : "Variance", es ? "Coste diferencia" : "Variance cost", es ? "Estado" : "Status"]));
+    data.rows.forEach((item) => lines.push(row([item.name, item.openingStock, item.received, item.bottlesSold, item.glassBottleEquivalent, item.breakage + item.comps, item.theoreticalStock, item.actualStock, item.variance, item.varianceCost, item.status])));
+  }
+  if (kind === "stockout") {
+    const data = result as StockoutRiskResult;
+    lines.push(row([es ? "Referencia" : "Reference", es ? "Cobertura (días)" : "Cover (days)", es ? "Días hasta entrega" : "Days to delivery", es ? "Déficit físico" : "Physical shortage", es ? "Unidades sustituibles" : "Substitutable units", es ? "Unidades sin cubrir" : "Uncovered units", es ? "Margen en riesgo" : "Contribution at risk", es ? "Compra emergencia" : "Emergency buy"]));
+    data.rows.forEach((item) => lines.push(row([item.name, item.daysCover ?? "", item.daysUntilDelivery, item.shortage, item.substitutedUnits, item.lostUnits, item.contributionAtRisk, item.emergencyQuantity])));
+  }
+  return lines.join("\n");
+}
 
 const relatedLinks = (kind: ToolKind, locale: Locale) => {
   const es = locale === "es";
