@@ -12,9 +12,9 @@ import {
 describe("operational decision tools", () => {
   it("rounds the weekly order to complete cases and identifies urgent references", () => {
     const row: OrderPlannerRow = {
-      id: "one", name: "House white", currentStock: 3, weeklySales: 7,
+      id: "one", name: "House white", supplier: "Supplier", currentStock: 3, weeklySales: 7, sales90Days: 90,
       leadDays: 5, safetyDays: 2, targetCoverDays: 7, unitsPerCase: 6,
-      unitCost: 10, eventDemand: 2,
+      unitCost: 10, eventDemand: 2, purchasePolicy: "rotation", supplierStatus: "confirmed",
     };
     const result = calculateOrderPlan([row]);
 
@@ -28,9 +28,49 @@ describe("operational decision tools", () => {
     const result = calculateOrderPlan([{
       id: "one", name: "No demand", currentStock: 4, weeklySales: 0,
       leadDays: 5, safetyDays: 2, targetCoverDays: 14, unitsPerCase: 6,
-      unitCost: 10, eventDemand: 0,
+      unitCost: 10, eventDemand: 0, supplier: "Supplier", sales90Days: 0,
+      purchasePolicy: "rotation", supplierStatus: "confirmed",
     }]);
     expect(result.rows[0]).toMatchObject({ bottlesToOrder: 0, casesToOrder: 0, status: "hold", daysCover: null });
+  });
+
+  it("uses proven 90-day rotation when the latest week has no sales", () => {
+    const result = calculateOrderPlan([{
+      id: "one", name: "Occasional premium", supplier: "Winery", currentStock: 1,
+      weeklySales: 0, sales90Days: 18, leadDays: 5, safetyDays: 2,
+      targetCoverDays: 14, unitsPerCase: 6, unitCost: 25, eventDemand: 0,
+      purchasePolicy: "keep", supplierStatus: "check",
+    }]);
+
+    expect(result.rows[0]).toMatchObject({ historicalDailySales: 0.2, dailySales: 0.2, casesToOrder: 1, action: "keep", needsSupplierCheck: true });
+    expect(result.supplierCheckCount).toBe(1);
+  });
+
+  it("respects a human decision not to restock", () => {
+    const result = calculateOrderPlan([{
+      id: "one", name: "Delisted wine", supplier: "Supplier", currentStock: 0,
+      weeklySales: 14, sales90Days: 100, leadDays: 5, safetyDays: 2,
+      targetCoverDays: 14, unitsPerCase: 6, unitCost: 10, eventDemand: 0,
+      purchasePolicy: "stop", supplierStatus: "confirmed",
+    }]);
+
+    expect(result.rows[0]).toMatchObject({ bottlesToOrder: 0, casesToOrder: 0, action: "stop" });
+    expect(result.stoppedCount).toBe(1);
+    expect(result.urgentCount).toBe(0);
+  });
+
+  it("keeps the need visible when the supplier is unavailable", () => {
+    const result = calculateOrderPlan([{
+      id: "one", name: "Unavailable wine", supplier: "Supplier", currentStock: 0,
+      weeklySales: 7, sales90Days: 60, leadDays: 3, safetyDays: 2,
+      targetCoverDays: 14, unitsPerCase: 6, unitCost: 10, eventDemand: 0,
+      purchasePolicy: "rotation", supplierStatus: "unavailable",
+    }]);
+
+    expect(result.rows[0]).toMatchObject({ action: "find-alternative", needsSupplierCheck: true });
+    expect(result.rows[0].bottlesToOrder).toBeGreaterThan(0);
+    expect(result.supplierCheckCount).toBe(1);
+    expect(result.urgentCount).toBe(1);
   });
 
   it("keeps pairing cost, contribution and overpour impact separate", () => {

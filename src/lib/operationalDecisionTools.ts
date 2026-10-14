@@ -1,19 +1,28 @@
 export type DecisionCurrency = "EUR" | "USD" | "GBP";
 
+export type OrderPurchasePolicy = "rotation" | "keep" | "optional" | "stop";
+export type OrderSupplierStatus = "confirmed" | "check" | "unavailable";
+
 export interface OrderPlannerRow {
   id: string;
   name: string;
+  supplier: string;
   currentStock: number;
   weeklySales: number;
+  sales90Days: number;
   leadDays: number;
   safetyDays: number;
   targetCoverDays: number;
   unitsPerCase: number;
   unitCost: number;
   eventDemand: number;
+  purchasePolicy: OrderPurchasePolicy;
+  supplierStatus: OrderSupplierStatus;
 }
 
 export interface OrderRecommendation extends OrderPlannerRow {
+  recentDailySales: number;
+  historicalDailySales: number;
   dailySales: number;
   daysCover: number | null;
   rawNeed: number;
@@ -26,6 +35,8 @@ export interface OrderRecommendation extends OrderPlannerRow {
   caseRoundingCost: number;
   postOrderCoverDays: number | null;
   status: "urgent" | "order" | "hold";
+  action: "find-alternative" | "urgent" | "strong" | "light" | "keep" | "optional" | "hold" | "stop";
+  needsSupplierCheck: boolean;
 }
 
 export interface OrderPlanResult {
@@ -39,20 +50,28 @@ export interface OrderPlanResult {
   totalPreDeliveryShortfall: number;
   totalCaseRoundingSurplus: number;
   totalCaseRoundingCost: number;
+  supplierCheckCount: number;
+  stoppedCount: number;
 }
 
 export const calculateOrderPlan = (rows: OrderPlannerRow[]): OrderPlanResult => {
   const recommendations = rows.map((row) => {
     const weeklySales = Math.max(0, row.weeklySales);
+    const sales90Days = Math.max(0, row.sales90Days);
     const currentStock = Math.max(0, row.currentStock);
     const leadDays = Math.max(0, row.leadDays);
     const safetyDays = Math.max(0, row.safetyDays);
     const targetCoverDays = Math.max(0, row.targetCoverDays);
     const eventDemand = Math.max(0, row.eventDemand);
     const unitsPerCase = Math.max(1, Math.round(row.unitsPerCase || 1));
-    const dailySales = weeklySales / 7;
+    const recentDailySales = weeklySales / 7;
+    const historicalDailySales = sales90Days / 90;
+    // This public estimator protects against both a recent acceleration and a
+    // slower reference with proven historical demand. SAVia can use richer,
+    // connected context inside Winerim; this rule stays deliberately visible.
+    const dailySales = Math.max(recentDailySales, historicalDailySales);
     const horizonDemand = dailySales * (leadDays + safetyDays + targetCoverDays) + eventDemand;
-    const rawNeed = Math.max(0, horizonDemand - currentStock);
+    const rawNeed = row.purchasePolicy === "stop" ? 0 : Math.max(0, horizonDemand - currentStock);
     const bottleRequirement = rawNeed > 0 ? Math.ceil(rawNeed) : 0;
     const casesToOrder = bottleRequirement > 0 ? Math.ceil(bottleRequirement / unitsPerCase) : 0;
     const roundedBottles = casesToOrder * unitsPerCase;
@@ -68,17 +87,39 @@ export const calculateOrderPlan = (rows: OrderPlannerRow[]): OrderPlanResult => 
       : roundedBottles > 0
         ? "order"
         : "hold";
+    const needsSupplierCheck = roundedBottles > 0 && row.supplierStatus !== "confirmed";
+    const action = row.purchasePolicy === "stop"
+      ? "stop"
+      : roundedBottles === 0
+        ? "hold"
+        : row.supplierStatus === "unavailable"
+          ? "find-alternative"
+          : status === "urgent"
+            ? "urgent"
+            : row.purchasePolicy === "optional"
+              ? "optional"
+              : row.purchasePolicy === "keep"
+                ? "keep"
+                : casesToOrder >= 2
+                  ? "strong"
+                  : "light";
 
     return {
       ...row,
       currentStock,
       weeklySales,
+      sales90Days,
       leadDays,
       safetyDays,
       targetCoverDays,
       unitsPerCase,
       unitCost: Math.max(0, row.unitCost),
       eventDemand,
+      supplier: row.supplier.trim() || "—",
+      purchasePolicy: row.purchasePolicy,
+      supplierStatus: row.supplierStatus,
+      recentDailySales,
+      historicalDailySales,
       dailySales,
       daysCover,
       rawNeed,
@@ -91,10 +132,12 @@ export const calculateOrderPlan = (rows: OrderPlannerRow[]): OrderPlanResult => 
       caseRoundingCost: caseRoundingSurplus * Math.max(0, row.unitCost),
       postOrderCoverDays,
       status,
+      action,
+      needsSupplierCheck,
     } satisfies OrderRecommendation;
   }).sort((left, right) => {
-    const urgency = { urgent: 0, order: 1, hold: 2 } as const;
-    return urgency[left.status] - urgency[right.status] || right.orderCost - left.orderCost;
+    const priority = { "find-alternative": 0, urgent: 1, strong: 2, light: 3, keep: 4, optional: 5, hold: 6, stop: 7 } as const;
+    return priority[left.action] - priority[right.action] || right.orderCost - left.orderCost;
   });
 
   return {
@@ -102,12 +145,14 @@ export const calculateOrderPlan = (rows: OrderPlannerRow[]): OrderPlanResult => 
     totalBottles: recommendations.reduce((sum, row) => sum + row.bottlesToOrder, 0),
     totalCases: recommendations.reduce((sum, row) => sum + row.casesToOrder, 0),
     totalCost: recommendations.reduce((sum, row) => sum + row.orderCost, 0),
-    urgentCount: recommendations.filter((row) => row.status === "urgent").length,
-    orderCount: recommendations.filter((row) => row.status === "order").length,
-    holdCount: recommendations.filter((row) => row.status === "hold").length,
+    urgentCount: recommendations.filter((row) => row.action === "urgent" || row.action === "find-alternative").length,
+    orderCount: recommendations.filter((row) => !["hold", "stop"].includes(row.action)).length,
+    holdCount: recommendations.filter((row) => row.action === "hold" || row.action === "stop").length,
     totalPreDeliveryShortfall: recommendations.reduce((sum, row) => sum + row.preDeliveryShortfall, 0),
     totalCaseRoundingSurplus: recommendations.reduce((sum, row) => sum + row.caseRoundingSurplus, 0),
     totalCaseRoundingCost: recommendations.reduce((sum, row) => sum + row.caseRoundingCost, 0),
+    supplierCheckCount: recommendations.filter((row) => row.needsSupplierCheck).length,
+    stoppedCount: recommendations.filter((row) => row.action === "stop").length,
   };
 };
 
@@ -458,9 +503,9 @@ export const calculateTpvIntegrationImpact = (input: TpvImpactInput): TpvIntegra
 };
 
 export const ORDER_EXAMPLE: OrderPlannerRow[] = [
-  { id: "order-1", name: "Blanco de alta rotación", currentStock: 8, weeklySales: 12, leadDays: 3, safetyDays: 3, targetCoverDays: 14, unitsPerCase: 6, unitCost: 11, eventDemand: 6 },
-  { id: "order-2", name: "Tinto reserva", currentStock: 18, weeklySales: 5, leadDays: 5, safetyDays: 4, targetCoverDays: 14, unitsPerCase: 6, unitCost: 19, eventDemand: 0 },
-  { id: "order-3", name: "Espumoso", currentStock: 4, weeklySales: 3, leadDays: 4, safetyDays: 3, targetCoverDays: 14, unitsPerCase: 6, unitCost: 15, eventDemand: 8 },
+  { id: "order-1", name: "Blanco de alta rotación", supplier: "Distribuidor Norte", currentStock: 8, weeklySales: 12, sales90Days: 126, leadDays: 3, safetyDays: 3, targetCoverDays: 14, unitsPerCase: 6, unitCost: 11, eventDemand: 6, purchasePolicy: "rotation", supplierStatus: "confirmed" },
+  { id: "order-2", name: "Tinto reserva", supplier: "Bodega directa", currentStock: 18, weeklySales: 5, sales90Days: 72, leadDays: 5, safetyDays: 4, targetCoverDays: 14, unitsPerCase: 6, unitCost: 19, eventDemand: 0, purchasePolicy: "keep", supplierStatus: "check" },
+  { id: "order-3", name: "Espumoso", supplier: "Distribuidor Centro", currentStock: 4, weeklySales: 3, sales90Days: 48, leadDays: 4, safetyDays: 3, targetCoverDays: 14, unitsPerCase: 6, unitCost: 15, eventDemand: 8, purchasePolicy: "rotation", supplierStatus: "unavailable" },
 ];
 
 export const PAIRING_EXAMPLE: PairingProfitabilityInput = {

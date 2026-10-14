@@ -42,6 +42,8 @@ import {
   type DecisionCurrency,
   type OrderPlanResult,
   type OrderPlannerRow,
+  type OrderPurchasePolicy,
+  type OrderSupplierStatus,
   type PairingProfitabilityResult,
   type PairingWineRow,
   type StockoutRiskResult,
@@ -66,30 +68,30 @@ const TOOL_COPY = {
   order: {
     es: {
       title: "Planificador de pedido semanal de vino | Winerim",
-      description: "Calcula qué vinos pedir, cuántas cajas comprar, el coste del pedido y qué referencias corren riesgo antes de la próxima entrega.",
+      description: "Prepara un pedido de vino al estilo SAVia cruzando stock, rotación reciente e histórica, eventos, cobertura y situación del distribuidor.",
       eyebrow: "Compras y cobertura", h1: "¿Qué vino deberías pedir esta semana?",
-      intro: "Convierte stock, ventas, plazos y eventos en una propuesta de pedido por cajas completas. Sin adivinar y sin pedir más de lo necesario.",
+      intro: "Convierte stock, ventas de 7 y 90 días, plazos, eventos y disponibilidad del distribuidor en una propuesta explicada y revisable.",
       contextTitle: "Define cómo quieres cubrir el stock", figuresTitle: "Añade las referencias a planificar", resultTitle: "Tu propuesta de pedido semanal",
       productTitle: "Winerim prepara el pedido con ventas y stock reales.",
-      productText: "SAVia y Winerim Supply conectan rotación, existencias, distribuidores y eventos para recomendar compras y evitar sobrestock.",
-      formula: "Necesidad = venta diaria × (plazo de entrega + seguridad + cobertura objetivo) + demanda de eventos − stock actual. El resultado se redondea a cajas completas.",
+      productText: "SAVia consulta la operativa conectada, separa hechos de recomendaciones y prepara el pedido para aprobación. No lo envía ni compromete una compra por sí sola.",
+      formula: "Ritmo protegido = el mayor entre la media diaria de los últimos 7 días y la de los últimos 90. Necesidad = ritmo protegido × (plazo + seguridad + cobertura) + eventos − stock. No se repone una referencia marcada para retirar y las cantidades se redondean a cajas completas.",
       faq: [
-        ["¿Es una previsión de demanda?", "Es un escenario operativo basado en el ritmo de venta que introduces. No sustituye una previsión conectada a ventas históricas, reservas y estacionalidad."],
+        ["¿Es exactamente el cálculo interno de SAVia?", "No. Es una versión pública, transparente y manual inspirada en su flujo. SAVia puede consultar dentro de Winerim más contexto conectado y explicar la recomendación antes de que una persona la apruebe."],
         ["¿Por qué redondea a cajas completas?", "Porque el pedido real suele hacerse por cajas. Así ves el compromiso de caja que asumirías, no una cantidad teórica imposible de comprar."],
         ["¿Qué hace Winerim de forma diferente?", "Winerim usa ventas, stock, distribuidores y contexto operativo conectados para preparar el pedido sin volver a introducir estos datos."],
       ],
     },
     en: {
       title: "Weekly wine order planner | Winerim",
-      description: "Calculate which wines to order, how many cases to buy, order cost and which references may run out before the next delivery.",
+      description: "Prepare a SAVia-style wine order using stock, recent and historical rotation, events, coverage and supplier status.",
       eyebrow: "Purchasing and coverage", h1: "What wine should you order this week?",
-      intro: "Turn stock, sales, lead times and events into an order proposal rounded to full cases. No guesswork and no unnecessary purchasing.",
+      intro: "Turn stock, 7- and 90-day sales, lead times, events and supplier availability into an explained order proposal for review.",
       contextTitle: "Set your stock coverage rules", figuresTitle: "Add the references to plan", resultTitle: "Your weekly order proposal",
       productTitle: "Winerim prepares the order from real sales and stock.",
-      productText: "SAVia and Winerim Supply connect rotation, inventory, distributors and events to recommend purchases and prevent overstock.",
-      formula: "Need = daily sales × (lead time + safety days + target coverage) + event demand − current stock. The result is rounded to full cases.",
+      productText: "SAVia consults connected operations, separates facts from recommendations and prepares the order for approval. It does not send or commit the purchase by itself.",
+      formula: "Protected pace = the higher daily average from the last 7 and 90 days. Need = protected pace × (lead time + safety + coverage) + events − stock. Stop-buy references are excluded and quantities are rounded to full cases.",
       faq: [
-        ["Is this a demand forecast?", "It is an operating scenario based on the sales pace you enter. It does not replace a forecast connected to sales history, bookings and seasonality."],
+        ["Is this SAVia's exact internal calculation?", "No. It is a transparent manual public version inspired by its workflow. Inside Winerim, SAVia can consult richer connected context and explain the recommendation before a person approves it."],
         ["Why does it round to full cases?", "Because real orders are usually placed by case. This shows the cash commitment you would actually make."],
         ["What does Winerim do differently?", "Winerim uses connected sales, stock, distributor and operating data to prepare the order without entering these figures again."],
       ],
@@ -219,7 +221,7 @@ const TOOL_STEPS: Record<ToolKind, Record<Locale, readonly string[]>> = {
   stockout: { es: ["Próxima entrega", "Tus vinos", "Riesgo de quedarte sin stock"], en: ["Next delivery", "Your wines", "Stockout risk"] },
 };
 
-const createOrderRow = (id = `order-${Date.now()}`): OrderPlannerRow => ({ id, name: "", currentStock: 0, weeklySales: 0, leadDays: 4, safetyDays: 3, targetCoverDays: 14, unitsPerCase: 6, unitCost: 0, eventDemand: 0 });
+const createOrderRow = (id = `order-${Date.now()}`): OrderPlannerRow => ({ id, name: "", supplier: "", currentStock: 0, weeklySales: 0, sales90Days: 0, leadDays: 4, safetyDays: 3, targetCoverDays: 14, unitsPerCase: 6, unitCost: 0, eventDemand: 0, purchasePolicy: "rotation", supplierStatus: "check" });
 const createPairingRow = (id = `pair-${Date.now()}`): PairingWineRow => ({ id, name: "", bottleCost: 0, bottleMl: 750, pourMl: 75 });
 const createReconRow = (id = `recon-${Date.now()}`): StockReconciliationRow => ({ id, name: "", openingStock: 0, received: 0, bottlesSold: 0, glassesSold: 0, glassesPerBottle: 6, breakage: 0, comps: 0, actualStock: 0, unitCost: 0 });
 const createStockoutRow = (id = `stockout-${Date.now()}`): StockoutRiskRow => ({ id, name: "", currentStock: 0, dailySales: 0, daysUntilDelivery: 5, eventDemand: 0, contributionPerBottle: 0, substitutionPct: 25 });
@@ -241,6 +243,14 @@ const NameField = ({ value, onChange, placeholder, help }: { value: string; onCh
   <label className="decision-field decision-name-field">
     <span>{placeholder}</span>
     <input value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} />
+    {help && <small className="decision-field-help">{help}</small>}
+  </label>
+);
+
+const SelectField = <T extends string>({ label, value, onChange, options, help }: { label: string; value: T; onChange: (value: T) => void; options: Array<{ value: T; label: string }>; help?: string }) => (
+  <label className="decision-field">
+    <span>{label}</span>
+    <select value={value} onChange={(event) => onChange(event.target.value as T)}>{options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select>
     {help && <small className="decision-field-help">{help}</small>}
   </label>
 );
@@ -299,7 +309,7 @@ function ContextInstrument({ kind, locale, orderDefaults, pairingContext, glasse
 function EntryGuide({ kind, locale }: { kind: ToolKind; locale: Locale }) {
   const es = locale === "es";
   const guide = {
-    order: { icon: <ReceiptText size={18} />, title: es ? "Hoja de compra" : "Purchase sheet", text: es ? "Una línea por referencia. El resultado prioriza urgencias y genera cantidades comprables." : "One row per reference. The result prioritizes urgency and generates purchasable quantities." },
+    order: { icon: <ReceiptText size={18} />, title: es ? "Lectura tipo SAVia" : "SAVia-style reading", text: es ? "Una línea por vino. Indica hechos de stock y venta, el papel que quieres conservar en carta y lo que sabes del distribuidor." : "One row per wine. Enter stock and sales facts, the role you want to preserve on the list and what you know about the supplier." },
     pairing: { icon: <GlassWater size={18} />, title: es ? "Secuencia de pases" : "Course sequence", text: es ? "Ordena los vinos como se sirven. La suma construye el P&L por comensal." : "Order wines as they are served. Their sum builds the per-guest P&L." },
     reconciliation: { icon: <ClipboardCheck size={18} />, title: es ? "Libro de movimientos" : "Movement ledger", text: es ? "Introduce entradas y salidas por referencia antes de comparar con el recuento físico." : "Enter movements by reference before comparing them with the physical count." },
     stockout: { icon: <LineChart size={18} />, title: es ? "Radar de disponibilidad" : "Availability radar", text: es ? "Incluye eventos y margen. Así el riesgo se prioriza por negocio, no solo por botellas." : "Include events and contribution so risk is prioritized by business impact, not bottle count alone." },
@@ -487,10 +497,14 @@ function RowsStep(props: {
     <EntryGuide kind={kind} locale={locale} />
     {kind === "order" && <>{props.orderRows.map((row, index) => <RowCard key={row.id} kind={kind} index={index} remove={() => removeRow(props.setOrderRows, row.id)} removeLabel={c.remove}>
       <NameField value={row.name} onChange={(value) => updateRow(props.setOrderRows, row.id, { name: value })} placeholder={es ? "Nombre del vino" : "Wine name"} help={es ? "Escribe una referencia de tu carta, por ejemplo: Albariño de la casa." : "Enter one wine from your list, for example: House Albariño."} />
+      <NameField value={row.supplier} onChange={(value) => updateRow(props.setOrderRows, row.id, { supplier: value })} placeholder={es ? "Distribuidor o bodega" : "Supplier or winery"} help={es ? "Sirve para ordenar la propuesta por proveedor. Puedes dejarlo pendiente." : "Used to group the proposal by supplier. You can leave it pending."} />
       <NumberField label={es ? "Botellas disponibles hoy" : "Bottles available today"} help={es ? "Stock utilizable que tienes ahora en bodega y sala." : "Usable stock currently in cellar and service."} value={row.currentStock} onChange={(value) => updateRow(props.setOrderRows, row.id, { currentStock: value })} unit={es ? "bot." : "btl."} />
       <NumberField label={es ? "Botellas vendidas en 7 días" : "Bottles sold in 7 days"} help={es ? "Suma botellas completas y el equivalente de las copas vendidas durante una semana normal." : "Add full bottles and the bottle equivalent of glasses sold in a normal week."} value={row.weeklySales} onChange={(value) => updateRow(props.setOrderRows, row.id, { weeklySales: value })} unit={es ? "bot." : "btl."} />
+      <NumberField label={es ? "Botellas vendidas en 90 días" : "Bottles sold in 90 days"} help={es ? "Ayuda a no olvidar vinos con venta menos frecuente. Incluye botellas y equivalentes de copas." : "Prevents slower proven demand from being ignored. Include bottles and glass equivalents."} value={row.sales90Days} onChange={(value) => updateRow(props.setOrderRows, row.id, { sales90Days: value })} unit={es ? "bot." : "btl."} />
       <NumberField label={es ? "Botellas extra para eventos" : "Extra bottles for events"} help={es ? "Añade reservas, grupos o banquetes ya previstos antes de la siguiente compra." : "Add bookings, groups or events expected before the next order."} value={row.eventDemand} onChange={(value) => updateRow(props.setOrderRows, row.id, { eventDemand: value })} unit={es ? "bot." : "btl."} />
       <NumberField label={es ? "Precio de compra por botella" : "Purchase price per bottle"} help={es ? "Usa el coste neto de tu última factura o tarifa de compra." : "Use the net cost from your latest invoice or supplier list."} value={row.unitCost} onChange={(value) => updateRow(props.setOrderRows, row.id, { unitCost: value })} unit={currency} />
+      <SelectField<OrderPurchasePolicy> label={es ? "Decisión de carta" : "List decision"} value={row.purchasePolicy} onChange={(value) => updateRow(props.setOrderRows, row.id, { purchasePolicy: value })} options={es ? [{ value: "rotation", label: "Reponer según rotación" }, { value: "keep", label: "Mantener la referencia" }, { value: "optional", label: "Compra opcional" }, { value: "stop", label: "No reponer / retirar" }] : [{ value: "rotation", label: "Restock by rotation" }, { value: "keep", label: "Keep the reference" }, { value: "optional", label: "Optional purchase" }, { value: "stop", label: "Do not restock / delist" }]} help={es ? "Añade el criterio humano que los datos de venta no conocen." : "Adds human judgement that sales figures cannot know."} />
+      <SelectField<OrderSupplierStatus> label={es ? "Situación del distribuidor" : "Supplier status"} value={row.supplierStatus} onChange={(value) => updateRow(props.setOrderRows, row.id, { supplierStatus: value })} options={es ? [{ value: "confirmed", label: "Disponible y confirmado" }, { value: "check", label: "Pendiente de confirmar" }, { value: "unavailable", label: "Sin disponibilidad" }] : [{ value: "confirmed", label: "Available and confirmed" }, { value: "check", label: "Needs confirmation" }, { value: "unavailable", label: "Unavailable" }]} help={es ? "La calculadora no consulta el catálogo del proveedor; indica lo que sabes hoy." : "The calculator does not query supplier stock; enter what you know today."} />
     </RowCard>)}{addButton(() => props.setOrderRows((rows) => rows.length < 10 ? [...rows, createOrderRow(`order-${Date.now()}`)] : rows))}</>}
     {kind === "pairing" && <>{props.pairingRows.map((row, index) => <RowCard key={row.id} kind={kind} index={index} remove={() => removeRow(props.setPairingRows, row.id)} removeLabel={c.remove}>
       <NameField value={row.name} onChange={(value) => updateRow(props.setPairingRows, row.id, { name: value })} placeholder={es ? "Vino o pase del menú" : "Wine or menu course"} help={es ? "Añade los vinos en el orden en que los sirves." : "Add wines in the order in which they are served."} />
@@ -534,26 +548,46 @@ function ResultStep({ kind, locale, result, money, decimal, formula, sourceLabel
 }
 
 function OrderResult({ result, es, money, decimal }: { result: OrderPlanResult; es: boolean; money: Intl.NumberFormat; decimal: Intl.NumberFormat }) {
+  const actionLabel = (action: OrderPlanResult["rows"][number]["action"]) => ({
+    "find-alternative": es ? "Buscar alternativa" : "Find alternative",
+    urgent: es ? "Resolver hoy" : "Resolve today",
+    strong: es ? "Reponer fuerte" : "Strong restock",
+    light: es ? "Refuerzo ligero" : "Light restock",
+    keep: es ? "Mantener referencia" : "Keep reference",
+    optional: es ? "Compra opcional" : "Optional buy",
+    hold: es ? "No pedir ahora" : "Do not order now",
+    stop: es ? "No reponer" : "Do not restock",
+  })[action];
+  const actionReason = (row: OrderPlanResult["rows"][number]) => {
+    if (row.action === "stop") return es ? "Decisión humana: retirar o agotar existencias." : "Human decision: delist or run down stock.";
+    if (row.action === "find-alternative") return es ? "Hay necesidad, pero el proveedor figura sin disponibilidad." : "There is demand, but the supplier is marked unavailable.";
+    if (row.action === "urgent") return es ? "El stock no alcanza hasta la próxima entrega." : "Stock will not last until the next delivery.";
+    if (row.action === "strong") return es ? "La cobertura exige dos cajas o más." : "Coverage requires at least two cases.";
+    if (row.action === "light") return es ? "Una caja completa cubre el horizonte calculado." : "One full case covers the calculated horizon.";
+    if (row.action === "keep") return es ? "Compra para conservar esta referencia en carta." : "Buy to preserve this reference on the list.";
+    if (row.action === "optional") return es ? "La cobertura aconseja compra, pero la decisión es opcional." : "Coverage suggests a purchase, but the decision is optional.";
+    return es ? "El stock actual cubre el horizonte indicado." : "Current stock covers the selected horizon.";
+  };
   return <>
-    <div className="decision-headline order-headline"><ReceiptText size={23} /><div><span>{es ? "Orden de compra preparada" : "Purchase order prepared"}</span><strong>{result.totalCases} {es ? "cajas" : "cases"} · {result.totalBottles} {es ? "botellas" : "bottles"} · {money.format(result.totalCost)}</strong><p>{result.urgentCount ? `${result.urgentCount} ${es ? "referencias necesitan una solución previa a la entrega" : "references need a solution before delivery"}.` : es ? "La propuesta llega al siguiente ciclo sin urgencias previas." : "The proposal reaches the next cycle without pre-delivery emergencies."}</p></div></div>
-    <div className="decision-kpis"><Metric label={es ? "Vinos que requieren actuar hoy" : "Wines requiring action today"} value={String(result.urgentCount)} help={es ? "El pedido normal llegaría tarde." : "The normal order would arrive too late."} /><Metric label={es ? "Botellas que podrían faltar antes de la entrega" : "Bottles that may run out before delivery"} value={`${decimal.format(result.totalPreDeliveryShortfall)} ${es ? "bot." : "btl."}`} help={es ? "Busca reposición urgente o una alternativa." : "Find an urgent restock or an alternative."} /><Metric label={es ? "Botellas extra al comprar cajas completas" : "Extra bottles from full-case ordering"} value={`${decimal.format(result.totalCaseRoundingSurplus)} ${es ? "bot." : "btl."}`} help={es ? "No son necesarias para cubrir la demanda calculada." : "Not required to cover calculated demand."} /><Metric label={es ? "Dinero adicional inmovilizado por el redondeo" : "Extra cash tied up by case rounding"} value={money.format(result.totalCaseRoundingCost)} help={es ? "Coste de esas botellas extra." : "Cost of those extra bottles."} accent /></div>
+    <div className="decision-headline order-headline"><ReceiptText size={23} /><div><span>{es ? "Propuesta preparada para revisión humana" : "Proposal prepared for human review"}</span><strong>{result.totalCases} {es ? "cajas" : "cases"} · {result.totalBottles} {es ? "botellas" : "bottles"} · {money.format(result.totalCost)}</strong><p>{result.urgentCount ? `${result.urgentCount} ${es ? "referencias requieren una solución antes de la entrega" : "references require a solution before delivery"}.` : es ? "La propuesta llega al siguiente ciclo sin urgencias previas." : "The proposal reaches the next cycle without pre-delivery emergencies."} {es ? "Revisa disponibilidad y aprueba antes de enviar." : "Review availability and approve before sending."}</p></div></div>
+    <div className="decision-kpis"><Metric label={es ? "Vinos que requieren actuar hoy" : "Wines requiring action today"} value={String(result.urgentCount)} help={es ? "El pedido normal llegaría tarde." : "The normal order would arrive too late."} /><Metric label={es ? "Botellas que podrían faltar antes de la entrega" : "Bottles that may run out before delivery"} value={`${decimal.format(result.totalPreDeliveryShortfall)} ${es ? "bot." : "btl."}`} help={es ? "Busca reposición urgente, traspaso o alternativa." : "Find an urgent restock, transfer or alternative."} /><Metric label={es ? "Vinos pendientes de confirmar con proveedor" : "Wines requiring supplier confirmation"} value={String(result.supplierCheckCount)} help={es ? "No deben enviarse sin revisar disponibilidad." : "Do not send without checking availability."} /><Metric label={es ? "Exceso por cajas completas" : "Full-case surplus"} value={`${decimal.format(result.totalCaseRoundingSurplus)} ${es ? "bot." : "btl."} · ${money.format(result.totalCaseRoundingCost)}`} help={es ? "Stock y capital añadidos solo por redondear la compra." : "Stock and cash added only by case rounding."} accent /></div>
     <section className="order-manifest" aria-label={es ? "Hoja de pedido" : "Order sheet"}>
-      <header><div><ReceiptText size={17} /><strong>{es ? "Hoja de pedido" : "Order sheet"}</strong></div><span>{es ? "Lista lista para revisar con distribución" : "Ready to review with distribution"}</span></header>
-      <div className="order-manifest-head"><span>{es ? "Referencia" : "Reference"}</span><span>{es ? "Cobertura" : "Coverage"}</span><span>{es ? "Pedido" : "Order"}</span><span>{es ? "Importe" : "Amount"}</span></div>
+      <header><div><ReceiptText size={17} /><strong>{es ? "Hoja de pedido explicada" : "Explained order sheet"}</strong></div><span>{es ? "SAVia prepara; el equipo valida y decide" : "SAVia prepares; the team validates and decides"}</span></header>
+      <div className="order-manifest-head"><span>{es ? "Referencia y proveedor" : "Reference and supplier"}</span><span>{es ? "Rotación y cobertura" : "Rotation and coverage"}</span><span>{es ? "Recomendación" : "Recommendation"}</span><span>{es ? "Importe" : "Amount"}</span></div>
       {result.rows.map((row) => {
         const target = Math.max(1, row.leadDays + row.safetyDays + row.targetCoverDays);
         const before = Math.min(100, ((row.daysCover || 0) / target) * 100);
         const after = Math.min(100, ((row.postOrderCoverDays || 0) / target) * 100);
         return <article key={row.id}>
-          <div className="order-reference"><span className={`decision-status ${row.status}`}>{row.status === "urgent" ? (es ? "Hoy" : "Today") : row.status === "order" ? (es ? "Pedir" : "Order") : (es ? "Mantener" : "Hold")}</span><strong>{row.name}</strong>{row.preDeliveryShortfall > 0 && <small>{es ? `Faltan ${decimal.format(row.preDeliveryShortfall)} antes de entrega` : `${decimal.format(row.preDeliveryShortfall)} short before delivery`}</small>}</div>
-          <div className="order-coverage"><div><i style={{ width: `${before}%` }} /><b style={{ width: `${Math.max(0, after - before)}%`, left: `${before}%` }} /></div><small>{row.daysCover === null ? "—" : decimal.format(row.daysCover)} → {row.postOrderCoverDays === null ? "—" : decimal.format(row.postOrderCoverDays)} {es ? "días" : "days"}</small></div>
-          <div className="order-quantity"><strong>{row.casesToOrder} {es ? "cajas" : "cases"}</strong><small>{row.bottlesToOrder} {es ? "botellas" : "bottles"}{row.caseRoundingSurplus > 0 ? ` · +${row.caseRoundingSurplus} ${es ? "redondeo" : "rounding"}` : ""}</small></div>
+          <div className="order-reference"><span className={`decision-status ${row.action}`}>{actionLabel(row.action)}</span><strong>{row.name}</strong><small>{row.supplier} · {row.supplierStatus === "confirmed" ? (es ? "disponibilidad confirmada" : "availability confirmed") : row.supplierStatus === "unavailable" ? (es ? "sin disponibilidad" : "unavailable") : (es ? "por confirmar" : "to confirm")}</small></div>
+          <div className="order-coverage"><div><i style={{ width: `${before}%` }} /><b style={{ width: `${Math.max(0, after - before)}%`, left: `${before}%` }} /></div><small>{row.daysCover === null ? "—" : decimal.format(row.daysCover)} → {row.postOrderCoverDays === null ? "—" : decimal.format(row.postOrderCoverDays)} {es ? "días" : "days"}</small><small>{es ? "Ritmo usado" : "Pace used"}: {decimal.format(row.dailySales)} {es ? "bot./día" : "btl./day"} ({es ? "7 d" : "7d"}: {decimal.format(row.recentDailySales)} · {es ? "90 d" : "90d"}: {decimal.format(row.historicalDailySales)})</small></div>
+          <div className="order-quantity"><strong>{row.casesToOrder} {es ? "cajas" : "cases"}</strong><small>{row.bottlesToOrder} {es ? "botellas" : "bottles"}{row.caseRoundingSurplus > 0 ? ` · +${row.caseRoundingSurplus} ${es ? "redondeo" : "rounding"}` : ""}</small><small>{actionReason(row)}</small></div>
           <div className="order-amount"><strong>{money.format(row.orderCost)}</strong><small>{row.caseRoundingCost > 0 ? `${money.format(row.caseRoundingCost)} ${es ? "por redondeo" : "from rounding"}` : (es ? "sin exceso" : "no surplus")}</small></div>
         </article>;
       })}
       <footer><span>{es ? "Total propuesto" : "Proposed total"}</span><strong>{result.totalCases} {es ? "cajas" : "cases"} · {money.format(result.totalCost)}</strong></footer>
     </section>
-    <ActionPlan title={es ? "Secuencia recomendada" : "Recommended sequence"} items={es ? ["Resuelve primero las referencias marcadas como Actuar hoy: el pedido ordinario llega tarde.", "Confirma cajas mínimas y disponibilidad con el distribuidor antes de comprometer el capital.", "Revisa el exceso por redondeo: si es alto, negocia unidad suelta o amplía la cobertura de esa referencia."] : ["Resolve Act today references first: the normal order arrives too late.", "Confirm case minimums and availability with the distributor before committing cash.", "Review rounding surplus: if it is high, negotiate split cases or extend that reference's coverage."]} />
+    <ActionPlan title={es ? "Secuencia de revisión tipo SAVia" : "SAVia-style review sequence"} items={es ? ["Resuelve primero las roturas previas a entrega con compra urgente, traspaso entre centros o una alternativa de carta.", "Agrupa por distribuidor y confirma disponibilidad, formato de caja, precio y día real de entrega.", "Revisa las decisiones de carta: mantener, compra opcional o no reponer no deben decidirse solo por una fórmula.", "Aprueba la hoja final antes de enviarla. Esta herramienta y SAVia preparan la decisión; no compran por sí solas."] : ["Resolve pre-delivery shortages first through an urgent purchase, inter-site transfer or list alternative.", "Group by supplier and confirm availability, case format, price and actual delivery day.", "Review list decisions: keep, optional buy and do not restock must not be decided by a formula alone.", "Approve the final sheet before sending it. This tool and SAVia prepare the decision; they do not purchase by themselves."]} />
   </>;
 }
 
@@ -635,8 +669,8 @@ function buildOperationalCsv(kind: ToolKind, locale: Locale, result: OrderPlanRe
   const lines: string[] = [row([es ? "Herramienta" : "Tool", kind]), row([es ? "Moneda" : "Currency", currency]), ""];
   if (kind === "order") {
     const data = result as OrderPlanResult;
-    lines.push(row([es ? "Referencia" : "Reference", es ? "Estado" : "Status", es ? "Cobertura actual (días)" : "Current cover (days)", es ? "Faltante antes de entrega" : "Shortfall before delivery", es ? "Cajas" : "Cases", es ? "Botellas" : "Bottles", es ? "Coste" : "Cost", es ? "Exceso por redondeo" : "Rounding surplus"]));
-    data.rows.forEach((item) => lines.push(row([item.name, item.status, item.daysCover ?? "", item.preDeliveryShortfall, item.casesToOrder, item.bottlesToOrder, item.orderCost, item.caseRoundingSurplus])));
+    lines.push(row([es ? "Referencia" : "Reference", es ? "Distribuidor" : "Supplier", es ? "Recomendación" : "Recommendation", es ? "Estado proveedor" : "Supplier status", es ? "Venta 7 días" : "7-day sales", es ? "Venta 90 días" : "90-day sales", es ? "Ritmo usado bot./día" : "Used pace btl./day", es ? "Cobertura actual (días)" : "Current cover (days)", es ? "Faltante antes de entrega" : "Shortfall before delivery", es ? "Cajas" : "Cases", es ? "Botellas" : "Bottles", es ? "Coste" : "Cost", es ? "Exceso por redondeo" : "Rounding surplus"]));
+    data.rows.forEach((item) => lines.push(row([item.name, item.supplier, item.action, item.supplierStatus, item.weeklySales, item.sales90Days, item.dailySales, item.daysCover ?? "", item.preDeliveryShortfall, item.casesToOrder, item.bottlesToOrder, item.orderCost, item.caseRoundingSurplus])));
     lines.push("", row([es ? "TOTAL" : "TOTAL", "", "", data.totalPreDeliveryShortfall, data.totalCases, data.totalBottles, data.totalCost, data.totalCaseRoundingSurplus]));
   }
   if (kind === "pairing") {

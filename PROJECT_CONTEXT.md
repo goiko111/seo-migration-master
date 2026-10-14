@@ -1,5 +1,43 @@
 # Project Context
 
+## Actualización 2026-10-14: planificador de pedidos alineado con SAVia
+
+### Hechos
+
+- El planificador semanal público cruza stock, ventas de 7 y 90 días, eventos,
+  cobertura, formato de caja, decisión de carta y situación del distribuidor.
+- La salida explica por referencia si conviene resolver hoy, reponer fuerte,
+  hacer un refuerzo ligero, mantener, comprar opcionalmente, no pedir o buscar
+  una alternativa por falta de disponibilidad.
+- La hoja exportable incluye proveedor, ritmo utilizado, cobertura, motivo,
+  cajas, botellas, coste y exceso por redondeo.
+- Producción usa Pages `65742153`, facade
+  `d41f4932-45c2-438a-96d7-8fdc870169fc` y backend sin cambios
+  `317e7c1c-09e4-41da-a0be-d63a8b4b12cb`.
+
+### Decisiones
+
+- Presentar la calculadora como una versión pública manual y transparente del
+  flujo, no como reproducción del motor interno de SAVia.
+- SAVia prepara y explica la recomendación; una persona confirma proveedor,
+  disponibilidad, precio, entrega y aprueba el envío.
+- La decisión humana `no reponer` prevalece sobre la necesidad matemática.
+
+### Hipótesis
+
+- Combinar ventana reciente e histórica reducirá tanto roturas por aceleración
+  como el olvido de referencias premium o de venta puntual.
+
+### Contradicciones
+
+- La captura de SAVia demuestra una recomendación en solo lectura; no demuestra
+  envío automático de pedidos ni disponibilidad conectada de distribuidores.
+
+### Tareas pendientes
+
+- Validar con responsables de compras el vocabulario y el orden de revisión.
+- Medir finalización, descarga y CTA sin registrar cifras ni nombres introducidos.
+
 ## Cierre 2026-07-21: arquitectura de producto ampliada
 
 ## Hechos

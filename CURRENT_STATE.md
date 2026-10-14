@@ -1,5 +1,38 @@
 # Current State
 
+## Estado 2026-10-14: pedido semanal con contexto SAVia
+
+### Hechos confirmados
+
+- Están activas las versiones ES y EN del planificador ampliado.
+- El ritmo protegido usa la mayor media diaria entre 7 y 90 días; la fórmula y
+  todas las hipótesis son visibles.
+- El formulario añade distribuidor, decisión de carta y disponibilidad conocida;
+  el resultado nunca se presenta como pedido enviado.
+- QA verde: `276/276` tests, TypeScript, ESLint acotado, build, Playwright local
+  y productivo, `34` checks HTTP y `10` URLs exactas de sitemap.
+- Producción: Pages `65742153`; facade
+  `d41f4932-45c2-438a-96d7-8fdc870169fc`; backend sin cambios.
+
+### Decisiones
+
+- Mantener la aprobación humana como frontera obligatoria.
+- Mantener visible una necesidad aunque el proveedor figure sin stock, pero
+  clasificarla como `buscar alternativa`.
+
+### Hipótesis
+
+- La explicación por referencia hará la propuesta más útil que un total de cajas.
+
+### Contradicciones / límites
+
+- La calculadora no consulta stock del proveedor ni datos internos del cliente.
+- No existe evidencia de que SAVia envíe pedidos automáticamente; solo los prepara.
+
+### Tareas pendientes
+
+- Contrastar las reglas con operativa real y datos consentidos antes de recalibrar.
+
 ## Cierre 2026-07-21: arquitectura de producto publicada
 
 ## Hechos

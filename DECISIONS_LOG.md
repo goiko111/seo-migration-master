@@ -1,5 +1,35 @@
 # Decisions Log
 
+## 2026-10-14 — Pedido público inspirado en SAVia, no automatización de compra
+
+### Hechos
+
+- La evidencia disponible muestra que SAVia consulta stock y rotación y prepara
+  una recomendación explicada para revisión humana.
+
+### Decisiones
+
+- Incorporar dos ventanas de rotación, eventos, cobertura, política de carta y
+  estado del proveedor al planificador.
+- Usar la mayor media diaria de 7 y 90 días como regla pública conservadora y
+  visible; no atribuirla al algoritmo interno de SAVia.
+- No permitir que la fórmula reabra una referencia marcada `no reponer`.
+- No describir una recomendación como pedido confirmado o enviado.
+- Publicar por Cloudflare sin usar créditos de Lovable ni tocar Supabase.
+
+### Hipótesis
+
+- Las decisiones explicadas mejorarán confianza y conversación comercial.
+
+### Contradicciones
+
+- La disponibilidad de distribuidor es declarada por el usuario en esta
+  herramienta; no procede de una integración en tiempo real.
+
+### Pendientes
+
+- Validar reglas con compras y documentar cualquier cambio con evidencia.
+
 ## 2026-07-21
 
 ### Ordenar Winerim como arquitectura conectada

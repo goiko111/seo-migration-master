@@ -12,7 +12,7 @@ const tools = [
     en: "/en/tools/weekly-wine-order-planner",
     esHeading: "¿Qué vino deberías pedir esta semana?",
     enHeading: "What wine should you order this week?",
-    expectedResult: "Botellas extra al comprar cajas completas",
+    expectedResult: "Vinos pendientes de confirmar con proveedor",
     uniqueSelector: ".order-manifest",
   },
   {

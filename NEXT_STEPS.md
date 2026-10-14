@@ -1,5 +1,33 @@
 # Next Steps
 
+## Siguiente bloque tras alinear pedido semanal con SAVia — 2026-10-14
+
+### Hechos
+
+- La herramienta ya prepara una hoja explicada y exportable con contexto de
+  rotación, carta y proveedor.
+
+### Decisiones
+
+- No añadir envío automático ni integración de proveedor sin una capacidad
+  productiva y auditable que lo respalde.
+
+### Hipótesis
+
+- El principal aprendizaje siguiente debe venir de uso real, no de más campos.
+
+### Contradicciones / límites
+
+- SAVia puede usar más contexto dentro de Winerim; esta superficie pública es
+  una simulación manual y no debe presentarse como paridad funcional completa.
+
+### Siguiente bloque verificable
+
+1. Probar el flujo con responsables de compras de restaurantes y hoteles.
+2. Medir inicio, finalización, CSV y CTA sin PII ni valores del escenario.
+3. Revisar si merece la pena añadir agrupación operativa por día de entrega solo
+   cuando clientes confirmen que ese dato cambia la decisión.
+
 ## Cierre 2026-07-21: retoma tras ampliar la arquitectura
 
 ## Hechos
