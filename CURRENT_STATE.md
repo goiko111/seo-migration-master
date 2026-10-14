@@ -7903,3 +7903,34 @@ Nota 2026-06-30: esta propuesta se materializo como `Aprender vino`, no como sub
 
 - Instrumentar eventos agregados sin PII ni cifras.
 - Evaluar uso real antes de añadir más herramientas o modificar supuestos.
+
+## Actualización 2026-10-14: navegación de Herramientas ordenada
+
+### Hechos confirmados
+
+- Cada herramienta aparece una sola vez entre el bloque inicial y el catálogo.
+- El catálogo productivo está dividido en seis objetivos con filtros localizados
+  en ES/EN/IT/FR/DE/PT.
+- QA: `273/273`, TypeScript, ESLint, build, Playwright local/productivo sin
+  overflow, duplicados ni errores; `34` checks HTTP y `10` sitemap exactos.
+- Producción: Pages `a8673cc8`; backend sin cambios
+  `317e7c1c-09e4-41da-a0be-d63a8b4b12cb`; facade
+  `9903d9b7-6029-474c-a8fa-23ddb134f614`.
+
+### Decisiones
+
+- Cuatro accesos iniciales y un catálogo único por área operativa.
+- La calculadora por copa se clasifica como Margen y precios.
+
+### Hipótesis
+
+- Menos repetición y categorías estables mejorarán descubrimiento y conversión.
+
+### Contradicciones / riesgos
+
+- Persisten avisos preexistentes no bloqueantes de React Router, `caniuse-lite`,
+  una `key` en Precios y chunks grandes.
+
+### Tareas pendientes
+
+- Instrumentar categoría y apertura sin PII.

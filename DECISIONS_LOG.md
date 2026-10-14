@@ -5338,3 +5338,32 @@ Nota 2026-06-30: esta decision evoluciono. La capa no se publica como subruta ca
 ### Pendientes
 
 - Medir comportamiento agregado y validar hipótesis con usuarios reales.
+
+## 2026-10-14 — Arquitectura única del catálogo de herramientas
+
+### Hechos
+
+- `Empieza por el problema` y el catálogo repetían las mismas rutas y convertían
+  la página en dos listados solapados.
+
+### Decisiones
+
+- Limitar el inicio guiado a cuatro herramientas principales.
+- Excluir esas cuatro del catálogo y agrupar el resto por decisión operativa.
+- Sustituir etiquetas planas por seis categorías estables y localizadas.
+- Tratar la calculadora por copa como referencia de claridad del sistema visual,
+  no como plantilla idéntica para todas las herramientas.
+
+### Hipótesis
+
+- Una herramienta mostrada una sola vez y en el contexto correcto se entiende
+  mejor que una prioridad expresada mediante repetición.
+
+### Contradicciones
+
+- Queda derogada la decisión anterior de mostrar las prioritarias tanto en
+  `Empieza aquí` como en el listado completo.
+
+### Pendientes
+
+- Medir uso de filtros y aperturas por categoría sin PII.

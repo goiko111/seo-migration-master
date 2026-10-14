@@ -5911,3 +5911,30 @@ Especificacion: PNG, `1600x1000` o `1440x900`, zoom 100 %, sin barra del navegad
 2. Construir un panel agregado de conversión por herramienta.
 3. Revisar Search Console tras acumular rastreo y resolver solo incidencias reales.
 4. Calibrar textos, ejemplos y orden con evidencia consentida.
+
+## Siguiente bloque tras ordenar Herramientas — 2026-10-14
+
+### Hechos
+
+- La navegación ya no repite herramientas y el catálogo tiene seis áreas claras.
+
+### Decisiones
+
+- No añadir otra categoría ni herramienta prioritaria sin una decisión nueva y
+  una ubicación inequívoca en el catálogo.
+
+### Hipótesis
+
+- Los eventos de categoría y apertura permitirán validar el orden sin recurrir a
+  opiniones internas.
+
+### Contradicciones / límites
+
+- Aún no existe una muestra suficiente de comportamiento productivo para ordenar
+  dentro de cada área por conversión.
+
+### Siguiente bloque verificable
+
+1. Medir `tools_category_selected` y `tool_opened` sin datos introducidos.
+2. Unirlo a finalización, CSV y CTA por nombre de herramienta.
+3. Revisar el orden con datos reales antes de modificar la jerarquía.

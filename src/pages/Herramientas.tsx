@@ -283,6 +283,150 @@ const toolIconByPath: Record<string, typeof Search> = {
   "/herramientas/calculadora-compra-inteligente": ShoppingCart,
 };
 
+type ToolGroupId = "diagnosis" | "margin" | "operations" | "supply" | "service" | "groups";
+
+const toolGroupOrder: ToolGroupId[] = ["diagnosis", "margin", "operations", "supply", "service", "groups"];
+
+const toolGroupRoutes: Record<ToolGroupId, readonly string[]> = {
+  diagnosis: [
+    "/wine-list-analyzer",
+    "/herramientas/diagnostico-rentabilidad-bodega",
+    "/wine-list-benchmark",
+    "/herramientas/diagnostico-vino-por-copa",
+    "/herramientas/wine-list-score",
+    "/herramientas/test-perfil-rim",
+  ],
+  margin: [
+    "/calculadora-margen-vino",
+    "/herramientas/calculadora-precio-vino-por-copa",
+    "/wine-pricing-tool",
+    "/herramientas/calculadora-rentabilidad-menu-maridaje",
+    "/herramientas/simulador-senal-margenes",
+    "/herramientas/simulador-pareto-carta-vinos",
+    "/herramientas/calculadora-fuga-margen",
+    "/wine-roi-calculator",
+  ],
+  operations: [
+    "/herramientas/calculadora-tiempo-operativo",
+    "/herramientas/calculadora-mermas-vino",
+    "/herramientas/conciliador-stock-vino",
+    "/herramientas/simulador-rotura-stock-vino",
+    "/herramientas/calculadora-stock-muerto",
+  ],
+  supply: [
+    "/herramientas/planificador-pedido-semanal-vino",
+    "/herramientas/comparador-distribuidores",
+    "/herramientas/calculadora-compra-inteligente",
+  ],
+  service: [
+    "/wine-pairing-generator",
+    "/herramientas/calculadora-ticket-medio-vino",
+  ],
+  groups: [
+    "/herramientas/simulador-impacto-integracion-tpv",
+    "/herramientas/auditor-carta-multilocal",
+  ],
+};
+
+const toolGroupByRoute = new Map<string, ToolGroupId>(
+  toolGroupOrder.flatMap((group) => toolGroupRoutes[group].map((route) => [route, group] as const)),
+);
+
+const toolGroupIcon: Record<ToolGroupId, typeof Search> = {
+  diagnosis: Search,
+  margin: DollarSign,
+  operations: ClipboardList,
+  supply: ShoppingCart,
+  service: Wine,
+  groups: Building2,
+};
+
+const catalogCopy: Record<string, {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  groups: Record<ToolGroupId, { label: string; description: string }>;
+}> = {
+  es: {
+    eyebrow: "Catálogo por objetivo",
+    title: "Una herramienta para cada decisión",
+    intro: "Después del diagnóstico inicial, entra directamente en el área que quieres mejorar. Cada herramienta aparece una sola vez.",
+    groups: {
+      diagnosis: { label: "Diagnóstico", description: "Entiende la salud de la carta y detecta dónde actuar primero." },
+      margin: { label: "Margen y precios", description: "Trabaja PVP, copa, rentabilidad y potencial económico." },
+      operations: { label: "Operaciones y stock", description: "Controla tiempo, mermas, inventario, roturas y capital inmovilizado." },
+      supply: { label: "Compras y Supply", description: "Prepara pedidos y compara compras, referencias y distribuidores." },
+      service: { label: "Sala y venta", description: "Mejora maridajes, recomendación y ticket medio de vino." },
+      groups: { label: "Grupos e integraciones", description: "Coordina centros, cartas y conexiones con el TPV." },
+    },
+  },
+  en: {
+    eyebrow: "Catalogue by objective",
+    title: "One tool for each decision",
+    intro: "After the initial diagnosis, go straight to the area you want to improve. Each tool appears only once.",
+    groups: {
+      diagnosis: { label: "Diagnosis", description: "Understand wine-list health and identify where to act first." },
+      margin: { label: "Margin and pricing", description: "Work on price, by-the-glass, profitability and economic potential." },
+      operations: { label: "Operations and stock", description: "Control time, waste, inventory, stockouts and tied-up capital." },
+      supply: { label: "Purchasing and Supply", description: "Prepare orders and compare purchases, references and suppliers." },
+      service: { label: "Service and sales", description: "Improve pairings, recommendations and the average wine ticket." },
+      groups: { label: "Groups and integrations", description: "Coordinate locations, lists and POS connections." },
+    },
+  },
+  it: {
+    eyebrow: "Catalogo per obiettivo",
+    title: "Uno strumento per ogni decisione",
+    intro: "Dopo la diagnosi iniziale, vai direttamente all'area da migliorare. Ogni strumento compare una sola volta.",
+    groups: {
+      diagnosis: { label: "Diagnosi", description: "Comprendi la salute della carta e dove intervenire prima." },
+      margin: { label: "Margine e prezzi", description: "Lavora su prezzo, calice, redditività e potenziale economico." },
+      operations: { label: "Operazioni e stock", description: "Controlla tempo, sprechi, inventario, rotture e capitale fermo." },
+      supply: { label: "Acquisti e Supply", description: "Prepara ordini e confronta referenze e distributori." },
+      service: { label: "Sala e vendita", description: "Migliora abbinamenti, raccomandazioni e scontrino vino." },
+      groups: { label: "Gruppi e integrazioni", description: "Coordina sedi, carte e connessioni POS." },
+    },
+  },
+  fr: {
+    eyebrow: "Catalogue par objectif",
+    title: "Un outil pour chaque décision",
+    intro: "Après le diagnostic initial, allez directement au domaine à améliorer. Chaque outil n'apparaît qu'une fois.",
+    groups: {
+      diagnosis: { label: "Diagnostic", description: "Comprenez la santé de la carte et où agir en premier." },
+      margin: { label: "Marge et prix", description: "Travaillez prix, verre, rentabilité et potentiel économique." },
+      operations: { label: "Opérations et stock", description: "Contrôlez temps, pertes, inventaire, ruptures et capital immobilisé." },
+      supply: { label: "Achats et Supply", description: "Préparez les commandes et comparez références et distributeurs." },
+      service: { label: "Salle et vente", description: "Améliorez accords, recommandation et ticket vin." },
+      groups: { label: "Groupes et intégrations", description: "Coordonnez sites, cartes et connexions caisse." },
+    },
+  },
+  de: {
+    eyebrow: "Katalog nach Ziel",
+    title: "Ein Tool für jede Entscheidung",
+    intro: "Nach der ersten Diagnose wechseln Sie direkt zum passenden Bereich. Jedes Tool erscheint nur einmal.",
+    groups: {
+      diagnosis: { label: "Diagnose", description: "Verstehen Sie den Zustand der Weinkarte und den ersten Hebel." },
+      margin: { label: "Marge und Preise", description: "Bearbeiten Sie Preis, Ausschank, Rentabilität und Potenzial." },
+      operations: { label: "Betrieb und Bestand", description: "Steuern Sie Zeit, Schwund, Inventar, Engpässe und Kapital." },
+      supply: { label: "Einkauf und Supply", description: "Planen Sie Bestellungen und vergleichen Sie Lieferanten." },
+      service: { label: "Service und Verkauf", description: "Verbessern Sie Pairings, Empfehlung und Weinbon." },
+      groups: { label: "Gruppen und Integrationen", description: "Koordinieren Sie Standorte, Karten und Kassensysteme." },
+    },
+  },
+  pt: {
+    eyebrow: "Catálogo por objetivo",
+    title: "Uma ferramenta para cada decisão",
+    intro: "Depois do diagnóstico inicial, avance diretamente para a área a melhorar. Cada ferramenta aparece uma única vez.",
+    groups: {
+      diagnosis: { label: "Diagnóstico", description: "Compreenda a saúde da carta e onde atuar primeiro." },
+      margin: { label: "Margem e preços", description: "Trabalhe preço, copo, rentabilidade e potencial económico." },
+      operations: { label: "Operações e stock", description: "Controle tempo, perdas, inventário, ruturas e capital parado." },
+      supply: { label: "Compras e Supply", description: "Prepare pedidos e compare referências e distribuidores." },
+      service: { label: "Sala e venda", description: "Melhore harmonizações, recomendação e ticket de vinho." },
+      groups: { label: "Grupos e integrações", description: "Coordene unidades, cartas e ligações ao POS." },
+    },
+  },
+};
+
 const pageUiCopy: Record<string, {
   all: string;
   toolCount: string;
@@ -572,18 +716,24 @@ const Herramientas = () => {
   const ui = pageUiCopy[lang] || pageUiCopy.es;
   const goals = goalCopy[lang] || goalCopy.es;
   const faq = toolsFaqCopy[lang] || toolsFaqCopy.es;
-  const [activeTag, setActiveTag] = useState("all");
+  const catalog = catalogCopy[lang] || catalogCopy.es;
+  const [activeGroup, setActiveGroup] = useState<"all" | ToolGroupId>("all");
   const prioritizedTools = prioritizeToolItems(t.tools);
   const prioritizedGoals = prioritizeToolItems(goals.goals);
-
-  // Extract unique tags for filter pills
-  const allTags = Array.from(new Set(prioritizedTools.map(tool => tool.tag)));
-  const tagFilters = [
-    { key: "all", label: ui.all },
-    ...allTags.map(tag => ({ key: tag, label: tag })),
-  ];
-
-  const filteredTools = activeTag === "all" ? prioritizedTools : prioritizedTools.filter(tool => tool.tag === activeTag);
+  const featuredGoals = prioritizedGoals.slice(0, 4);
+  const featuredRoutes = new Set(featuredGoals.map((goal) => goal.to));
+  const catalogTools = prioritizedTools.filter((tool) => !featuredRoutes.has(tool.to));
+  const groupedTools = toolGroupOrder
+    .map((id) => ({
+      id,
+      ...catalog.groups[id],
+      tools: catalogTools.filter((tool) => (toolGroupByRoute.get(tool.to) || "diagnosis") === id),
+    }))
+    .filter((group) => group.tools.length > 0);
+  const visibleGroups = activeGroup === "all"
+    ? groupedTools
+    : groupedTools.filter((group) => group.id === activeGroup);
+  const visibleToolCount = visibleGroups.reduce((total, group) => total + group.tools.length, 0);
 
   return (
     <div className="min-h-screen bg-background">
@@ -618,7 +768,7 @@ const Herramientas = () => {
               <p className="text-muted-foreground leading-relaxed">{goals.intro}</p>
             </div>
             <div className="grid md:grid-cols-2 border-t border-border" data-tool-priority="goals">
-              {prioritizedGoals.map((goal, index) => {
+              {featuredGoals.map((goal, index) => {
                 const Icon = toolIconByPath[goal.to] || Search;
                 const isFeatured = goal.to === "/herramientas/calculadora-tiempo-operativo";
                 return (
@@ -649,48 +799,76 @@ const Herramientas = () => {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-20">
-          {/* Tag filter pills */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {tagFilters.map((f) => (
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
+          <div className="max-w-3xl mb-8">
+            <p className="text-xs font-semibold tracking-[0.3em] uppercase text-accent mb-3">{catalog.eyebrow}</p>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">{catalog.title}</h2>
+            <p className="text-muted-foreground leading-relaxed">{catalog.intro}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-12" aria-label={catalog.eyebrow}>
+            {[{ key: "all" as const, label: ui.all }, ...groupedTools.map((group) => ({ key: group.id, label: group.label }))].map((filter) => (
               <button
-                key={f.key}
-                onClick={() => setActiveTag(f.key)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-all border ${
-                  activeTag === f.key
+                key={filter.key}
+                type="button"
+                onClick={() => setActiveGroup(filter.key)}
+                aria-pressed={activeGroup === filter.key}
+                className={`px-3 py-2 rounded-md text-xs font-semibold tracking-wider transition-[color,background-color,border-color,transform] duration-150 border active:scale-[0.97] ${
+                  activeGroup === filter.key
                     ? "bg-wine text-white border-wine"
                     : "bg-transparent text-muted-foreground border-border hover:border-wine/40"
                 }`}
               >
-                {f.label}
+                {filter.label}
               </button>
             ))}
-            <span className="self-center text-xs text-muted-foreground ml-2">{filteredTools.length} {ui.toolCount}</span>
+            <span className="self-center text-xs text-muted-foreground ml-2">{visibleToolCount} {ui.toolCount}</span>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-tool-priority="catalog">
-            {filteredTools.map((tool, i) => {
-              const Icon = toolIconByPath[tool.to] || Search;
+          <div className="space-y-14" data-tool-priority="catalog">
+            {visibleGroups.map((group) => {
+              const GroupIcon = toolGroupIcon[group.id];
               return (
-                <ScrollReveal key={tool.to} delay={i * 0.04}>
-                  <Link to={localePath(tool.to)} className="group bg-gradient-card rounded-xl border border-border hover:border-wine/50 transition-all block p-6 h-full hover:shadow-lg hover:shadow-wine/5 hover:-translate-y-0.5 duration-300">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-wine/10 flex items-center justify-center shrink-0 group-hover:bg-wine/15 transition-colors">
-                        <Icon size={20} className="text-wine" />
-                      </div>
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-full border border-amber-500/20 bg-amber-500/10 text-[10px] font-semibold tracking-widest uppercase text-amber-400">{tool.tag}</span>
+                <section key={group.id} data-tool-group={group.id}>
+                  <div className="flex items-start gap-4 border-b border-border pb-5 mb-6">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-wine/25 text-wine">
+                      <GroupIcon size={19} />
                     </div>
-                    <h2 className="font-heading font-bold mb-2 group-hover:text-wine transition-colors duration-300">{tool.title}</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">{tool.desc}</p>
-                    <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold tracking-widest uppercase text-accent group-hover:text-wine transition-colors">
-                      {t.useTool} <ArrowRight size={12} />
-                    </span>
-                  </Link>
-                </ScrollReveal>
+                    <div>
+                      <h3 className="font-heading text-xl font-bold mb-1">{group.label}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{group.description}</p>
+                    </div>
+                    <span className="ml-auto shrink-0 text-xs text-muted-foreground">{group.tools.length}</span>
+                  </div>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {group.tools.map((tool) => {
+                      const Icon = toolIconByPath[tool.to] || Search;
+                      return (
+                        <Link
+                          key={tool.to}
+                          to={localePath(tool.to)}
+                          className="group flex min-h-56 flex-col rounded-lg border border-border bg-background p-6 transition-[background-color,border-color,color] duration-150 hover:border-wine/35 hover:bg-wine/[0.045] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wine"
+                        >
+                          <div className="flex items-center justify-between gap-3 mb-5">
+                            <div className="w-10 h-10 rounded-md border border-border bg-card flex items-center justify-center shrink-0 group-hover:border-wine/35 transition-colors">
+                              <Icon size={20} className="text-wine" />
+                            </div>
+                            <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-muted-foreground">{tool.tag}</span>
+                          </div>
+                          <h4 className="font-heading text-lg font-bold mb-2 group-hover:text-wine transition-colors duration-150">{tool.title}</h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
+                          <span className="mt-auto pt-5 inline-flex items-center gap-1 text-xs font-semibold tracking-widest uppercase text-accent group-hover:text-wine transition-colors">
+                            {t.useTool} <ArrowRight size={12} />
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </section>
               );
             })}
           </div>
-          {filteredTools.length === 0 && (
+          {visibleToolCount === 0 && (
             <p className="text-center text-muted-foreground text-sm py-12">
               {ui.empty}
             </p>

@@ -1715,3 +1715,41 @@
 - Medir inicio, finalización, descarga CSV y CTA de forma agregada, sin PII ni
   valores introducidos.
 - Contrastar ejemplos e hipótesis con clientes antes de recalibrar cifras.
+
+## Actualización 2026-10-14: catálogo de herramientas sin duplicados
+
+### Hechos
+
+- `/herramientas` muestra cuatro recorridos principales en `Empieza por el
+  problema` y excluye esas mismas rutas del catálogo inferior.
+- El resto se organiza una sola vez en seis áreas: Diagnóstico, Margen y precios,
+  Operaciones y stock, Compras y Supply, Sala y venta, y Grupos e integraciones.
+- La calculadora de precio por copa queda en `Margen y precios`; las cinco
+  herramientas operativas conservan sus interfaces y resultados diferenciados.
+- Producción usa Pages `a8673cc8`, backend sin cambios
+  `317e7c1c-09e4-41da-a0be-d63a8b4b12cb` y facade
+  `9903d9b7-6029-474c-a8fa-23ddb134f614`.
+
+### Decisiones
+
+- Cada herramienta solo puede aparecer una vez en la página, aunque existan
+  accesos contextuales desde otras páginas.
+- El orden responde al tipo de decisión, no a la fecha de publicación ni a una
+  lista plana de etiquetas.
+- Mantener identidad Winerim común y diferenciar cada herramienta por controles,
+  visualización y salida, no mediante diseños de marca desconectados.
+
+### Hipótesis
+
+- Una arquitectura por objetivo reducirá la carga de elección y hará más fácil
+  descubrir la herramienta adecuada.
+
+### Contradicciones
+
+- La regla anterior exigía repetir herramientas prioritarias en dos bloques; se
+  sustituye por una única aparición para evitar duplicidad visual.
+
+### Tareas pendientes
+
+- Medir selección de categoría y apertura de herramienta sin PII.
+- Revisar el orden con datos reales de uso antes de añadir nuevas categorías.

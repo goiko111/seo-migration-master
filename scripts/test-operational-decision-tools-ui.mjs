@@ -151,22 +151,57 @@ await english.close();
 const hub = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
 await hub.goto(`${base}/herramientas`, { waitUntil: "networkidle" });
 await rejectCookies(hub, "es");
-const expectedPriority = [
+const expectedFeatured = [
   "/herramientas/calculadora-tiempo-operativo",
   "/herramientas/diagnostico-rentabilidad-bodega",
   "/herramientas/calculadora-fuga-margen",
   "/herramientas/calculadora-mermas-vino",
-  ...tools.map((tool) => tool.es),
 ];
-for (const block of ["goals", "catalog"]) {
-  const hrefs = await hub.locator(`[data-tool-priority="${block}"] a`).evaluateAll((anchors) =>
-    anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean).slice(0, 9),
-  );
-  if (JSON.stringify(hrefs) !== JSON.stringify(expectedPriority)) {
-    throw new Error(`/herramientas ${block} priority mismatch: ${JSON.stringify(hrefs)}`);
-  }
+const featuredHrefs = await hub.locator('[data-tool-priority="goals"] a').evaluateAll((anchors) =>
+  anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean),
+);
+if (JSON.stringify(featuredHrefs) !== JSON.stringify(expectedFeatured)) {
+  throw new Error(`/herramientas featured priority mismatch: ${JSON.stringify(featuredHrefs)}`);
 }
+const catalogHrefs = await hub.locator('[data-tool-priority="catalog"] a').evaluateAll((anchors) =>
+  anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean),
+);
+const allHrefs = [...featuredHrefs, ...catalogHrefs];
+if (new Set(allHrefs).size !== allHrefs.length) {
+  throw new Error(`/herramientas repeats tool routes: ${JSON.stringify(allHrefs)}`);
+}
+for (const tool of tools) {
+  if (!allHrefs.includes(tool.es)) throw new Error(`/herramientas is missing ${tool.es}`);
+}
+const expectedGroups = ["diagnosis", "margin", "operations", "supply", "service", "groups"];
+const renderedGroups = await hub.locator("[data-tool-group]").evaluateAll((groups) =>
+  groups.map((group) => group.getAttribute("data-tool-group")),
+);
+if (JSON.stringify(renderedGroups) !== JSON.stringify(expectedGroups)) {
+  throw new Error(`/herramientas group order mismatch: ${JSON.stringify(renderedGroups)}`);
+}
+const marginHrefs = await hub.locator('[data-tool-group="margin"] a').evaluateAll((anchors) =>
+  anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean),
+);
+if (!marginHrefs.includes("/herramientas/calculadora-precio-vino-por-copa")) {
+  throw new Error("/herramientas should classify the by-the-glass calculator under margin and pricing");
+}
+await assertNoOverflow(hub, "tools-hub-desktop");
+await hub.screenshot({ path: `${out}/tools-hub-desktop.png`, fullPage: true });
 await hub.close();
+
+const mobileHub = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+await mobileHub.goto(`${base}/herramientas`, { waitUntil: "networkidle" });
+await rejectCookies(mobileHub, "es");
+await assertNoOverflow(mobileHub, "tools-hub-mobile");
+const mobileHrefs = await mobileHub.locator('[data-tool-priority="goals"] a, [data-tool-priority="catalog"] a').evaluateAll((anchors) =>
+  anchors.map((anchor) => anchor.getAttribute("href")).filter(Boolean),
+);
+if (new Set(mobileHrefs).size !== mobileHrefs.length) {
+  throw new Error(`/herramientas repeats tool routes on mobile: ${JSON.stringify(mobileHrefs)}`);
+}
+await mobileHub.screenshot({ path: `${out}/tools-hub-mobile.png`, fullPage: true });
+await mobileHub.close();
 
 await browser.close();
 console.log(`UI_OK ${out}`);
