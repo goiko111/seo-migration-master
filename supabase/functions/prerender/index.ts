@@ -3551,6 +3551,82 @@ const LOCALIZED_STATIC_TEMPLATES: Record<StaticLocalizedLang, {
 };
 
 function localizedStaticPageOverride(lang: WineLibraryLang, esPath: string, label: string, canonical: string): Partial<PageContent> & { title?: string; description?: string } | null {
+  if (esPath === '/blog' && lang !== 'es') {
+    const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
+      en: {
+        title: 'Restaurant Wine Management and Profitability | Winerim',
+        description: 'Practical guides to wine lists, margins, stock, service, purchasing and technology for restaurants, hotels and restaurant groups.',
+        h1: 'Restaurant wine management and profitability',
+        subtitle: 'Analysis and practical guides to make better decisions about wine in hospitality.',
+        sections: [
+          { heading: 'Profitability and management', content: 'Monitor margins, costs and stock turnover to identify losses and prioritise operational improvements.' },
+          { heading: 'Wine lists and strategy', content: 'Design the range, price structure and by-the-glass selection around demand and the role of each wine.' },
+          { heading: 'Front of house and service', content: 'Organise recommendations, serving temperatures and open-bottle preservation with clear criteria for the team.' },
+          { heading: 'Technology and AI', content: 'Use data, integrations and artificial intelligence to reduce manual work and support decisions.' },
+          { heading: 'Industry intelligence', content: 'Compare trends, benchmarks and purchasing patterns to put results in context and adjust strategy.' },
+        ],
+        faqs: [],
+      },
+      it: {
+        title: 'Gestione e Redditività del Vino nella Ristorazione | Winerim',
+        description: 'Guide pratiche su carta vini, margini, scorte, servizio, acquisti e tecnologia per ristoranti, hotel e gruppi di ristorazione.',
+        h1: 'Gestione e redditività del vino nella ristorazione',
+        subtitle: 'Analisi e guide pratiche per prendere decisioni migliori sul vino nella ristorazione.',
+        sections: [
+          { heading: 'Redditività e gestione', content: 'Monitorare margini, costi e rotazione delle scorte per individuare perdite e dare priorità ai miglioramenti operativi.' },
+          { heading: 'Carta dei vini e strategia', content: 'Definire assortimento, fasce di prezzo e proposta al calice in base alla domanda e al ruolo di ogni vino.' },
+          { heading: 'Sala e servizio', content: 'Organizzare consigli, temperature di servizio e conservazione delle bottiglie aperte con criteri chiari per il personale.' },
+          { heading: 'Tecnologia e IA', content: 'Usare dati, integrazioni e intelligenza artificiale per ridurre il lavoro manuale e supportare le decisioni.' },
+          { heading: 'Intelligence di settore', content: 'Confrontare tendenze, benchmark e modelli di acquisto per contestualizzare i risultati e adeguare la strategia.' },
+        ],
+        faqs: [],
+      },
+      fr: {
+        title: 'Gestion et Rentabilité du Vin en Restauration | Winerim',
+        description: 'Guides pratiques sur la carte des vins, les marges, les stocks, le service, les achats et la technologie pour restaurants, hôtels et groupes.',
+        h1: 'Gestion et rentabilité du vin en restauration',
+        subtitle: 'Analyses et guides pratiques pour prendre de meilleures décisions sur le vin en restauration.',
+        sections: [
+          { heading: 'Rentabilité et gestion', content: 'Suivre les marges, les coûts et la rotation des stocks pour repérer les pertes et prioriser les améliorations opérationnelles.' },
+          { heading: 'Carte des vins et stratégie', content: 'Définir la sélection, les gammes de prix et l’offre au verre selon la demande et le rôle de chaque vin.' },
+          { heading: 'Salle et service', content: 'Organiser les recommandations, les températures de service et la conservation des bouteilles ouvertes avec des critères clairs pour l’équipe.' },
+          { heading: 'Technologie et IA', content: 'Utiliser les données, les intégrations et l’intelligence artificielle pour réduire le travail manuel et appuyer les décisions.' },
+          { heading: 'Intelligence sectorielle', content: 'Comparer les tendances, les benchmarks et les habitudes d’achat pour contextualiser les résultats et adapter la stratégie.' },
+        ],
+        faqs: [],
+      },
+      de: {
+        title: 'Weinmanagement und Rentabilität in der Gastronomie | Winerim',
+        description: 'Praxisratgeber zu Weinkarten, Margen, Bestand, Service, Einkauf und Technologie für Restaurants, Hotels und Gastronomiegruppen.',
+        h1: 'Weinmanagement und Rentabilität in der Gastronomie',
+        subtitle: 'Analysen und Praxisratgeber für bessere Entscheidungen rund um Wein in der Gastronomie.',
+        sections: [
+          { heading: 'Rentabilität und Management', content: 'Margen, Kosten und Lagerumschlag prüfen, um Verluste zu erkennen und operative Verbesserungen zu priorisieren.' },
+          { heading: 'Weinkarte und Strategie', content: 'Sortiment, Preisstruktur und offenen Ausschank an der Nachfrage und der Rolle jedes Weins ausrichten.' },
+          { heading: 'Gästebetreuung und Service', content: 'Empfehlungen, Serviertemperaturen und die Aufbewahrung offener Flaschen mit klaren Kriterien für das Team organisieren.' },
+          { heading: 'Technologie und KI', content: 'Daten, Integrationen und künstliche Intelligenz nutzen, um manuelle Arbeit zu reduzieren und Entscheidungen zu unterstützen.' },
+          { heading: 'Brancheninformationen', content: 'Trends, Benchmarks und Einkaufsmuster vergleichen, um Ergebnisse einzuordnen und die Strategie anzupassen.' },
+        ],
+        faqs: [],
+      },
+      pt: {
+        title: 'Gestão e Rentabilidade do Vinho na Restauração | Winerim',
+        description: 'Guias práticos sobre carta de vinhos, margens, stock, serviço, compras e tecnologia para restaurantes, hotéis e grupos de restauração.',
+        h1: 'Gestão e rentabilidade do vinho na restauração',
+        subtitle: 'Análises e guias práticos para tomar melhores decisões sobre vinho na restauração.',
+        sections: [
+          { heading: 'Rentabilidade e gestão', content: 'Acompanhar margens, custos e rotação de stock para identificar perdas e dar prioridade às melhorias operacionais.' },
+          { heading: 'Carta de vinhos e estratégia', content: 'Definir a seleção, os níveis de preço e a oferta a copo de acordo com a procura e o papel de cada vinho.' },
+          { heading: 'Sala e serviço', content: 'Organizar recomendações, temperaturas de serviço e conservação de garrafas abertas com critérios claros para a equipa.' },
+          { heading: 'Tecnologia e IA', content: 'Usar dados, integrações e inteligência artificial para reduzir o trabalho manual e apoiar as decisões.' },
+          { heading: 'Inteligência setorial', content: 'Comparar tendências, benchmarks e padrões de compra para contextualizar os resultados e ajustar a estratégia.' },
+        ],
+        faqs: [],
+      },
+    };
+    return copies[lang as StaticLocalizedLang] || null;
+  }
+
   if (esPath === '/producto/cloudrim' && lang !== 'es') {
     const copies: Record<StaticLocalizedLang, Partial<PageContent> & { title: string; description: string }> = {
       en: {
@@ -5432,8 +5508,8 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
   },
   '/blog': {
     meta: {
-      title: 'Blog | Winerim – Gestión de Vinos en Restauración',
-      description: 'Artículos sobre gestión de cartas de vinos, estrategias de venta, IA en restauración, maridajes y tendencias del sector.',
+      title: 'Gestión y Rentabilidad del Vino para Restaurantes | Winerim',
+      description: 'Guías prácticas sobre carta de vinos, márgenes, stock, servicio, compras y tecnología para restaurantes, hoteles y grupos.',
       canonical: `${SITE}/blog`,
       ogImage: OG_IMAGE,
       lang: 'es',
@@ -5441,12 +5517,14 @@ const STATIC_PAGES: Record<string, { meta: PageMeta; content: PageContent }> = {
       schemaType: 'CollectionPage',
     },
     content: {
-      h1: 'Blog de Winerim',
-      subtitle: 'Artículos, análisis y tendencias sobre gestión de vinos en restauración.',
+      h1: 'Gestión y rentabilidad del vino para restaurantes',
+      subtitle: 'Análisis y guías prácticas para tomar mejores decisiones sobre vino en restauración.',
       sections: [
-        { heading: 'Estrategia y negocio', content: 'Cómo diseñar una carta de vinos rentable, fijar precios óptimos y aumentar las ventas de vino en tu restaurante.' },
-        { heading: 'Tecnología y IA', content: 'El papel de la inteligencia artificial en la restauración moderna: recomendaciones, analytics y automatización.' },
-        { heading: 'Gestión de bodega', content: 'Mejores prácticas para gestionar el stock, reducir mermas y optimizar las compras de vino.' },
+        { heading: 'Rentabilidad y gestión', content: 'Controlar márgenes, costes y rotación de stock para detectar pérdidas y priorizar mejoras operativas.' },
+        { heading: 'Carta de vinos y estrategia', content: 'Diseñar la selección, los niveles de precio y la oferta por copa según la demanda y la función de cada vino.' },
+        { heading: 'Sala y servicio', content: 'Organizar recomendaciones, temperaturas de servicio y conservación de botellas abiertas con criterios claros para el equipo.' },
+        { heading: 'Tecnología e IA', content: 'Usar datos, integraciones e inteligencia artificial para reducir trabajo manual y apoyar las decisiones.' },
+        { heading: 'Inteligencia sectorial', content: 'Comparar tendencias, benchmarks y patrones de compra para contextualizar resultados y ajustar la estrategia.' },
       ],
       faqs: [],
       breadcrumbs: [
