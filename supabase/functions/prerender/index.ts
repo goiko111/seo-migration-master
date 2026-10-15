@@ -7194,6 +7194,10 @@ function withStaticDepthSections(meta: PageMeta, content: PageContent): PageCont
     return content.sections;
   }
 
+  if (/^\/(?:en\/|it\/|fr\/|de\/|pt\/)?blog\/?$/.test(path)) {
+    return content.sections;
+  }
+
   const bodyText = [
     content.subtitle || '',
     content.intro || '',
