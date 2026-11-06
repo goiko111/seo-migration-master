@@ -511,13 +511,13 @@ export default function PresentationLegacy({
             onClick={handleDownloadPdf}
             disabled={pdfBusy}
             aria-busy={pdfBusy}
-            title={t.downloadLabel}
+            title={currentT.downloadLabel}
             className="inline-flex gap-2 text-cream hover:text-cream"
             aria-label="PDF"
           >
             {pdfBusy ? <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" /> : <Download className="h-4 w-4" />}
             <span className="text-xs" aria-live="polite">
-              {pdfBusy ? `${pdfProgress}%` : pdfError ? "PDF ↻" : pdfFile ? t.downloadLabel : "PDF"}
+              {pdfBusy ? `${pdfProgress}%` : pdfError ? "PDF ↻" : pdfFile ? currentT.downloadLabel : "PDF"}
             </span>
           </Button>
           <Button
