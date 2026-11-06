@@ -1,0 +1,2 @@
+## Presentation exports
+- Generate presentation PDFs in the shared export utility with bounded image waits and cleanup; retain prepared files for a fresh user-initiated download on touch browsers because generation can outlast browser activation.
