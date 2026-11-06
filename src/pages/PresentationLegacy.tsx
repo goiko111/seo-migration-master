@@ -7,7 +7,7 @@ import {
   TrendingUp, Users, Languages, Repeat, ShoppingCart, BadgeCheck,
   Shield, Calendar, Database, GitCompare, Bell, Zap,
   Building2, LineChart, Rocket, Target, Upload, QrCode, Printer, LifeBuoy,
-  Download, CheckCircle2, ChevronDown, Smartphone, Tablet, Globe,
+  Download, Loader2, CheckCircle2, ChevronDown, Smartphone, Tablet, Globe,
   Cable, Cloud, FileStack, MapPinned, MessageSquareText, ShieldCheck,
 } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -27,6 +27,7 @@ import {
 import { createCurrentCommercialContent, getCommercialSlideLabels } from "@/data/presentationStory";
 import { PRESENTATION_CAPABILITY_DEPTH } from "@/data/presentationCapabilityDepth";
 import { CANONICAL_DOMAIN } from "@/seo/config";
+import type { DeckPdfFile } from "@/lib/generateDeckPdf";
 
 type PresentationAnalyticsWindow = Window & {
   dataLayer?: Array<Record<string, unknown>>;
@@ -162,6 +163,13 @@ export default function PresentationLegacy({
         outcome: t.sSupplyTag,
       };
   const [shared, setShared] = useState(false);
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const pdfBusyRef = useRef(false);
+  const [pdfProgress, setPdfProgress] = useState(0);
+  const [pdfFile, setPdfFile] = useState<DeckPdfFile | null>(null);
+  const [pdfError, setPdfError] = useState(false);
+
+  useEffect(() => { setPdfFile(null); setPdfError(false); }, [lang, preparedForName]);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showScrollArrow, setShowScrollArrow] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -253,10 +261,33 @@ export default function PresentationLegacy({
   }, [embedded, url, preparedForName, t.metaTitle, t.shareLabel, lang]);
 
   const handleDownloadPdf = useCallback(async () => {
+    if (pdfBusyRef.current) return;
+    pdfBusyRef.current = true;
+    setPdfBusy(true);
+    setPdfError(false);
+    setPdfProgress(0);
+    try {
     (window as PresentationAnalyticsWindow).dataLayer?.push({ event: "presentation_download_pdf", lang });
-    const { generateDeckPdf } = await import("@/lib/generateDeckPdf");
-    await generateDeckPdf(t.metaTitle || "winerim-presentacion");
-  }, [lang, t.metaTitle]);
+    const { generateDeckPdf, deliverDeckPdf } = await import("@/lib/generateDeckPdf");
+    if (pdfFile) {
+      await deliverDeckPdf(pdfFile);
+      return;
+    }
+    const result = await generateDeckPdf(t.metaTitle || "winerim-presentacion", {
+      prepareOnly: true,
+      onProgress: (completed, total) => setPdfProgress(Math.round(completed / total * 100)),
+    });
+    setPdfFile(result);
+    // Touch browsers need a fresh click after generation to open their save/share sheet.
+    if (!matchMedia("(pointer: coarse)").matches) await deliverDeckPdf(result);
+    } catch (error) {
+      console.error("PDF generation failed", error);
+      setPdfError(true);
+    } finally {
+      pdfBusyRef.current = false;
+      setPdfBusy(false);
+    }
+  }, [lang, t.metaTitle, pdfFile]);
 
   const handleFullscreen = useCallback(() => {
     if (typeof document === "undefined") return;
@@ -478,11 +509,16 @@ export default function PresentationLegacy({
             size="sm"
             variant="ghost"
             onClick={handleDownloadPdf}
-            className="hidden md:inline-flex gap-2 text-cream hover:text-cream"
+            disabled={pdfBusy}
+            aria-busy={pdfBusy}
+            title={t.downloadLabel}
+            className="inline-flex gap-2 text-cream hover:text-cream"
             aria-label="PDF"
           >
-            <Download className="h-4 w-4" />
-            <span className="text-xs">PDF</span>
+            {pdfBusy ? <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" /> : <Download className="h-4 w-4" />}
+            <span className="text-xs" aria-live="polite">
+              {pdfBusy ? `${pdfProgress}%` : pdfError ? "PDF ↻" : pdfFile ? t.downloadLabel : "PDF"}
+            </span>
           </Button>
           <Button
             size="sm"
